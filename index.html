@@ -302,6 +302,9 @@ dl{display:grid}
 .m3{stroke:var(--gold);fill:rgba(197,161,91,.3);opacity:0;animation:fadein .7s .9s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}@keyframes fadein{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}.m1{stroke-dashoffset:0}.m3{opacity:1}}
+.chips.cats{padding-top:7px}
+.chips.cats .chip{height:32px;padding:0 11px;font-size:13px;border-color:rgba(197,161,91,.5)}
+.chips.cats .chip.on{background:var(--ivory);border-color:var(--ivory);color:var(--forest)}
 
 </style>
 </head>
@@ -413,7 +416,7 @@ const VERIFIED_PHOTO_URLS = {
 (function(){
 'use strict';
 /* ================= Mickey's Merry Christmas Village — Collector's Edition (v18) ================= */
-const APP_VERSION='20';
+const APP_VERSION='21';
 const KEY="mickey-merry-christmas-village-v1";            /* unchanged: ownership + purchase details */
 const JKEY="mickey-merry-christmas-village-journal-v1";   /* new: journal entries */
 const SKEY="mickey-merry-christmas-village-settings-v1";  /* new: appearance + backup status */
@@ -760,22 +763,25 @@ function chipsHTML(){
   const c=counts(), ch=(v,l,n)=>`<button class="chip${S.status===v?' on':''}" data-act="status" data-v="${v}">${l}<i>${n}</i></button>`;
   return ch('all','All',c.all)+ch('owned','Owned',c.owned)+ch('missing','Not owned',c.missing)+ch('wish','Wishlist',c.wish)+ch('recent','Recently added',c.recent);
 }
-const filterCount=()=>(S.cat?1:0)+(S.chr?1:0)+(S.sort!=='catalog'?1:0);
+const filterCount=()=>(S.chr?1:0)+(S.sort!=='catalog'?1:0);
+function catChipsHTML(){
+  return `<button class="chip${!S.cat?' on':''}" data-act="qcat" data-v="">All types<i>${total}</i></button>`+CATS.map(c=>`<button class="chip${S.cat===c?' on':''}" data-act="qcat" data-v="${esc(c)}">${esc(catName(c))}<i>${ITEMS.filter(x=>x.category===c).length}</i></button>`).join('');
+}
 function vCollection(){
   const nf=filterCount();
   return `<header class="hero tight"><div class="hrow"><h1>Collection</h1><div class="vt" role="group" aria-label="View mode"><button data-act="view" data-v="grid" class="${settings.view==='grid'?'on':''}" aria-label="Grid view">${ic('grid')}</button><button data-act="view" data-v="list" class="${settings.view==='list'?'on':''}" aria-label="List view">${ic('list')}</button></div></div></header>
-  <div class="bar-sticky"><div class="srow"><label class="search">${ic('search')}<input id="q" type="search" enterkeyhint="search" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Name, item number or character" value="${esc(S.q)}"></label><button class="fbtn" id="fbtn" data-act="filters" aria-label="Sort and filter">${ic('sliders')}${nf?`<i>${nf}</i>`:''}</button></div><div class="chips" id="chips">${chipsHTML()}</div></div>
+  <div class="bar-sticky"><div class="srow"><label class="search">${ic('search')}<input id="q" type="search" enterkeyhint="search" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Name, item number or character" value="${esc(S.q)}"></label><button class="fbtn" id="fbtn" data-act="filters" aria-label="Sort and filter">${ic('sliders')}${nf?`<i>${nf}</i>`:''}</button></div><div class="chips" id="chips">${chipsHTML()}</div><div class="chips cats" id="cats">${catChipsHTML()}</div></div>
   <main class="pg"><div id="active"></div><p class="cnt" id="cnt"></p><div id="res"></div></main>`;
 }
 function renderChips(){
-  const c=$('#chips'); if(c)c.innerHTML=chipsHTML();
+  const c=$('#chips'); if(c)c.innerHTML=chipsHTML(); const k=$('#cats'); if(k)k.innerHTML=catChipsHTML();
   const f=$('#fbtn'); if(f){const n=filterCount();f.innerHTML=ic('sliders')+(n?`<i>${n}</i>`:'');}
 }
 function renderResults(){
   const res=$('#res'); if(!res)return;
   const l=filtered();
   $('#cnt').textContent=S.status==='recent'?`Showing your ${l.length} most recent`:`Showing ${l.length} of ${total} pieces`;
-  const act=[]; if(S.cat)act.push(['clearcat',catName(S.cat)]); if(S.chr)act.push(['clearchr',S.chr]); if(S.sort!=='catalog')act.push(['clearsort','Sorted: '+SORTS.find(s=>s[0]===S.sort)[1]]);
+  const act=[]; if(S.chr)act.push(['clearchr',S.chr]); if(S.sort!=='catalog')act.push(['clearsort','Sorted: '+SORTS.find(s=>s[0]===S.sort)[1]]);
   $('#active').innerHTML=act.length?`<div class="chips act">${act.map(a=>`<button class="chip on" data-act="${a[0]}">${esc(a[1])}${ic('x')}</button>`).join('')}</div>`:'';
   if(!l.length){
     const msg={wish:['Your wishlist is empty.','Add a piece','pickwish'],owned:['You haven’t marked any pieces as owned yet.','',''],recent:['No dated acquisitions yet. Add purchase dates to your pieces to see them here.','','']}[S.status];
@@ -1173,6 +1179,7 @@ const ACT={
   filters:()=>filtersSheet(),
   setsort:(t,id,v)=>{S.sort=v;setSheet(filtersBody());syncBar();},
   setcat:(t,id,v)=>{S.cat=v;setSheet(filtersBody());syncBar();},
+  qcat:(t,id,v)=>{S.cat=(v&&S.cat===v)?'':v;syncBar();},
   setchr:(t,id,v)=>{S.chr=v;setSheet(filtersBody());syncBar();},
   resetf:()=>{resetFilters();const q=$('#q');if(q)q.value='';setSheet(filtersBody());syncBar();},
   clearall:()=>{resetFilters();const q=$('#q');if(q)q.value='';syncBar();},
