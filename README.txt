@@ -1,9 +1,12 @@
-Mickey's Merry Christmas Village Collector — Christmas design + feature update
+Mickey’s Merry Christmas Village — Update v17
 
-This update adds:
-• A deep evergreen highlight across the full card when an item is marked owned, with readable light text and gold accents.
-• A “Find This Piece on eBay” link on every item, using the Department 56 item name and SKU in the search.
+This update removes the three gift-set entries at the user's request:
+- 4051628-A — Mickey's Holiday Gift Set (set of 6)
+- 4051628-B — Mickey's Holiday Gift Set (set of 4)
+- 4056425 — Disney Village Gift Set (set of 4)
 
-Upload/replace the files in this ZIP in the root of your existing GitHub Pages repository. At minimum replace index.html and sw.js. Keep your existing collection data: the app's local storage key and item IDs have not changed.
+The checklist now contains 113 entries. All remaining item IDs are unchanged. The existing collection storage key is unchanged, so ownership and item details for remaining pieces are preserved. Any saved records associated with the removed gift-set IDs are no longer displayed; they are not used by the checklist.
 
-After committing, refresh the site. If the old version remains cached, close the site and reopen it.
+The Christmas design, photo matches, owned-card highlighting, eBay lookup, and backup/restore features are retained. The service-worker cache is bumped to v17.
+
+To update GitHub Pages, replace the existing root files with the files in this package. Do not clear website data or change browsers. Export a backup from the app before replacing files as a precaution.
