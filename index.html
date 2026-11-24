@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#173d32">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Mickey Village">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+<title>Mickey's Merry Christmas Village — Collector</title>
+<style>
+:root{--pine:#173d32;--pine2:#245344;--red:#9d3535;--cream:#fbf8f0;--gold:#c6a35a;--ink:#26352e;--muted:#718078;--line:#e6e0d3;--white:#fff;--soft:#f1eee5}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+header{background:linear-gradient(135deg,#14372e,#285847);color:white;padding:26px 18px 22px;border-bottom:4px solid var(--gold)}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:#e7d8ae;font-weight:800}
+h1{font-family:Georgia,serif;font-size:clamp(25px,6vw,38px);line-height:1.06;margin:8px 0 8px}
+.sub{color:#e8eee9;font-size:13px;line-height:1.45;max-width:600px}
+main{max-width:900px;margin:0 auto;padding:16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:-1px}
+.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:13px 12px;box-shadow:0 3px 12px #233c2e0a}
+.stat strong{display:block;font-size:23px;color:var(--pine);font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;color:var(--muted)}
+.progress{margin:12px 0 18px;background:#e7e2d6;border-radius:99px;height:9px;overflow:hidden}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,#2d6b50,#c6a35a);border-radius:99px;transition:width .2s}
+.toolbar{position:sticky;top:0;z-index:4;background:var(--cream);padding:8px 0 12px}
+.search{width:100%;border:1px solid var(--line);background:white;border-radius:12px;padding:13px 14px;font-size:16px;outline:none}
+.filters{display:flex;gap:7px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.filters button,.catbtn{border:1px solid var(--line);background:white;color:var(--ink);border-radius:99px;padding:9px 13px;white-space:nowrap;font-size:12px;font-weight:700}
+.filters button.active,.catbtn.active{background:var(--pine);border-color:var(--pine);color:white}
+.catbar{display:flex;gap:7px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 10px}
+.sectionhead h2{font: bold 18px Georgia,serif;margin:0;color:var(--pine)}
+.count{font-size:12px;color:var(--muted)}
+.list{display:grid;gap:9px}
+.item{background:white;border:1px solid var(--line);border-radius:14px;padding:13px;display:grid;grid-template-columns:34px 1fr;gap:11px;box-shadow:0 2px 8px #233c2e08}
+.check{appearance:none;-webkit-appearance:none;width:29px;height:29px;border:2px solid #b8c2b9;border-radius:9px;margin:1px 0 0;display:grid;place-items:center;background:white}
+.check:checked{background:var(--pine);border-color:var(--pine)}
+.check:checked:after{content:"✓";font-size:19px;color:white;font-weight:800;line-height:1}
+.item.owned{background:#f7faf6;border-color:#d3e0d4}
+.item.owned .itemname{color:#6a7a70}
+.topline{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.itemname{font-weight:750;font-size:15px;line-height:1.25}
+.sku{font-size:11px;font-weight:800;color:var(--red);white-space:nowrap}
+.meta{font-size:11px;color:var(--muted);margin-top:5px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tag{font-size:10px;background:var(--soft);border-radius:6px;padding:4px 7px;color:#58665e}
+.details{margin-top:10px;border-top:1px solid var(--line);padding-top:9px;display:none}
+.item.expanded .details{display:block}
+.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+label{display:block;font-size:10px;color:var(--muted);font-weight:700;margin-bottom:4px}
+.details input,.details textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px;font:13px -apple-system,sans-serif;background:#fff}
+.details textarea{min-height:58px;resize:vertical}
+.full{grid-column:1/-1}
+.itemactions{display:flex;justify-content:flex-end;margin-top:7px}
+.expand{background:none;border:0;color:var(--pine2);font-size:12px;font-weight:750;padding:4px 0}
+.empty{background:white;border:1px dashed #cfc8b8;border-radius:14px;padding:28px;text-align:center;color:var(--muted);font-size:13px}
+footer{max-width:900px;margin:18px auto 0;padding:0 16px;color:var(--muted);font-size:11px;line-height:1.5}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.tools button,.tools label{border:1px solid var(--line);background:white;color:var(--pine);border-radius:10px;padding:10px 12px;font-size:12px;font-weight:750;cursor:pointer}
+.tools input{display:none}
+.note{background:#f4efe2;border:1px solid #e7dcc0;border-radius:12px;padding:11px 12px;font-size:11px;color:#6e6248;line-height:1.45;margin-top:14px}
+@media(min-width:650px){.list{grid-template-columns:1fr 1fr}.item{align-self:start}.stats{max-width:520px}.toolbar{border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="eyebrow">The collector's checklist</div>
+<h1>Mickey's Merry<br>Christmas Village</h1>
+<div class="sub">A personal collection tracker for the Department 56 Christmas village series. Tap a box to mark a piece owned; open any item to add your purchase and condition notes.</div>
+</div></header>
+<main>
+<section class="stats">
+ <div class="stat"><strong id="ownedCount">0</strong><span>Owned</span></div>
+ <div class="stat"><strong id="remainingCount">0</strong><span>Still to collect</span></div>
+ <div class="stat"><strong id="percentCount">0%</strong><span>Collection complete</span></div>
+</section>
+<div class="progress"><div id="progressFill"></div></div>
+<div class="toolbar">
+ <input id="search" class="search" type="search" placeholder="Search item name or item number…" autocomplete="off">
+ <div class="filters" id="statusFilters">
+  <button class="active" data-status="all">All items</button><button data-status="needed">Still needed</button><button data-status="owned">Owned</button>
+ </div>
+ <div class="catbar" id="categoryFilters"></div>
+</div>
+<div class="sectionhead"><h2 id="listTitle">All collection pieces</h2><span class="count" id="visibleCount"></span></div>
+<div class="list" id="itemList"></div>
+<div class="tools">
+ <button id="backupBtn">Export backup</button>
+ <label for="restoreFile">Restore backup<input id="restoreFile" type="file" accept="application/json"></label>
+ <button id="clearFilters">Clear filters</button>
+</div>
+<div class="note"><b>Your collection data stays on this device/browser.</b> Use “Export backup” periodically so you can restore your ownership marks and item notes if you change phones or clear browser data. This checklist preserves the original working catalog; some 2026 and special-edition entries still need independent catalog verification.</div>
+</main>
+<footer>Department 56 collection tracker • Working catalog: 116 entries • Not an official Department 56 app.</footer>
+<script>
+const ITEMS = [{"id": "1", "category": "Buildings", "sku": "811261", "name": "Mickey's Christmas Castle", "years": "2009–2014", "catalogNote": "", "conditionNote": ""}, {"id": "2", "category": "Buildings", "sku": "811262", "name": "Donald's Toy Shop", "years": "2009–2011", "catalogNote": "", "conditionNote": ""}, {"id": "3", "category": "Buildings", "sku": "811263", "name": "Mickey's Ski & Skate Shop", "years": "2009–current", "catalogNote": "", "conditionNote": ""}, {"id": "4", "category": "Buildings", "sku": "811264", "name": "Minnie's Bakery", "years": "2009–2015", "catalogNote": "", "conditionNote": ""}, {"id": "5", "category": "Buildings", "sku": "811265", "name": "Pluto's Pet Shop", "years": "2009–2011", "catalogNote": "", "conditionNote": ""}, {"id": "6", "category": "Buildings", "sku": "809461", "name": "Minnie's Diner", "years": "2010–2012", "catalogNote": "", "conditionNote": ""}, {"id": "7", "category": "Buildings", "sku": "809462", "name": "Donald's Fire Station", "years": "2011–2012", "catalogNote": "", "conditionNote": ""}, {"id": "8", "category": "Buildings", "sku": "809463", "name": "Mickey's Tree House", "years": "2011", "catalogNote": "", "conditionNote": ""}, {"id": "9", "category": "Buildings", "sku": "4021754", "name": "Mickey's Ice Cream Shop", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "10", "category": "Buildings", "sku": "4021755", "name": "Minnie's Dress Shop", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "11", "category": "Buildings", "sku": "4027600", "name": "Goofy's Gas Station", "years": "2012–2014", "catalogNote": "", "conditionNote": ""}, {"id": "12", "category": "Buildings", "sku": "4027599", "name": "Mickey's House", "years": "2013–2018", "catalogNote": "", "conditionNote": ""}, {"id": "13", "category": "Buildings", "sku": "4032203", "name": "Mickey's Holiday Train Station", "years": "2014–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "14", "category": "Buildings", "sku": "4038630", "name": "Mickey's Cinema", "years": "2015–2016", "catalogNote": "", "conditionNote": ""}, {"id": "15", "category": "Buildings", "sku": "4038631", "name": "Minnie's House", "years": "2014–current", "catalogNote": "", "conditionNote": ""}, {"id": "16", "category": "Buildings", "sku": "4047183", "name": "Mickey's Candy Shop", "years": "2015–2019", "catalogNote": "", "conditionNote": ""}, {"id": "17", "category": "Buildings", "sku": "4047184", "name": "Mickey's Toy Store", "years": "2015–2017", "catalogNote": "", "conditionNote": ""}, {"id": "18", "category": "Buildings", "sku": "4053048", "name": "Mickey's Cocoa Shoppe", "years": "2016–2018", "catalogNote": "", "conditionNote": ""}, {"id": "19", "category": "Buildings", "sku": "4057261", "name": "Mickey's Alarm Clock Shop", "years": "2017–current", "catalogNote": "", "conditionNote": ""}, {"id": "20", "category": "Buildings", "sku": "4059627", "name": "Mickey's Tree Lot", "years": "2017–current", "catalogNote": "", "conditionNote": ""}, {"id": "21", "category": "Buildings", "sku": "4059626", "name": "Mickey's Holiday Center", "years": "2019–2020", "catalogNote": "", "conditionNote": ""}, {"id": "22", "category": "Buildings", "sku": "6003307", "name": "Mickey's Carriage Rides", "years": "2019", "catalogNote": "", "conditionNote": ""}, {"id": "23", "category": "Buildings", "sku": "6001316", "name": "Mickey's Balloon Inflators", "years": "2019–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "24", "category": "Buildings", "sku": "6001318", "name": "Minnie's Cotton Candy Shop", "years": "2019–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "25", "category": "Buildings", "sku": "6001317", "name": "Mickey's Gingerbread House", "years": "2020–current", "catalogNote": "", "conditionNote": ""}, {"id": "26", "category": "Buildings", "sku": "6007176", "name": "Minnie's Dance Academy", "years": "2021–current", "catalogNote": "", "conditionNote": ""}, {"id": "27", "category": "Buildings", "sku": "6007177", "name": "Mickey Mouse Ear Hat Shop", "years": "2021–current", "catalogNote": "", "conditionNote": ""}, {"id": "28", "category": "Buildings", "sku": "6010492", "name": "Mickey's Clubhouse", "years": "2023–2024 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "29", "category": "Buildings", "sku": "6010494", "name": "Minnie's Shoe Boutique", "years": "2023–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "30", "category": "Buildings", "sku": "6013668", "name": "Duck the Halls", "years": "2024 limited edition", "catalogNote": "", "conditionNote": ""}, {"id": "31", "category": "Buildings", "sku": "6013662", "name": "Mickey's Peppermint Villa", "years": "2024–current", "catalogNote": "", "conditionNote": ""}, {"id": "32", "category": "Buildings", "sku": "6013663", "name": "Minnie's Peppermint Villa", "years": "2025", "catalogNote": "", "conditionNote": ""}, {"id": "33", "category": "Buildings", "sku": "6014523", "name": "Daisy's Dockside Café", "years": "2025", "catalogNote": "", "conditionNote": ""}, {"id": "34", "category": "Buildings", "sku": "6018368", "name": "Mickey's Peppermint Café", "years": "2026", "catalogNote": "", "conditionNote": ""}, {"id": "35", "category": "Coordinating figures & accessories", "sku": "811269", "name": "Mickey & Pluto Loading the Sleigh", "years": "2009–2011", "catalogNote": "", "conditionNote": ""}, {"id": "36", "category": "Coordinating figures & accessories", "sku": "811270", "name": "Merry Christmas List (Mickey's Christmas List)", "years": "2009–2015", "catalogNote": "", "conditionNote": ""}, {"id": "37", "category": "Coordinating figures & accessories", "sku": "811271", "name": "Goofy's Got Game", "years": "2009–2012", "catalogNote": "", "conditionNote": ""}, {"id": "38", "category": "Coordinating figures & accessories", "sku": "811272", "name": "Huey, Dewey & Louie Race", "years": "2010–2012", "catalogNote": "", "conditionNote": ""}, {"id": "39", "category": "Coordinating figures & accessories", "sku": "811273", "name": "Goofy Takes a Tumble", "years": "2009–2013", "catalogNote": "", "conditionNote": ""}, {"id": "40", "category": "Coordinating figures & accessories", "sku": "811274", "name": "Mickey & Minnie Go Skating", "years": "2010–current", "catalogNote": "", "conditionNote": ""}, {"id": "41", "category": "Coordinating figures & accessories", "sku": "811275", "name": "Minnie's Custom Cookies", "years": "2010–2016", "catalogNote": "", "conditionNote": ""}, {"id": "42", "category": "Coordinating figures & accessories", "sku": "811276", "name": "Mickey & Minnie Wrapping Gifts", "years": "2010–2017", "catalogNote": "", "conditionNote": ""}, {"id": "43", "category": "Coordinating figures & accessories", "sku": "811277", "name": "Pluto's Kittens", "years": "2010–2012", "catalogNote": "", "conditionNote": ""}, {"id": "44", "category": "Coordinating figures & accessories", "sku": "811278", "name": "A Treat for Minnie's Dog", "years": "2009–2012", "catalogNote": "", "conditionNote": ""}, {"id": "45", "category": "Coordinating figures & accessories", "sku": "811279", "name": "Mickey and Friends Sing Carols", "years": "2009–2014", "catalogNote": "", "conditionNote": ""}, {"id": "46", "category": "Coordinating figures & accessories", "sku": "811289", "name": "The Three Mouseketeers", "years": "2010–current", "catalogNote": "", "conditionNote": ""}, {"id": "47", "category": "Coordinating figures & accessories", "sku": "4017688", "name": "Donald's Fire Hose", "years": "2011–2014", "catalogNote": "", "conditionNote": ""}, {"id": "48", "category": "Coordinating figures & accessories", "sku": "4017689", "name": "Tree House Stayover", "years": "2011", "catalogNote": "", "conditionNote": ""}, {"id": "49", "category": "Coordinating figures & accessories", "sku": "4017690", "name": "Minnie's Pies", "years": "2011–2012", "catalogNote": "", "conditionNote": ""}, {"id": "50", "category": "Coordinating figures & accessories", "sku": "4020326", "name": "Mickey's Holiday Express", "years": "2011–current", "catalogNote": "", "conditionNote": ""}, {"id": "51", "category": "Coordinating figures & accessories", "sku": "4021789", "name": "Minnie Sewing", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "52", "category": "Coordinating figures & accessories", "sku": "4021790", "name": "Mickey's Christmas Spirit", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "53", "category": "Coordinating figures & accessories", "sku": "4021791", "name": "Pluto Sneaking Ice Cream", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "54", "category": "Coordinating figures & accessories", "sku": "4021842", "name": "Mickey Serving Ice Cream", "years": "2011–2016", "catalogNote": "", "conditionNote": ""}, {"id": "55", "category": "Coordinating figures & accessories", "sku": "4021864", "name": "Mickey Catching Some Air", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "56", "category": "Coordinating figures & accessories", "sku": "4027601", "name": "Goofy for Gas", "years": "2012–2014", "catalogNote": "", "conditionNote": ""}, {"id": "57", "category": "Coordinating figures & accessories", "sku": "4027602", "name": "A Special Snack for Pluto", "years": "2013–2014", "catalogNote": "", "conditionNote": ""}, {"id": "58", "category": "Coordinating figures & accessories", "sku": "4027603", "name": "Mickey & Minnie's Holiday Drive", "years": "2012–2019", "catalogNote": "", "conditionNote": ""}, {"id": "59", "category": "Coordinating figures & accessories", "sku": "4032205", "name": "Hurry Up, Donald", "years": "2014–2015", "catalogNote": "", "conditionNote": ""}, {"id": "60", "category": "Coordinating figures & accessories", "sku": "4032206", "name": "Ringing in the Holidays", "years": "2013–current", "catalogNote": "", "conditionNote": ""}, {"id": "61", "category": "Coordinating figures & accessories", "sku": "4032207", "name": "Snow for Fun! / Mickey's Snow Fort Fun", "years": "2013–2017", "catalogNote": "", "conditionNote": ""}, {"id": "62", "category": "Coordinating figures & accessories", "sku": "4038633", "name": "Minnie's Finishing Touch", "years": "2014–2018", "catalogNote": "", "conditionNote": ""}, {"id": "63", "category": "Coordinating figures & accessories", "sku": "4038634", "name": "Mickey Lights Up Christmas", "years": "2014–current", "catalogNote": "", "conditionNote": ""}, {"id": "64", "category": "Coordinating figures & accessories", "sku": "4038635", "name": "Mickey & Minnie's Date Night", "years": "2015–2016", "catalogNote": "", "conditionNote": ""}, {"id": "65", "category": "Coordinating figures & accessories", "sku": "4041361", "name": "Mickey's Tangled Tango", "years": "2014–2015", "catalogNote": "", "conditionNote": ""}, {"id": "66", "category": "Coordinating figures & accessories", "sku": "4043307", "name": "Mickey & Minnie Go Camping", "years": "2015", "catalogNote": "", "conditionNote": ""}, {"id": "67", "category": "Coordinating figures & accessories", "sku": "4047186", "name": "Donald's Snowshoe Adventure", "years": "2015–2016", "catalogNote": "", "conditionNote": ""}, {"id": "68", "category": "Coordinating figures & accessories", "sku": "4047187", "name": "Minnie's Treats for Sweets", "years": "2015–2017", "catalogNote": "", "conditionNote": ""}, {"id": "69", "category": "Coordinating figures & accessories", "sku": "4049831", "name": "Mickey's Toys", "years": "2015–2017", "catalogNote": "", "conditionNote": ""}, {"id": "70", "category": "Coordinating figures & accessories", "sku": "4053052", "name": "Cocoa on the Go (set of 2)", "years": "2016–2018", "catalogNote": "", "conditionNote": ""}, {"id": "71", "category": "Coordinating figures & accessories", "sku": "4053053", "name": "Mickey's Christmas Kiss", "years": "2016–current", "catalogNote": "", "conditionNote": ""}, {"id": "72", "category": "Coordinating figures & accessories", "sku": "4059719", "name": "Mickey's Mistletoe Surprise", "years": "2018–current", "catalogNote": "", "conditionNote": ""}, {"id": "73", "category": "Coordinating figures & accessories", "sku": "6001190", "name": "Christmas Treats for Pluto", "years": "2018–2019", "catalogNote": "", "conditionNote": ""}, {"id": "74", "category": "Coordinating figures & accessories", "sku": "4057262", "name": "Mickey's Autograph Clock", "years": "2017–2019", "catalogNote": "", "conditionNote": ""}, {"id": "75", "category": "Coordinating figures & accessories", "sku": "4057263", "name": "Pluto's Toboggan Ride", "years": "2017–current", "catalogNote": "", "conditionNote": ""}, {"id": "76", "category": "Coordinating figures & accessories", "sku": "4057264", "name": "Mickey & Minnie Card Exchange", "years": "2017", "catalogNote": "", "conditionNote": ""}, {"id": "77", "category": "Coordinating figures & accessories", "sku": "6003310", "name": "Mickey and Minnie's Dance (animated/musical)", "years": "2019–2020", "catalogNote": "", "conditionNote": ""}, {"id": "78", "category": "Coordinating figures & accessories", "sku": "4059718", "name": "A Gift from Mickey", "years": "2019–2020", "catalogNote": "", "conditionNote": ""}, {"id": "79", "category": "Coordinating figures & accessories", "sku": "6003309", "name": "Minnie's Carriage Ride", "years": "2019", "catalogNote": "", "conditionNote": ""}, {"id": "80", "category": "Coordinating figures & accessories", "sku": "6001191", "name": "Mickey's Head in the Clouds", "years": "2019–current", "catalogNote": "", "conditionNote": ""}, {"id": "81", "category": "Coordinating figures & accessories", "sku": "6001193", "name": "Cotton Candy Delight", "years": "2019–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "82", "category": "Coordinating figures & accessories", "sku": "6001192", "name": "Sugar & Spice", "years": "2020–current", "catalogNote": "", "conditionNote": ""}, {"id": "83", "category": "Coordinating figures & accessories", "sku": "6007178", "name": "Minnie's Arabesque", "years": "2021–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "84", "category": "Coordinating figures & accessories", "sku": "6007179", "name": "Mickey's Finishing Touch", "years": "2021–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "85", "category": "Coordinating figures & accessories", "sku": "6010493", "name": "Minnie Will Love This!", "years": "2023–2024 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "86", "category": "Coordinating figures & accessories", "sku": "6010495", "name": "Minnie Struts Her Stuff", "years": "2023–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "87", "category": "Train", "sku": "4032204", "name": "Mickey's Holiday Train Engine", "years": "2014–2017", "catalogNote": "", "conditionNote": ""}, {"id": "88", "category": "Train", "sku": "4038632", "name": "Mickey's Holiday Tree Car", "years": "2015–2017", "catalogNote": "", "conditionNote": ""}, {"id": "89", "category": "Train", "sku": "4047185", "name": "Donald's Duck Choir Train Car", "years": "2015–2016", "catalogNote": "", "conditionNote": ""}, {"id": "90", "category": "Train", "sku": "4053051", "name": "Mickey's Holiday Caboose / Dumbo Caboose", "years": "2016–2017", "catalogNote": "", "conditionNote": ""}, {"id": "91", "category": "General village", "sku": "4028299", "name": "Mickey Topiary", "years": "2012–current", "catalogNote": "", "conditionNote": ""}, {"id": "92", "category": "General village", "sku": "4028300", "name": "Mickey Water Tower", "years": "2012–current", "catalogNote": "", "conditionNote": ""}, {"id": "93", "category": "General village", "sku": "4028301", "name": "Mickey Trellis", "years": "2012–2013", "catalogNote": "", "conditionNote": ""}, {"id": "94", "category": "General village", "sku": "4028302", "name": "Mickey Street Lamps (set of 2)", "years": "2012–current", "catalogNote": "", "conditionNote": ""}, {"id": "95", "category": "General village", "sku": "4028303", "name": "Mickey Fence", "years": "2012–2013", "catalogNote": "", "conditionNote": ""}, {"id": "96", "category": "General village", "sku": "4032412", "name": "Mickey's Bench", "years": "2013–2014", "catalogNote": "", "conditionNote": ""}, {"id": "97", "category": "General village", "sku": "4038636", "name": "Mickey's Road, Curved (set of 2)", "years": "2014–2015", "catalogNote": "", "conditionNote": ""}, {"id": "98", "category": "General village", "sku": "4038637", "name": "Mickey's Bridge", "years": "2014–2016", "catalogNote": "", "conditionNote": ""}, {"id": "99", "category": "General village", "sku": "4038638", "name": "Mickey's Crossing Sign", "years": "2014", "catalogNote": "", "conditionNote": ""}, {"id": "100", "category": "General village", "sku": "4043197", "name": "Mickey's Road, Straight (set of 2)", "years": "2014–2015", "catalogNote": "", "conditionNote": ""}, {"id": "101", "category": "General village", "sku": "4047190", "name": "Mickey's Candy Tree", "years": "2015–current", "catalogNote": "", "conditionNote": ""}, {"id": "102", "category": "General village", "sku": "4047191", "name": "Mickey's Christmas Tree House", "years": "2014–2020", "catalogNote": "", "conditionNote": ""}, {"id": "103", "category": "General village", "sku": "4054847", "name": "Mickey & Minnie's Animated Skating Pond", "years": "2016–2019", "catalogNote": "", "conditionNote": ""}, {"id": "104", "category": "Seaside subseries", "sku": "6013677", "name": "What I Really, Really Wanted!", "years": "2024 limited edition", "catalogNote": "", "conditionNote": ""}, {"id": "105", "category": "Seaside subseries", "sku": "6018372", "name": "Pete's Crabby Christmas", "years": "2026–current", "catalogNote": "", "conditionNote": ""}, {"id": "106", "category": "Seaside subseries", "sku": "6018374", "name": "Keeping a Watch for Santa", "years": "2026–current", "catalogNote": "", "conditionNote": ""}, {"id": "107", "category": "Seaside subseries", "sku": "6013678", "name": "Thank You, Uncle Donald!", "years": "2024–current", "catalogNote": "", "conditionNote": ""}, {"id": "108", "category": "Seaside subseries", "sku": "6014524", "name": "Compliments to the Cook", "years": "2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "109", "category": "Seaside subseries", "sku": "6015590", "name": "Wharf Fencing (set of 2)", "years": "2025–current", "catalogNote": "", "conditionNote": ""}, {"id": "110", "category": "Seaside subseries", "sku": "6018373", "name": "No One's Crabby at Christmas", "years": "2026–current", "catalogNote": "", "conditionNote": ""}, {"id": "111", "category": "Seaside subseries", "sku": "6018375", "name": "Santa Ahoy!", "years": "2026–current", "catalogNote": "", "conditionNote": ""}, {"id": "112", "category": "Gift sets / special editions", "sku": "4051628-A", "name": "Mickey's Holiday Gift Set (set of 6)", "years": "2015 Dillard's exclusive", "catalogNote": "Set listing; contents may overlap individual pieces", "conditionNote": ""}, {"id": "113", "category": "Gift sets / special editions", "sku": "4051628-B", "name": "Mickey's Holiday Gift Set (set of 4)", "years": "2016 exclusive", "catalogNote": "Separate packaged set; verify contents", "conditionNote": ""}, {"id": "114", "category": "Gift sets / special editions", "sku": "4056425", "name": "Disney Village Gift Set (set of 4)", "years": "2016", "catalogNote": "Cataloged set; verify it belongs to this Christmas line before counting", "conditionNote": ""}, {"id": "115", "category": "Coordinating figures & accessories", "sku": "6018337", "name": "A Cocoa With A Cutie!", "years": "2026", "catalogNote": "2026 Disney Village Christmas release; included as a figure, not a separate village.", "conditionNote": ""}, {"id": "116", "category": "Coordinating figures & accessories", "sku": "6018367", "name": "Stitch Orders It All", "years": "2026", "catalogNote": "2026 Disney Village Christmas release; included as a figure, not a separate village.", "conditionNote": ""}];
+const STORAGE_KEY = "mickey-merry-christmas-village-v1";
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch(e) { saved = {}; }
+let statusFilter = "all", categoryFilter = "All categories", query = "";
+const categories = ["All categories", ...new Set(ITEMS.map(x=>x.category))];
+const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function record(id){ return saved[id] || (saved[id]={owned:false,price:"",date:"",condition:"",box:"",notes:""}); }
+function persist(){ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(saved));}catch(e){alert("Browser storage is full or unavailable. Please export a backup.");} }
+function updateStats(){
+ const owned=ITEMS.filter(x=>record(x.id).owned).length, total=ITEMS.length, pct=total?Math.round(owned/total*100):0;
+ document.getElementById("ownedCount").textContent=owned;
+ document.getElementById("remainingCount").textContent=total-owned;
+ document.getElementById("percentCount").textContent=pct+"%";
+ document.getElementById("progressFill").style.width=pct+"%";
+}
+function renderCategories(){
+ const el=document.getElementById("categoryFilters");
+ el.innerHTML=categories.map(c=>`<button class="catbtn ${c===categoryFilter?"active":""}" data-category="${esc(c)}">${esc(c)}</button>`).join("");
+ el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{categoryFilter=b.dataset.category;renderCategories();renderItems();}));
+}
+function renderItems(){
+ const filtered=ITEMS.filter(x=>{
+  const r=record(x.id), q=query.toLowerCase();
+  return (statusFilter==="all" || (statusFilter==="owned"?r.owned:!r.owned)) &&
+   (categoryFilter==="All categories" || x.category===categoryFilter) &&
+   (!q || (x.name+" "+x.sku+" "+x.category).toLowerCase().includes(q));
+ });
+ document.getElementById("visibleCount").textContent=filtered.length+" shown";
+ document.getElementById("listTitle").textContent=statusFilter==="owned"?"Pieces you own":statusFilter==="needed"?"Still on your wish list":"Collection pieces";
+ const el=document.getElementById("itemList");
+ if(!filtered.length){el.innerHTML='<div class="empty">No pieces match that search or filter.</div>';return;}
+ el.innerHTML=filtered.map(x=>{
+  const r=record(x.id);
+  return `<article class="item ${r.owned?"owned":""}" data-id="${x.id}">
+   <input class="check" type="checkbox" aria-label="Mark ${esc(x.name)} owned" ${r.owned?"checked":""}>
+   <div>
+    <div class="topline"><div class="itemname">${esc(x.name)}</div><div class="sku">#${esc(x.sku)}</div></div>
+    <div class="meta">${esc(x.category)} · ${esc(x.years)}</div>
+    ${x.catalogNote?`<div class="tags"><span class="tag">Catalog note</span></div>`:""}
+    <div class="itemactions"><button class="expand" type="button">${r.owned?"✓ Owned · ":""}Details & notes ▾</button></div>
+    <div class="details">
+     <div class="detailgrid">
+      <div><label>Purchase price</label><input data-field="price" value="${esc(r.price)}" placeholder="$0.00"></div>
+      <div><label>Purchase date</label><input data-field="date" value="${esc(r.date)}" placeholder="MM/DD/YYYY"></div>
+      <div><label>Condition</label><input data-field="condition" value="${esc(r.condition)}" placeholder="New, used, excellent…"></div>
+      <div><label>Original box</label><input data-field="box" value="${esc(r.box)}" placeholder="Yes / No / Condition"></div>
+      <div class="full"><label>My notes</label><textarea data-field="notes" placeholder="Where purchased, missing parts, display notes…">${esc(r.notes)}</textarea></div>
+      ${x.catalogNote?`<div class="full"><label>Catalog verification note</label><div class="meta">${esc(x.catalogNote)}</div></div>`:""}
+     </div>
+    </div>
+   </div>
+  </article>`;
+ }).join("");
+ el.querySelectorAll(".item").forEach(card=>{
+  const id=card.dataset.id;
+  card.querySelector(".check").addEventListener("change",e=>{record(id).owned=e.target.checked;persist();renderItems();updateStats();});
+  card.querySelector(".expand").addEventListener("click",()=>card.classList.toggle("expanded"));
+  card.querySelectorAll("[data-field]").forEach(input=>input.addEventListener("change",()=>{record(id)[input.dataset.field]=input.value;persist();}));
+ });
+ updateStats();
+}
+document.getElementById("search").addEventListener("input",e=>{query=e.target.value;renderItems();});
+document.querySelectorAll("#statusFilters button").forEach(b=>b.addEventListener("click",()=>{statusFilter=b.dataset.status;document.querySelectorAll("#statusFilters button").forEach(x=>x.classList.toggle("active",x===b));renderItems();}));
+document.getElementById("clearFilters").addEventListener("click",()=>{query="";statusFilter="all";categoryFilter="All categories";document.getElementById("search").value="";document.querySelectorAll("#statusFilters button").forEach(x=>x.classList.toggle("active",x.dataset.status==="all"));renderCategories();renderItems();});
+document.getElementById("backupBtn").addEventListener("click",()=>{
+ const payload={app:"Mickey's Merry Christmas Village Collector",version:1,exportedAt:new Date().toISOString(),saved};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Mickey-Village-Collection-Backup.json";a.click();URL.revokeObjectURL(a.href);
+});
+document.getElementById("restoreFile").addEventListener("change",async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{const data=JSON.parse(await file.text());const incoming=data.saved||data;if(!incoming||typeof incoming!=="object")throw new Error("Invalid backup");saved=incoming;persist();renderItems();alert("Backup restored.");}
+ catch(err){alert("That backup file could not be read.");}e.target.value="";
+});
+renderCategories();renderItems();updateStats();
+if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {})); }
+</script>
+</body></html>
