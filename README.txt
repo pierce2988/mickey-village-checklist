@@ -1,13 +1,9 @@
-BULK PHOTO LOOKUP UPDATE
+Mickey's Merry Christmas Village Collector — Christmas design + feature update
 
-Replace index.html AND sw.js in the root of your GitHub repository with these two files, then commit.
+This update adds:
+• A deep evergreen highlight across the full card when an item is marked owned, with readable light text and gold accents.
+• A “Find This Piece on eBay” link on every item, using the Department 56 item name and SKU in the search.
 
-This update tries multiple exact-SKU image locations in sequence:
-1) Department 56 retired-product image CDN
-2) The Village Chronicler collection image folder using the exact SKU
-3) A base SKU fallback for letter-suffixed gift set numbers
-4) The Village Chronicler common Images folder
+Upload/replace the files in this ZIP in the root of your existing GitHub Pages repository. At minimum replace index.html and sw.js. Keep your existing collection data: the app's local storage key and item IDs have not changed.
 
-If no exact-SKU image responds, the app retains the item-specific photo search link instead of showing a mismatched image.
-
-The service worker cache is versioned v3 so the previous app cache is removed on next visit.
+After committing, refresh the site. If the old version remains cached, close the site and reopen it.

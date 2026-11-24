@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#173d32">
+<meta name="theme-color" content="#102f27">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Mickey Village">
@@ -11,73 +11,107 @@
 <link rel="manifest" href="manifest.webmanifest">
 <title>Mickey's Merry Christmas Village — Collector</title>
 <style>
-:root{--pine:#173d32;--pine2:#245344;--red:#9d3535;--cream:#fbf8f0;--gold:#c6a35a;--ink:#26352e;--muted:#718078;--line:#e6e0d3;--white:#fff;--soft:#f1eee5}
-*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
-header{background:linear-gradient(135deg,#14372e,#285847);color:white;padding:26px 18px 22px;border-bottom:4px solid var(--gold)}
-.wrap{max-width:900px;margin:0 auto;padding:0 16px}
-.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:#e7d8ae;font-weight:800}
-h1{font-family:Georgia,serif;font-size:clamp(25px,6vw,38px);line-height:1.06;margin:8px 0 8px}
-.sub{color:#e8eee9;font-size:13px;line-height:1.45;max-width:600px}
-main{max-width:900px;margin:0 auto;padding:16px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:-1px}
-.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:13px 12px;box-shadow:0 3px 12px #233c2e0a}
-.stat strong{display:block;font-size:23px;color:var(--pine);font-variant-numeric:tabular-nums}
-.stat span{font-size:11px;color:var(--muted)}
-.progress{margin:12px 0 18px;background:#e7e2d6;border-radius:99px;height:9px;overflow:hidden}
-.progress>div{height:100%;width:0;background:linear-gradient(90deg,#2d6b50,#c6a35a);border-radius:99px;transition:width .2s}
-.toolbar{position:sticky;top:0;z-index:4;background:var(--cream);padding:8px 0 12px}
-.search{width:100%;border:1px solid var(--line);background:white;border-radius:12px;padding:13px 14px;font-size:16px;outline:none}
-.filters{display:flex;gap:7px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
-.filters button,.catbtn{border:1px solid var(--line);background:white;color:var(--ink);border-radius:99px;padding:9px 13px;white-space:nowrap;font-size:12px;font-weight:700}
-.filters button.active,.catbtn.active{background:var(--pine);border-color:var(--pine);color:white}
-.catbar{display:flex;gap:7px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
-.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 10px}
-.sectionhead h2{font: bold 18px Georgia,serif;margin:0;color:var(--pine)}
-.count{font-size:12px;color:var(--muted)}
-.list{display:grid;gap:9px}
-.item{background:white;border:1px solid var(--line);border-radius:14px;padding:13px;display:grid;grid-template-columns:34px 1fr;gap:11px;box-shadow:0 2px 8px #233c2e08}
+:root{--pine:#153d31;--pine2:#245b45;--red:#a52d35;--cream:#fbf7ed;--gold:#d7b66b;--ink:#26352e;--muted:#718078;--line:#e8dfcf;--white:#fff;--soft:#f3eee2;--berry:#7e202b}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#fffdf7 0,#fbf7ed 52%,#f5efe2 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+header{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 85% 10%,#386b50 0,transparent 34%),linear-gradient(135deg,#0e2b24 0%,#174536 52%,#12372c 100%);color:white;padding:76px 18px 34px;border-bottom:5px solid var(--gold);box-shadow:0 8px 24px #193c2b22}
+header:before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 12% 65%,#ffffff12 0 1px,transparent 2px),radial-gradient(circle at 76% 68%,#ffffff12 0 1px,transparent 2px),radial-gradient(circle at 88% 35%,#ffffff14 0 1px,transparent 2px);background-size:42px 42px,58px 58px,73px 73px;opacity:.7}
+header:after{content:"";position:absolute;z-index:-1;right:-75px;bottom:-150px;width:340px;height:340px;border:1px solid #d7b66b30;border-radius:50%;box-shadow:0 0 0 18px #d7b66b0c,0 0 0 38px #d7b66b0a}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px;position:relative}
+.lights{position:absolute;left:0;right:0;top:0;height:47px;pointer-events:none;overflow:hidden}
+.lights:before{content:"";position:absolute;left:-3%;right:-3%;top:-27px;height:58px;border-bottom:2px solid #26352b; border-radius:0 0 50% 50%}
+.bulbs{position:absolute;left:0;right:0;top:14px;display:flex;justify-content:space-around;align-items:flex-start}
+.bulb{width:9px;height:13px;border-radius:50% 50% 45% 45%;position:relative;box-shadow:0 0 10px currentColor,0 0 18px currentColor}
+.bulb:before{content:"";position:absolute;width:5px;height:4px;background:#314337;left:2px;top:-4px;border-radius:2px 2px 0 0}
+.bulb:nth-child(4n+1){background:#e84d4d;color:#e84d4d;transform:rotate(-8deg)}
+.bulb:nth-child(4n+2){background:#f4d36c;color:#f4d36c;transform:rotate(7deg);margin-top:5px}
+.bulb:nth-child(4n+3){background:#6bd29a;color:#6bd29a;transform:rotate(-5deg);margin-top:1px}
+.bulb:nth-child(4n){background:#6bb9e8;color:#6bb9e8;transform:rotate(8deg);margin-top:6px}
+.hero-top{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.hero-seal{width:37px;height:37px;border:1px solid #d7b66b99;border-radius:50%;display:grid;place-items:center;color:#f3d991;font-size:20px;background:#ffffff0c;box-shadow:inset 0 0 0 3px #ffffff08}
+.eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:10px;color:#f0d99d;font-weight:850}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(29px,7vw,47px);line-height:1.02;letter-spacing:-.025em;margin:0 0 12px;text-shadow:0 3px 15px #0005}
+h1 span{display:block;color:#f4d993;font-style:italic;font-size:.88em;margin-top:3px}
+.sub{color:#e6eee8;font-size:13px;line-height:1.55;max-width:560px}
+.hero-ribbon{display:inline-flex;align-items:center;gap:7px;margin-top:17px;padding:7px 11px;border:1px solid #d8b96d66;border-radius:99px;background:#ffffff0b;color:#f5e5bc;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+main{max-width:900px;margin:0 auto;padding:19px 16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:0}
+.stat{position:relative;background:linear-gradient(145deg,#fff,#fffdf8);border:1px solid var(--line);border-radius:15px;padding:14px 12px;box-shadow:0 5px 15px #233c2e0b;overflow:hidden}
+.stat:after{content:"";position:absolute;right:-12px;top:-15px;width:45px;height:45px;border:1px solid #d7b66b55;border-radius:50%}
+.stat strong{display:block;font-family:Georgia,serif;font-size:25px;color:var(--pine);font-variant-numeric:tabular-nums}
+.stat span{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.02em}
+.progress{margin:13px 0 19px;background:#e8e0d1;border:1px solid #e1d7c5;border-radius:99px;height:11px;overflow:hidden;padding:1px}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,#286346,#6e9b62,#d6b76b);border-radius:99px;transition:width .2s}
+.toolbar{position:sticky;top:0;z-index:4;background:#fbf7edee;backdrop-filter:blur(12px);padding:10px 0 12px;border-bottom:1px solid #e7dece}
+.search{width:100%;border:1px solid #ded5c5;background:white;border-radius:13px;padding:14px;font-size:16px;outline:none;box-shadow:0 3px 10px #233c2e08}
+.search:focus{border-color:#b99a55;box-shadow:0 0 0 3px #d7b66b25}
+.filters{display:flex;gap:7px;overflow-x:auto;padding:11px 0 3px;scrollbar-width:none}
+.filters button,.catbtn{border:1px solid #e3d9c8;background:#fffdf9;color:var(--ink);border-radius:99px;padding:9px 14px;white-space:nowrap;font-size:12px;font-weight:750}
+.filters button.active,.catbtn.active{background:var(--pine);border-color:var(--pine);color:white;box-shadow:0 3px 8px #153d312b}
+.catbar{display:flex;gap:7px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:none}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0 11px}
+.sectionhead h2{font: bold 20px Georgia,serif;margin:0;color:var(--pine)}
+.count{font-size:11px;color:var(--muted);font-weight:700}
+.list{display:grid;gap:11px}
+.item{background:linear-gradient(145deg,#fff 0%,#fffefa 100%);border:1px solid #e8dfcf;border-radius:16px;padding:14px;display:grid;grid-template-columns:34px 1fr;gap:11px;box-shadow:0 4px 13px #233c2e09;transition:transform .15s,border-color .15s}
+.item.owned{background:linear-gradient(145deg,#174d38 0%,#236447 100%);border:1px solid #c9a95e;box-shadow:0 5px 18px #153d3130;color:#fff}
+.item.owned .itemname{color:#fff}
+.item.owned .meta,.item.owned label,.item.owned .photo-caption{color:#e2eee5}
+.item.owned .sku{background:#f2dfaa;color:#553e14}
+.item.owned .tag{background:#ffffff18;border-color:#ffffff35;color:#f8edcf}
+.item.owned .details{border-top-color:#ffffff35}
+.item.owned .details input,.item.owned .details textarea{background:#fdfbf4;color:#26352e;border-color:#d7c79e}
+.item.owned .expand{background:#f2dfaa;border-color:#d7b66b;color:#284b38}
+.item.owned .photo-box{border-color:#d7b66b;background:#f8f3e7}
+.item.owned .photo-link{color:#f6df9e}
 .check{appearance:none;-webkit-appearance:none;width:29px;height:29px;border:2px solid #b8c2b9;border-radius:9px;margin:1px 0 0;display:grid;place-items:center;background:white}
 .check:checked{background:var(--pine);border-color:var(--pine)}
 .check:checked:after{content:"✓";font-size:19px;color:white;font-weight:800;line-height:1}
-.item.owned{background:#f7faf6;border-color:#d3e0d4}
-.photo-row{display:flex;gap:11px;align-items:flex-start;margin:1px 0 9px}
-.photo-box{width:104px;min-width:104px;height:104px;border:1px solid var(--line);border-radius:10px;background:#f8f6f0;overflow:hidden;display:grid;place-items:center}
+.photo-row{display:flex;gap:11px;align-items:flex-start;margin:1px 0 10px}
+.photo-box{width:112px;min-width:112px;height:112px;border:1px solid #e5dccb;border-radius:12px;background:linear-gradient(145deg,#faf7ef,#f0ebdf);overflow:hidden;display:grid;place-items:center}
 .itemphoto{width:100%;height:100%;object-fit:contain;display:block}
 .photo-placeholder{display:none;text-align:center;padding:8px;color:var(--muted);font-size:10px;line-height:1.35}
 .photo-box.missing .photo-placeholder{display:block}
-.photo-tools{display:flex;flex-direction:column;gap:5px;align-items:flex-start;padding-top:3px}
-.photo-link{font-size:11px;color:var(--pine2);font-weight:700;text-decoration:underline}
+.photo-tools{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding-top:3px}
+.photo-link{font-size:11px;color:var(--pine2);font-weight:800;text-decoration:underline}
 .photo-caption{font-size:10px;color:var(--muted)}
-.item.owned .itemname{color:#6a7a70}
+.item.owned .itemname{color:#61766a}
 .topline{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.itemname{font-weight:750;font-size:15px;line-height:1.25}
-.sku{font-size:11px;font-weight:800;color:var(--red);white-space:nowrap}
+.itemname{font-weight:800;font-size:15px;line-height:1.3}
+.sku{font-size:10px;font-weight:850;color:var(--berry);white-space:nowrap;background:#f8e9e5;border-radius:6px;padding:4px 6px}
 .meta{font-size:11px;color:var(--muted);margin-top:5px}
 .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
-.tag{font-size:10px;background:var(--soft);border-radius:6px;padding:4px 7px;color:#58665e}
-.details{margin-top:10px;border-top:1px solid var(--line);padding-top:9px;display:none}
+.tag{font-size:10px;background:#f4eee1;border:1px solid #eee4d2;border-radius:7px;padding:4px 7px;color:#59665e}
+.details{margin-top:11px;border-top:1px solid #eee5d6;padding-top:10px;display:none}
 .item.expanded .details{display:block}
 .detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-label{display:block;font-size:10px;color:var(--muted);font-weight:700;margin-bottom:4px}
-.details input,.details textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px;font:13px -apple-system,sans-serif;background:#fff}
+label{display:block;font-size:10px;color:var(--muted);font-weight:750;margin-bottom:4px}
+.details input,.details textarea{width:100%;border:1px solid #e5dccb;border-radius:9px;padding:10px;font:13px -apple-system,sans-serif;background:#fffdf9}
 .details textarea{min-height:58px;resize:vertical}
 .full{grid-column:1/-1}
 .itemactions{display:flex;justify-content:flex-end;margin-top:7px}
-.expand{background:none;border:0;color:var(--pine2);font-size:12px;font-weight:750;padding:4px 0}
+.find-actions{justify-content:flex-start;margin-top:9px;margin-bottom:2px}
+.find-ebay{display:inline-flex;align-items:center;background:var(--red);border:1px solid #8e222b;border-radius:99px;color:#fff;text-decoration:none;font-size:11px;font-weight:850;padding:9px 13px;box-shadow:0 3px 8px #a52d3526}
+.item.owned .find-ebay{background:#f2dfaa;border-color:#d7b66b;color:#294d3a}
+.expand{background:#f4f0e6;border:1px solid #e8dfcf;border-radius:99px;color:var(--pine2);font-size:11px;font-weight:800;padding:7px 11px}
 .empty{background:white;border:1px dashed #cfc8b8;border-radius:14px;padding:28px;text-align:center;color:var(--muted);font-size:13px}
-footer{max-width:900px;margin:18px auto 0;padding:0 16px;color:var(--muted);font-size:11px;line-height:1.5}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
-.tools button,.tools label{border:1px solid var(--line);background:white;color:var(--pine);border-radius:10px;padding:10px 12px;font-size:12px;font-weight:750;cursor:pointer}
+footer{max-width:900px;margin:20px auto 0;padding:0 16px;color:var(--muted);font-size:11px;line-height:1.5;text-align:center}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.tools button,.tools label{border:1px solid #e4d9c7;background:#fffdf8;color:var(--pine);border-radius:11px;padding:11px 13px;font-size:12px;font-weight:800;cursor:pointer}
 .tools input{display:none}
-.note{background:#f4efe2;border:1px solid #e7dcc0;border-radius:12px;padding:11px 12px;font-size:11px;color:#6e6248;line-height:1.45;margin-top:14px}
-@media(min-width:650px){.list{grid-template-columns:1fr 1fr}.item{align-self:start}.stats{max-width:520px}.toolbar{border-bottom:1px solid var(--line)}}
+.note{background:#f6f0df;border:1px solid #e8d8ad;border-left:4px solid var(--gold);border-radius:12px;padding:12px 13px;font-size:11px;color:#6e6248;line-height:1.5;margin-top:14px}
+@media(min-width:650px){.list{grid-template-columns:1fr 1fr}.item{align-self:start}.stats{max-width:560px}.toolbar{border-bottom:1px solid var(--line)}}
+@media(max-width:380px){header{padding-top:68px}.stats{gap:6px}.stat{padding:11px 8px}.stat strong{font-size:22px}.photo-box{width:94px;min-width:94px;height:94px}}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-<div class="eyebrow">The collector's checklist</div>
-<h1>Mickey's Merry<br>Christmas Village</h1>
-<div class="sub">A personal collection tracker for the Department 56 Christmas village series. Tap a box to mark a piece owned; open any item to add your purchase and condition notes.</div>
+<header>
+<div class="lights" aria-hidden="true"><div class="bulbs"><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i></div></div>
+<div class="wrap">
+<div class="hero-top"><div class="hero-seal">✦</div><div class="eyebrow">A Christmas collector's edition</div></div>
+<h1>Mickey's Merry <span>Christmas Village</span></h1>
+<div class="sub">Your personal Department 56 collection book. Keep track of every treasured piece, from the village buildings to the tiniest Christmas details.</div>
+<div class="hero-ribbon">❄ &nbsp; Collect the magic, one piece at a time &nbsp; ❄</div>
 </div></header>
 <main>
 <section class="stats">
@@ -163,6 +197,7 @@ function renderItems(){
     </div>
     <div class="topline"><div class="itemname">${esc(x.name)}</div><div class="sku">#${esc(x.sku)}</div></div>
     <div class="meta">${esc(x.category)} · ${esc(x.years)}</div>
+    <div class="itemactions find-actions"><a class="find-ebay" href="https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent("Department 56 "+x.name+" "+x.sku)}" target="_blank" rel="noopener">Find This Piece on eBay ↗</a></div>
     ${x.catalogNote?`<div class="tags"><span class="tag">Catalog note</span></div>`:""}
     <div class="itemactions"><button class="expand" type="button">${r.owned?"✓ Owned · ":""}Details & notes ▾</button></div>
     <div class="details">
