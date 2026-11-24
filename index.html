@@ -3,162 +3,316 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#102f27">
+<meta name="theme-color" content="#0B2921">
+<meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mickey Village">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Mickey's Merry Christmas Village — Collector</title>
+<title>Mickey’s Merry Christmas Village — Collector’s Edition</title>
 <style>
-:root{--pine:#153d31;--pine2:#245b45;--red:#a52d35;--cream:#fbf7ed;--gold:#d7b66b;--ink:#26352e;--muted:#718078;--line:#e8dfcf;--white:#fff;--soft:#f3eee2;--berry:#7e202b}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top,#fffdf7 0,#fbf7ed 52%,#f5efe2 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(30px + env(safe-area-inset-bottom))}
-header{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 85% 10%,#386b50 0,transparent 34%),linear-gradient(135deg,#0e2b24 0%,#174536 52%,#12372c 100%);color:white;padding:76px 18px 34px;border-bottom:5px solid var(--gold);box-shadow:0 8px 24px #193c2b22}
-header:before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 12% 65%,#ffffff12 0 1px,transparent 2px),radial-gradient(circle at 76% 68%,#ffffff12 0 1px,transparent 2px),radial-gradient(circle at 88% 35%,#ffffff14 0 1px,transparent 2px);background-size:42px 42px,58px 58px,73px 73px;opacity:.7}
-header:after{content:"";position:absolute;z-index:-1;right:-75px;bottom:-150px;width:340px;height:340px;border:1px solid #d7b66b30;border-radius:50%;box-shadow:0 0 0 18px #d7b66b0c,0 0 0 38px #d7b66b0a}
-.wrap{max-width:900px;margin:0 auto;padding:0 16px;position:relative}
-.lights{position:absolute;left:0;right:0;top:0;height:47px;pointer-events:none;overflow:hidden}
-.lights:before{content:"";position:absolute;left:-3%;right:-3%;top:-27px;height:58px;border-bottom:2px solid #26352b; border-radius:0 0 50% 50%}
-.bulbs{position:absolute;left:0;right:0;top:14px;display:flex;justify-content:space-around;align-items:flex-start}
-.bulb{width:9px;height:13px;border-radius:50% 50% 45% 45%;position:relative;box-shadow:0 0 10px currentColor,0 0 18px currentColor}
-.bulb:before{content:"";position:absolute;width:5px;height:4px;background:#314337;left:2px;top:-4px;border-radius:2px 2px 0 0}
-.bulb:nth-child(4n+1){background:#e84d4d;color:#e84d4d;transform:rotate(-8deg)}
-.bulb:nth-child(4n+2){background:#f4d36c;color:#f4d36c;transform:rotate(7deg);margin-top:5px}
-.bulb:nth-child(4n+3){background:#6bd29a;color:#6bd29a;transform:rotate(-5deg);margin-top:1px}
-.bulb:nth-child(4n){background:#6bb9e8;color:#6bb9e8;transform:rotate(8deg);margin-top:6px}
-.hero-top{display:flex;align-items:center;gap:9px;margin-bottom:12px}
-.hero-seal{width:37px;height:37px;border:1px solid #d7b66b99;border-radius:50%;display:grid;place-items:center;color:#f3d991;font-size:20px;background:#ffffff0c;box-shadow:inset 0 0 0 3px #ffffff08}
-.eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:10px;color:#f0d99d;font-weight:850}
-h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(29px,7vw,47px);line-height:1.02;letter-spacing:-.025em;margin:0 0 12px;text-shadow:0 3px 15px #0005}
-h1 span{display:block;color:#f4d993;font-style:italic;font-size:.88em;margin-top:3px}
-.sub{color:#e6eee8;font-size:13px;line-height:1.55;max-width:560px}
-.hero-ribbon{display:inline-flex;align-items:center;gap:7px;margin-top:17px;padding:7px 11px;border:1px solid #d8b96d66;border-radius:99px;background:#ffffff0b;color:#f5e5bc;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-main{max-width:900px;margin:0 auto;padding:19px 16px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:0}
-.stat{position:relative;background:linear-gradient(145deg,#fff,#fffdf8);border:1px solid var(--line);border-radius:15px;padding:14px 12px;box-shadow:0 5px 15px #233c2e0b;overflow:hidden}
-.stat:after{content:"";position:absolute;right:-12px;top:-15px;width:45px;height:45px;border:1px solid #d7b66b55;border-radius:50%}
-.stat strong{display:block;font-family:Georgia,serif;font-size:25px;color:var(--pine);font-variant-numeric:tabular-nums}
-.stat span{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.02em}
-.progress{margin:13px 0 19px;background:#e8e0d1;border:1px solid #e1d7c5;border-radius:99px;height:11px;overflow:hidden;padding:1px}
-.progress>div{height:100%;width:0;background:linear-gradient(90deg,#286346,#6e9b62,#d6b76b);border-radius:99px;transition:width .2s}
-.toolbar{position:sticky;top:0;z-index:4;background:#fbf7edee;backdrop-filter:blur(12px);padding:10px 0 12px;border-bottom:1px solid #e7dece}
-.search{width:100%;border:1px solid #ded5c5;background:white;border-radius:13px;padding:14px;font-size:16px;outline:none;box-shadow:0 3px 10px #233c2e08}
-.search:focus{border-color:#b99a55;box-shadow:0 0 0 3px #d7b66b25}
-.filters{display:flex;gap:7px;overflow-x:auto;padding:11px 0 3px;scrollbar-width:none}
-.filters button,.catbtn{border:1px solid #e3d9c8;background:#fffdf9;color:var(--ink);border-radius:99px;padding:9px 14px;white-space:nowrap;font-size:12px;font-weight:750}
-.filters button.active,.catbtn.active{background:var(--pine);border-color:var(--pine);color:white;box-shadow:0 3px 8px #153d312b}
-.catbar{display:flex;gap:7px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:none}
-.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0 11px}
-.sectionhead h2{font: bold 20px Georgia,serif;margin:0;color:var(--pine)}
-.count{font-size:11px;color:var(--muted);font-weight:700}
-.list{display:grid;gap:11px}
-.item{background:linear-gradient(145deg,#fff 0%,#fffefa 100%);border:1px solid #e8dfcf;border-radius:16px;padding:14px;display:grid;grid-template-columns:34px 1fr;gap:11px;box-shadow:0 4px 13px #233c2e09;transition:transform .15s,border-color .15s}
-.item.owned{background:linear-gradient(145deg,#174d38 0%,#236447 100%);border:1px solid #c9a95e;box-shadow:0 5px 18px #153d3130;color:#fff}
-.item.owned .itemname{color:#fff}
-.item.owned .meta,.item.owned label,.item.owned .photo-caption{color:#e2eee5}
-.item.owned .sku{background:#f2dfaa;color:#553e14}
-.item.owned .tag{background:#ffffff18;border-color:#ffffff35;color:#f8edcf}
-.item.owned .details{border-top-color:#ffffff35}
-.item.owned .details input,.item.owned .details textarea{background:#fdfbf4;color:#26352e;border-color:#d7c79e}
-.item.owned .expand{background:#f2dfaa;border-color:#d7b66b;color:#284b38}
-.item.owned .photo-box{border-color:#d7b66b;background:#f8f3e7}
-.item.owned .photo-link{color:#f6df9e}
-.check{appearance:none;-webkit-appearance:none;width:29px;height:29px;border:2px solid #b8c2b9;border-radius:9px;margin:1px 0 0;display:grid;place-items:center;background:white}
-.check:checked{background:var(--pine);border-color:var(--pine)}
-.check:checked:after{content:"✓";font-size:19px;color:white;font-weight:800;line-height:1}
-.photo-row{display:flex;gap:11px;align-items:flex-start;margin:1px 0 10px}
-.photo-box{width:112px;min-width:112px;height:112px;border:1px solid #e5dccb;border-radius:12px;background:linear-gradient(145deg,#faf7ef,#f0ebdf);overflow:hidden;display:grid;place-items:center}
-.itemphoto{width:100%;height:100%;object-fit:contain;display:block}
-.photo-placeholder{display:none;text-align:center;padding:8px;color:var(--muted);font-size:10px;line-height:1.35}
-.photo-box.missing .photo-placeholder{display:block}
-.photo-tools{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding-top:3px}
-.photo-link{font-size:11px;color:var(--pine2);font-weight:800;text-decoration:underline}
-.photo-caption{font-size:10px;color:var(--muted)}
-.item.owned .itemname{color:#61766a}
-.topline{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.itemname{font-weight:800;font-size:15px;line-height:1.3}
-.sku{font-size:10px;font-weight:850;color:var(--berry);white-space:nowrap;background:#f8e9e5;border-radius:6px;padding:4px 6px}
-.meta{font-size:11px;color:var(--muted);margin-top:5px}
-.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
-.tag{font-size:10px;background:#f4eee1;border:1px solid #eee4d2;border-radius:7px;padding:4px 7px;color:#59665e}
-.details{margin-top:11px;border-top:1px solid #eee5d6;padding-top:10px;display:none}
-.item.expanded .details{display:block}
-.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-label{display:block;font-size:10px;color:var(--muted);font-weight:750;margin-bottom:4px}
-.details input,.details textarea{width:100%;border:1px solid #e5dccb;border-radius:9px;padding:10px;font:13px -apple-system,sans-serif;background:#fffdf9}
-.details textarea{min-height:58px;resize:vertical}
-.full{grid-column:1/-1}
-.itemactions{display:flex;justify-content:flex-end;margin-top:7px}
-.find-actions{justify-content:flex-start;margin-top:9px;margin-bottom:2px}
-.find-ebay{display:inline-flex;align-items:center;background:var(--red);border:1px solid #8e222b;border-radius:99px;color:#fff;text-decoration:none;font-size:11px;font-weight:850;padding:9px 13px;box-shadow:0 3px 8px #a52d3526}
-.item.owned .find-ebay{background:#f2dfaa;border-color:#d7b66b;color:#294d3a}
-.expand{background:#f4f0e6;border:1px solid #e8dfcf;border-radius:99px;color:var(--pine2);font-size:11px;font-weight:800;padding:7px 11px}
-.empty{background:white;border:1px dashed #cfc8b8;border-radius:14px;padding:28px;text-align:center;color:var(--muted);font-size:13px}
-footer{max-width:900px;margin:20px auto 0;padding:0 16px;color:var(--muted);font-size:11px;line-height:1.5;text-align:center}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-.tools button,.tools label{border:1px solid #e4d9c7;background:#fffdf8;color:var(--pine);border-radius:11px;padding:11px 13px;font-size:12px;font-weight:800;cursor:pointer}
-.tools input{display:none}
-.note{background:#f6f0df;border:1px solid #e8d8ad;border-left:4px solid var(--gold);border-radius:12px;padding:12px 13px;font-size:11px;color:#6e6248;line-height:1.5;margin-top:14px}
-@media(min-width:650px){.list{grid-template-columns:1fr 1fr}.item{align-self:start}.stats{max-width:560px}.toolbar{border-bottom:1px solid var(--line)}}
-@media(max-width:380px){header{padding-top:68px}.stats{gap:6px}.stat{padding:11px 8px}.stat strong{font-size:22px}.photo-box{width:94px;min-width:94px;height:94px}}
+:root{--ever:#123B2D;--forest:#0B2921;--ivory:#F7F3E9;--gold:#C5A15B;--cran:#8F3438;--char:#292A26;
+--bg:#F1EBDB;--card:#FBF8F0;--ink:#292A26;--muted:#686B61;--line:#DDD3BB;--soft:#EBE3CF;--ownbg:#123B2D;--owntx:#F7F3E9;--ownmut:#B6C6BA;--goldink:#85692B;--tabon:#123B2D;--chipon:#123B2D;--chipontx:#F7F3E9;--prim:#123B2D;--primtx:#F7F3E9;--ringbg:#DDD3BB;
+--photo:radial-gradient(ellipse at 50% 38%,#FDFBF5 0,#F3ECDB 68%,#E9E0CA 100%);--shadow:0 1px 2px rgba(41,42,38,.06),0 8px 22px rgba(41,42,38,.08);
+--serif:ui-serif,"New York","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+--gut:max(16px,calc((100vw - 640px)/2));--tab:58px;color-scheme:light}
+:root[data-theme=dark]{--bg:#08201A;--card:#0F2D24;--ink:#F2ECDC;--muted:#A5B2A8;--line:#1E4236;--soft:#0B261E;--ownbg:#17503B;--owntx:#F7F3E9;--ownmut:#C3D3C7;--goldink:#D7B873;--tabon:#D7B873;--chipon:#C5A15B;--chipontx:#0B2921;--prim:#C5A15B;--primtx:#0B2921;--ringbg:#1E4236;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#08201A;--card:#0F2D24;--ink:#F2ECDC;--muted:#A5B2A8;--line:#1E4236;--soft:#0B261E;--ownbg:#17503B;--owntx:#F7F3E9;--ownmut:#C3D3C7;--goldink:#D7B873;--tabon:#D7B873;--chipon:#C5A15B;--chipontx:#0B2921;--prim:#C5A15B;--primtx:#0B2921;--ringbg:#1E4236;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme=dark] body{}
+:root[data-theme=dark] #tabs{background:rgba(11,41,33,.9)}:root[data-theme=dark] .ph-empty{color:#8a8878}:root[data-theme=dark] .wtag{background:rgba(251,248,240,.92)}:root[data-theme=dark] .dots i{background:rgba(247,243,233,.3)}:root[data-theme=dark] .slide-cap{color:#6c6a5d}:root[data-theme=dark] .btn.ghost{background:var(--card)}:root[data-theme=dark] .pill.own{background:#17503B;border-color:#17503B}:root[data-theme=dark] .btn.danger{background:#a6454a}:root[data-theme=dark] .prio.med{border-color:var(--goldink)}:root[data-theme=dark] .fl input,.fl textarea,.fl select{background:#0B261E}:root[data-theme=dark] .search.inset{background:#0B261E}:root[data-theme=dark] .sheet{background:#0F2D24}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) #tabs{background:rgba(11,41,33,.9)}:root:not([data-theme=light]) .ph-empty{color:#8a8878}:root:not([data-theme=light]) .wtag{background:rgba(251,248,240,.92)}:root:not([data-theme=light]) .dots i{background:rgba(247,243,233,.3)}:root:not([data-theme=light]) .slide-cap{color:#6c6a5d}:root:not([data-theme=light]) .btn.ghost{background:var(--card)}:root:not([data-theme=light]) .pill.own{background:#17503B;border-color:#17503B}:root:not([data-theme=light]) .btn.danger{background:#a6454a}:root:not([data-theme=light]) .prio.med{border-color:var(--goldink)}:root:not([data-theme=light]) .fl input,.fl textarea,.fl select{background:#0B261E}:root:not([data-theme=light]) .search.inset{background:#0B261E}:root:not([data-theme=light]) .sheet{background:#0F2D24}}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--sans);padding-bottom:calc(var(--tab) + env(safe-area-inset-bottom) + 28px);-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,dl,dd,dt,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit}
+.ic{width:22px;height:22px;flex:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#sb{position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:var(--forest);z-index:60}
+.view.enter{animation:vin .24s ease-out}
+@keyframes vin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* hero */
+.hero{position:relative;background:linear-gradient(180deg,var(--forest),var(--ever));color:var(--ivory);padding:calc(env(safe-area-inset-top) + 18px) var(--gut) 24px;padding-left:calc(var(--gut) + 2px);padding-right:calc(var(--gut) + 2px);background-image:radial-gradient(circle at 18% 30%,rgba(247,243,233,.09) 0 1px,transparent 1.6px),radial-gradient(circle at 72% 62%,rgba(247,243,233,.07) 0 1px,transparent 1.6px),linear-gradient(180deg,var(--forest),var(--ever));background-size:46px 46px,67px 67px,100% 100%}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hero.tight{padding-bottom:14px}
+.hero h1{font:600 31px/1.1 var(--serif);letter-spacing:-.01em}
+.hero.home h1{font-size:34px}
+.kicker{font:italic 500 15px var(--serif);color:var(--gold);margin-bottom:6px}
+.hrow{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.hrow h1{flex:1}
+.dhead .hrow h1{font-size:20px;text-align:center}
+.prog{display:flex;align-items:center;gap:22px;margin-top:20px}
+.ring{width:128px;height:128px;flex:none}
+.ring-bg{stroke:rgba(247,243,233,.16)}
+.ring-fg{stroke:var(--gold);transition:stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1)}
+.ring-n{fill:var(--ivory);font-family:var(--serif);font-weight:600}
+.ring-s{fill:rgba(247,243,233,.7)}
+.card .ring-bg{stroke:var(--ringbg)}.card .ring-n{fill:var(--ink)}.card .ring-s{fill:var(--muted)}
+.figs{display:grid;gap:10px;flex:1}
+.figs div{display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-bottom:1px solid rgba(197,161,91,.28);padding-bottom:7px}
+.figs div:last-child{border:0}
+.figs dt{font-size:14px;color:rgba(247,243,233,.78)}
+.figs dd{font:600 26px/1 var(--serif);font-variant-numeric:tabular-nums}
+.pg{padding:16px var(--gut) 0;padding-left:calc(var(--gut) + 0px)}
+.pg>*{margin-bottom:18px}
+.pg{padding-inline:max(16px,var(--gut))}
+.muted{color:var(--muted);font-size:14px}.fine{font-size:13px;margin-top:10px}
+.lab{font:italic 500 14px var(--serif);color:var(--goldink);margin-bottom:2px}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 18px;border-radius:13px;border:1px solid var(--line);background:transparent;font-weight:600;font-size:15px;text-decoration:none;color:var(--ink);transition:transform .15s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn .ic{width:19px;height:19px}
+.btn.primary{background:var(--prim);color:var(--primtx);border-color:var(--prim)}
+.btn.gold{background:var(--gold);color:var(--forest);border-color:var(--gold)}
+.btn.ghost{background:var(--card)}
+.btn.danger{background:var(--cran);color:#fff;border-color:var(--cran)}
+.btn.sm{min-height:36px;padding:0 13px;font-size:14px;border-radius:10px}
+.link{background:none;border:0;padding:6px 0;color:var(--goldink);font-weight:600;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.link .ic{width:15px;height:15px}
+.danger-t{color:var(--cran)}.btn.danger-o{color:var(--cran);border-color:var(--cran)}
+.ibtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;text-decoration:none;flex:none}
+.ibtn.ghost{width:40px;height:40px}.ibtn.light{background:rgba(247,243,233,.1);border-color:rgba(247,243,233,.28);color:var(--ivory)}
+/* photos */
+.ph{position:relative;aspect-ratio:1;background:var(--photo);overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:contain;padding:7px;opacity:0;transition:opacity .35s;display:block}
+.ph img.ok{opacity:1}
+.ph-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#8a8878;font-size:12.5px;text-align:center;padding:8px}
+.ph-empty .ic{opacity:.45;width:26px;height:26px}
+.ph.sm{width:64px;height:64px;border-radius:12px;flex:none;aspect-ratio:auto}.ph.xs{width:52px;height:52px;border-radius:10px;flex:none;aspect-ratio:auto}
+.ph.sm .ph-empty span,.ph.xs .ph-empty span{display:none}
+.ph.sm img,.ph.xs img{padding:3px}
+.ph.lg,.ph.big{border-radius:0}
+.badge{position:absolute;left:8px;top:8px;display:inline-flex;align-items:center;gap:3px;padding:3px 9px 3px 6px;border-radius:99px;background:var(--gold);color:var(--forest);font-size:12px;font-weight:700}
+.badge .ic{width:13px;height:13px;stroke-width:2.4}
+.wtag{position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;background:rgba(251,248,240,.92);color:var(--cran);display:grid;place-items:center}
+.wtag .ic{width:15px;height:15px;fill:var(--cran)}
+.lr .badge,.lr .wtag{display:none}
+/* home */
+.nudge{display:flex;gap:12px;background:var(--card);border:1px solid var(--gold);border-radius:16px;padding:14px}
+.nudge>.ic{color:var(--goldink);margin-top:2px}.nt{display:grid;gap:3px}.nt b{font-size:15px}.nt span{font-size:14px;color:var(--muted)}
+.nb{display:flex;gap:14px;align-items:center;margin-top:8px}
+.nudge.soft{border-color:var(--line)}
+.spot{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.spot-b{padding:14px 16px 16px}.spot-b h2{font:600 22px/1.15 var(--serif);margin-bottom:3px}
+.spot-r{display:flex;align-items:center;gap:8px;margin-top:14px}.grow{flex:1}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:4px 10px}
+.pill .ic{width:14px;height:14px}.pill.own{background:var(--ever);border-color:var(--ever);color:var(--ivory)}.pill.own .ic{color:var(--gold)}.pill.wish{color:var(--cran);border-color:var(--cran)}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quick button{display:grid;gap:2px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;min-height:92px;align-content:start}
+.quick .ic{color:var(--goldink);margin-bottom:6px}.quick b{font-size:15px}.quick span{font-size:13px;color:var(--muted)}
+.sh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.sh h2,.card h2{font:600 20px/1.2 var(--serif)}
+.hscroll{display:flex;gap:10px;overflow-x:auto;margin:0 calc(-1*max(16px,var(--gut)));padding:2px max(16px,var(--gut)) 6px;scroll-snap-type:x proximity;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.mini{flex:none;width:118px;display:grid;gap:3px;text-align:left;background:none;border:0;padding:0;scroll-snap-align:start}
+.mini .ph{width:118px;height:118px;border-radius:14px;border:1px solid var(--line)}
+.mini b{font-size:13.5px;font-weight:600;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.mini span{font-size:12.5px;color:var(--muted)}
+.empty-s{color:var(--muted);font-size:14.5px;padding:6px 0}
+.hls{display:grid;gap:10px}
+.hl{display:flex;align-items:center;gap:12px;text-align:left;width:100%;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px 10px 10px}
+.hl-b{flex:1;display:grid;min-width:0}.hl-b b{font-size:15px}.hl-b span{font-size:13.5px;color:var(--muted)}.hl>.ic{color:var(--muted);width:18px;height:18px}
+.hl.empty{padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.mline{font-size:15px;margin-bottom:8px}.lastm{margin-top:8px}
+.bar{height:8px;border-radius:99px;background:var(--soft);overflow:hidden;margin:6px 0}
+.bar-fg{height:100%;background:linear-gradient(90deg,var(--ever),var(--gold));border-radius:99px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.row-link{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.row-link>.ic:first-child{color:var(--goldink)}.row-link div{flex:1;display:grid}.row-link span{font-size:13.5px;color:var(--muted)}.row-link>.ic:last-child{width:18px;height:18px;color:var(--muted)}
+/* collection */
+.vt{display:flex;background:rgba(247,243,233,.1);border:1px solid rgba(247,243,233,.25);border-radius:12px;padding:3px}
+.vt button{width:42px;height:34px;border-radius:9px;border:0;background:none;color:var(--ivory);display:grid;place-items:center}.vt button.on{background:var(--gold);color:var(--forest)}
+.vt .ic{width:20px;height:20px}
+.bar-sticky{position:sticky;top:env(safe-area-inset-top);z-index:30;background:var(--forest);padding:6px var(--gut) 11px;padding-inline:max(16px,var(--gut));box-shadow:0 6px 14px rgba(5,18,14,.18)}
+.srow{display:flex;gap:8px}
+.search{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:var(--ivory);color:var(--char);border-radius:13px;padding:0 12px;height:46px}
+.search .ic{color:#7b7d70;width:20px;height:20px}
+.search input{flex:1;min-width:0;width:100%;border:0;background:none;outline:0;font-size:16px;color:var(--char);height:100%;-webkit-appearance:none}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none}
+.search.inset{background:var(--soft);margin-bottom:12px}
+.fbtn{position:relative;width:46px;height:46px;border-radius:13px;border:1px solid rgba(247,243,233,.3);background:none;color:var(--ivory);display:grid;place-items:center;flex:none}
+.fbtn i{position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;border-radius:99px;background:var(--gold);color:var(--forest);font:700 11px/19px var(--sans);text-align:center;font-style:normal}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:10px 0 0}
+.chips::-webkit-scrollbar{display:none}
+.chips.wrap{flex-wrap:wrap;overflow:visible;padding-top:2px}
+.chip{flex:none;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 13px;border-radius:99px;border:1px solid rgba(247,243,233,.3);background:none;color:var(--ivory);font-size:14px;font-weight:600;white-space:nowrap}
+.chip i{font-style:normal;font-size:12px;opacity:.75;font-variant-numeric:tabular-nums}
+.chip.on{background:var(--gold);border-color:var(--gold);color:var(--forest)}
+.chip .ic{width:14px;height:14px}
+.sheet .chip,.pg .chip{border-color:var(--line);color:var(--ink)}
+.sheet .chip.on,.pg .chip.on{background:var(--chipon);border-color:var(--chipon);color:var(--chipontx)}
+.chips.act{padding:0 0 10px}
+.cnt{font-size:13.5px;color:var(--muted);margin:2px 0 12px!important}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(156px,1fr));gap:12px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
+.pc .ph{border-bottom:1px solid var(--line);transition:border-color .5s}
+.pc-b{display:flex;gap:6px;align-items:flex-end;padding:10px 10px 11px 12px;flex:1}
+.pc-t{flex:1;min-width:0;display:grid;gap:2px;align-content:start}
+.cat{font:italic 500 13px var(--serif);color:var(--goldink);transition:color .5s}
+.pc h3,.lr h3{font-size:14.5px;line-height:1.25;font-weight:650;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.5em}
+.sku{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;transition:color .5s}
+.tg{flex:none;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--goldink);background:transparent;color:transparent;display:grid;place-items:center;transition:background .35s,color .35s,transform .25s,border-color .35s}
+.tg .ic{width:20px;height:20px;stroke-width:2.4}
+.tg:active{transform:scale(.88)}
+.owned .tg,.tg[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--forest)}
+.pc.owned,.lr.owned{background:var(--ownbg);border-color:rgba(197,161,91,.6);color:var(--owntx)}
+.pc.owned .ph{border-color:rgba(197,161,91,.45)}
+.owned .cat{color:var(--gold)}.owned .sku,.owned .meta,.owned .st{color:var(--ownmut)}
+.pc.just{animation:glow 1s ease-out}
+.pc.just .badge{animation:seal .55s cubic-bezier(.2,1.3,.4,1)}
+.lr.just .tg{animation:seal .55s cubic-bezier(.2,1.3,.4,1)}
+@keyframes seal{0%{transform:scale(.3);opacity:0}100%{transform:none;opacity:1}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(197,161,91,.7)}100%{box-shadow:0 0 0 14px rgba(197,161,91,0)}}
+.lst{display:grid;gap:8px}
+.lr{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 10px 8px 8px;transition:background .5s,border-color .5s,color .5s}
+.lr .ph{border:1px solid var(--line)}
+.lr-t{flex:1;min-width:0;display:grid;gap:1px}.lr h3{min-height:0;-webkit-line-clamp:2;font-size:15px}
+.meta{font-size:13px;color:var(--muted)}.st{font-size:12.5px;font-weight:600;color:var(--goldink)}.st:empty{display:none}
+.empty{text-align:center;padding:36px 12px;display:grid;gap:14px;justify-items:center;color:var(--muted)}
+.empty.big{padding:44px 8px}.empty.big h2{font:600 22px var(--serif);color:var(--ink)}.empty.big p{max-width:320px}
+.empty-ic{width:64px;height:64px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;color:var(--goldink)}
+/* sheets */
+.sheet-wrap{position:fixed;inset:0;z-index:100;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
+.scrim{position:absolute;inset:0;background:rgba(5,18,14,.55);opacity:0;transition:opacity .25s;pointer-events:auto}
+.sheet{position:relative;width:100%;max-width:640px;max-height:88vh;max-height:88dvh;background:var(--card);border-radius:22px 22px 0 0;transform:translateY(100%);transition:transform .32s cubic-bezier(.2,.8,.2,1);overflow-y:auto;overscroll-behavior:contain;padding:8px 18px calc(20px + env(safe-area-inset-bottom));pointer-events:auto;box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+.in .sheet{transform:none}.in .scrim{opacity:1}
+.grab{width:38px;height:4px;border-radius:4px;background:var(--line);margin:2px auto 12px}
+.sh-t{font:600 22px/1.2 var(--serif);margin-bottom:6px}.sh-p{color:var(--muted);margin-bottom:16px;font-size:15px;line-height:1.5}.sh-p b{color:var(--ink)}
+.sh-h{font:600 14px var(--sans);color:var(--muted);margin:16px 0 8px}.sh-h small{font-weight:400}
+.sh-head{display:flex;gap:12px;align-items:center;margin-bottom:14px}.sh-head .sh-t{margin:0}
+.sh-actions{display:grid;gap:10px;margin-top:18px;justify-items:stretch}.sh-actions .link{justify-content:center}
+.opts{display:grid;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.opt{display:flex;justify-content:space-between;align-items:center;padding:0 14px;min-height:46px;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;font-size:15px}
+.opt:last-child{border:0}.opt.on{font-weight:700;color:var(--goldink)}
+.form{display:grid;gap:12px}
+.fl{display:grid;gap:5px}.fl>span{font-size:13.5px;font-weight:600;color:var(--muted)}
+.fl small{font-size:12.5px;color:var(--muted)}
+.fl input,.fl textarea,.fl select{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:12px;font-size:16px;min-height:46px;-webkit-appearance:none;appearance:none}
+.fl textarea{resize:vertical;line-height:1.4}
+.fl input:focus,.fl textarea:focus,.fl select:focus{outline:2px solid var(--gold);border-color:transparent}
+.qchips{display:flex;gap:7px;flex-wrap:wrap;margin-top:-4px}
+.qchips button{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 12px;font-size:13.5px;font-weight:600}
+.seg{display:flex;background:var(--soft);border-radius:12px;padding:3px;gap:3px}
+.seg button{flex:1;min-height:40px;border:0;background:none;border-radius:9px;font-weight:600;font-size:14.5px;color:var(--muted)}
+.seg button.on{background:var(--ever);color:var(--ivory)}
+.plist{display:grid;gap:4px}
+.prow{display:flex;align-items:center;gap:12px;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:8px 2px}
+.prow div:last-child{display:grid}.prow span{font-size:13px;color:var(--muted)}
+#toasts{position:fixed;left:12px;right:12px;bottom:calc(var(--tab) + env(safe-area-inset-bottom) + 10px);z-index:90;display:flex;justify-content:center;pointer-events:none}
+.toast{pointer-events:auto;display:flex;align-items:center;gap:6px;background:var(--char);color:var(--ivory);border-radius:14px;padding:6px 6px 6px 16px;box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:520px;opacity:0;transform:translateY(10px);transition:all .25s;font-size:14.5px}
+.toast.in{opacity:1;transform:none}
+.toast span{padding:6px 4px 6px 0;flex:1}
+.toast button{background:none;border:0;color:var(--gold);font-weight:700;padding:10px 10px;font-size:14.5px;white-space:nowrap}
+/* tabs */
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;justify-content:center;background:rgba(247,243,233,.9);-webkit-backdrop-filter:saturate(1.6) blur(18px);backdrop-filter:saturate(1.6) blur(18px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+#tabs button{flex:1;max-width:128px;height:var(--tab);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:0;color:var(--muted);font-size:11px;font-weight:600;position:relative}
+#tabs button.on{color:var(--tabon)}
+#tabs button.on:before{content:"";position:absolute;top:0;width:26px;height:3px;border-radius:0 0 3px 3px;background:var(--gold)}
+#tabs .ic{width:25px;height:25px}
+/* detail */
+.gallery{margin:-16px calc(-1*max(16px,var(--gut))) 0;position:relative}
+.gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.gal::-webkit-scrollbar{display:none}
+.slide{flex:none;width:100%;scroll-snap-align:center;margin:0;position:relative}
+.slide .ph.big{width:100%;max-height:440px;aspect-ratio:1/1}
+.slide-cap{position:absolute;left:12px;bottom:10px;font-size:12px;color:#6c6a5d;background:rgba(251,248,240,.86);padding:3px 9px;border-radius:99px}
+.dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;pointer-events:none}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(41,42,38,.25)}.dots i.on{background:var(--ever)}
+.slide-cap{bottom:auto;top:10px}
+.ptools{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:-4px!important}
+.dtitle .cat{font-size:15px}.dtitle h1{font:600 28px/1.15 var(--serif);margin:2px 0 6px}
+.status{display:flex;align-items:center;gap:12px;border:1px dashed var(--line);border-radius:16px;padding:12px 14px;background:var(--card)}
+.status div{display:grid}.status span:not(.seal){font-size:13.5px;color:var(--muted)}
+.seal{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--goldink);display:grid;place-items:center;color:var(--goldink);flex:none}
+.seal .ic{width:19px;height:19px}
+.status.own{background:var(--ownbg);border:1px solid rgba(197,161,91,.6);color:var(--owntx)}
+.status.own span:not(.seal){color:var(--ownmut)}.status.own .seal{background:var(--gold);border-color:var(--gold);color:var(--forest)}
+.status.own.pop .seal{animation:seal .6s cubic-bezier(.2,1.3,.4,1)}
+.status.own.pop{animation:glow 1.1s ease-out}
+.status.wish .seal{color:var(--cran);border-color:var(--cran)}
+.acts{display:flex;gap:10px}.acts>*{flex:1}.acts.trio>*{padding:0 8px;font-size:14px;white-space:nowrap}
+.acts .btn.primary,.acts .btn.gold{min-height:52px;font-size:16px}
+dl{display:grid}
+.kv{display:grid;grid-template-columns:116px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.kv:last-child{border:0}.kv dt{font-size:14px;color:var(--muted)}.kv dd{font-size:15px;word-break:break-word}.kv em{color:#a09c8c;font-size:14px}.kv dd.pre{white-space:pre-wrap}
+.card>.link.danger-t{margin-top:8px}
+.card .acts{margin-top:12px}
+.hist{padding:10px 0;border-bottom:1px solid var(--line);display:grid;gap:3px;justify-items:start}.hist:last-of-type{border:0}
+.hd{display:flex;justify-content:space-between;gap:10px;width:100%}.hd span{font-size:13.5px;color:var(--muted)}
+.story{font-family:var(--serif);font-size:15.5px;line-height:1.55;white-space:pre-wrap}
+/* wishlist */
+.stats3{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:8px}
+.stats3>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column-reverse;justify-content:flex-end;gap:2px}
+.stats3 dd{font:600 22px/1.1 var(--serif);font-variant-numeric:tabular-nums}.stats3 dt{font-size:12px;color:var(--muted);line-height:1.3}
+.stats3.flat{grid-template-columns:1fr 1fr 1fr}.stats3.flat>div{background:var(--bg)}
+.wlist{display:grid;gap:10px}
+.wr{display:grid;grid-template-columns:64px 1fr;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px}
+.wr .ph{border:1px solid var(--line)}
+.wr-b{display:grid;gap:2px;align-content:start;min-width:0}.wr-b h3{font-size:15.5px;line-height:1.25}
+.wr-a{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center}
+.ia{display:flex;gap:8px}
+.clip{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prio{justify-self:start;font-size:12px;font-weight:700;border-radius:99px;padding:2px 9px;border:1px solid var(--line);color:var(--muted)}
+.prio.high{background:var(--cran);color:#fff;border-color:var(--cran)}.prio.med{color:var(--goldink);border-color:var(--gold)}
+/* insights */
+.comp{display:flex;align-items:center;gap:18px}.comp .ring{width:112px;height:112px}.comp>div{flex:1}.comp h2{font-size:24px}
+.crow{margin-top:12px}.cr-h{display:flex;justify-content:space-between;font-size:14.5px}.cr-h small{font-weight:400;color:var(--muted)}
+.cols{display:flex;gap:10px;align-items:flex-end;height:150px;overflow-x:auto;padding-top:4px}
+.col{flex:1;min-width:34px;height:100%;display:grid;grid-template-rows:auto 1fr auto;justify-items:center;gap:4px}
+.cw{width:100%;max-width:44px;display:flex;align-items:flex-end;background:var(--soft);border-radius:8px 8px 3px 3px;overflow:hidden}
+.cb{width:100%;background:linear-gradient(180deg,var(--gold),#a98745);border-radius:6px 6px 0 0;min-height:4px}
+.cv{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}.cy{font-size:12px;color:var(--muted)}
+.line{width:100%;height:110px;display:block}.la{fill:rgba(197,161,91,.18)}.ll{fill:none;stroke:var(--gold);stroke-width:2.2;stroke-linejoin:round}
+.axis{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin:4px 0 8px}
+.tl li{display:grid;grid-template-columns:96px 1fr auto;gap:8px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px}
+.td{color:var(--muted);font-size:13px}.tp{color:var(--muted);font-variant-numeric:tabular-nums}
+.miles li{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);color:var(--muted)}.miles li:first-child{border:0}
+.miles li div{display:grid}.miles li span:not(.mk){font-size:13px}.miles b{font-size:15px;color:var(--ink);font-weight:600}
+.mk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;flex:none}
+.miles li.ok .mk{background:var(--gold);border-color:var(--gold);color:var(--forest)}.mk .ic{width:16px;height:16px;stroke-width:2.4}
+/* journal / more */
+.yh{font:600 20px var(--serif);margin:6px 0 10px!important}
+.jc{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;margin-bottom:10px!important}
+.jc .ph{border:1px solid var(--line)}.ph.jg{display:grid;place-items:center;color:var(--goldink)}
+.jc-b{flex:1;min-width:0;display:grid;gap:3px;align-content:start}.jc-b h3{font-size:16px;line-height:1.25}
+.jd{font-size:13px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tag{font-size:11.5px;font-weight:700;border:1px solid var(--gold);color:var(--goldink);border-radius:99px;padding:1px 8px}.tag.mute{border-color:var(--line);color:var(--muted)}
+.fnd{font-size:14px}
+.saved{display:flex;gap:12px;align-items:flex-start;margin-bottom:6px}.saved .ic{color:var(--goldink)}.saved div{display:grid}.saved span{font-size:13.5px;color:var(--muted)}
+.stack{display:grid;gap:10px;margin-top:14px}
+.filebtn{position:relative;overflow:hidden}.filebtn input{position:absolute;inset:0;opacity:0;width:100%;cursor:pointer}
+.mini-kv{margin-top:10px}.mini-kv .kv{grid-template-columns:130px 1fr}
+.seg.wide button{min-height:44px}
+/* tabs / milestone overlay */
+.mile-wrap{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:24px;background:rgba(5,18,14,.62);opacity:0;transition:opacity .4s}
+.mile-wrap.in{opacity:1}
+.mile-card2{width:100%;max-width:320px;text-align:center;background:linear-gradient(180deg,var(--forest),var(--ever));color:var(--ivory);border:1px solid rgba(197,161,91,.55);border-radius:24px;padding:28px 24px 24px;display:grid;gap:8px;justify-items:center;transform:translateY(14px) scale(.97);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.in .mile-card2{transform:none}
+.mile-card2 h2{font:600 26px/1.15 var(--serif)}.mile-card2 p{color:rgba(247,243,233,.78)}.mk2{font:italic 500 15px var(--serif);color:var(--gold)!important}
+.mile-card2 .btn{margin-top:12px;min-width:160px}
+.mseal{width:112px;height:112px}
+.m1{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-dasharray:340;stroke-dashoffset:340;animation:draw 1.2s .2s ease-out forwards}
+.m2{fill:rgba(197,161,91,.08);stroke:rgba(197,161,91,.45);stroke-width:1}
+.m3{stroke:var(--gold);fill:rgba(197,161,91,.3);opacity:0;animation:fadein .7s .9s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes fadein{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}.m1{stroke-dashoffset:0}.m3{opacity:1}}
+
 </style>
 </head>
 <body>
-<header>
-<div class="lights" aria-hidden="true"><div class="bulbs"><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i></div></div>
-<div class="wrap">
-<div class="hero-top"><div class="hero-seal">✦</div><div class="eyebrow">A Christmas collector's edition</div></div>
-<h1>Mickey's Merry <span>Christmas Village</span></h1>
-<div class="sub">Your personal Department 56 collection book. Keep track of every treasured piece, from the village buildings to the tiniest Christmas details.</div>
-<div class="hero-ribbon">❄ &nbsp; Collect the magic, one piece at a time &nbsp; ❄</div>
-</div></header>
-<main>
-<section class="stats">
- <div class="stat"><strong id="ownedCount">0</strong><span>Owned</span></div>
- <div class="stat"><strong id="remainingCount">0</strong><span>Still to collect</span></div>
- <div class="stat"><strong id="percentCount">0%</strong><span>Collection complete</span></div>
-</section>
-<div class="progress"><div id="progressFill"></div></div>
-<div class="toolbar">
- <input id="search" class="search" type="search" placeholder="Search item name or item number…" autocomplete="off">
- <div class="filters" id="statusFilters">
-  <button class="active" data-status="all">All items</button><button data-status="needed">Still needed</button><button data-status="owned">Owned</button>
- </div>
- <div class="catbar" id="categoryFilters"></div>
-</div>
-<div class="sectionhead"><h2 id="listTitle">All collection pieces</h2><span class="count" id="visibleCount"></span></div>
-<div class="list" id="itemList"></div>
-<div class="tools">
- <button id="backupBtn">Export backup</button>
- <label for="restoreFile">Restore backup<input id="restoreFile" type="file" accept="application/json"></label>
- <button id="clearFilters">Clear filters</button>
-</div>
-<div class="note"><b>Your collection data stays on this device/browser.</b> Use “Export backup” periodically so you can restore your ownership marks and item notes if you change phones or clear browser data. This checklist preserves the original working catalog; some 2026 and special-edition entries still need independent catalog verification.</div>
-</main>
-<footer>Department 56 collection tracker • Working catalog: 116 entries • Not an official Department 56 app.</footer>
+<div id="sb"></div>
+<div id="view" class="view"></div>
+<nav id="tabs" aria-label="Main"><button data-act="tab" data-v="home"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></svg><span>Home</span></button><button data-act="tab" data-v="collection"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.6"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.6"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.6"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.6"/></svg><span>Collection</span></button><button data-act="tab" data-v="wishlist"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.4a4.3 4.3 0 0 1 7.5 2.4C19.5 15.4 12 20 12 20z"/></svg><span>Wishlist</span></button><button data-act="tab" data-v="insights"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-6M12 20V5M19 20v-10"/></svg><span>Insights</span></button><button data-act="tab" data-v="more"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></svg><span>More</span></button></nav>
+<div id="toasts" aria-live="polite"></div>
 <script>
 const ITEMS = [{"id": "1", "category": "Buildings", "sku": "811261", "name": "Mickey's Christmas Castle", "years": "2009–2014", "catalogNote": "", "conditionNote": ""}, {"id": "2", "category": "Buildings", "sku": "811262", "name": "Donald's Toy Shop", "years": "2009–2011", "catalogNote": "", "conditionNote": ""}, {"id": "3", "category": "Buildings", "sku": "811263", "name": "Mickey's Ski & Skate Shop", "years": "2009–current", "catalogNote": "", "conditionNote": ""}, {"id": "4", "category": "Buildings", "sku": "811264", "name": "Minnie's Bakery", "years": "2009–2015", "catalogNote": "", "conditionNote": ""}, {"id": "5", "category": "Buildings", "sku": "811265", "name": "Pluto's Pet Shop", "years": "2009–2011", "catalogNote": "", "conditionNote": ""}, {"id": "6", "category": "Buildings", "sku": "809461", "name": "Minnie's Diner", "years": "2010–2012", "catalogNote": "", "conditionNote": ""}, {"id": "7", "category": "Buildings", "sku": "809462", "name": "Donald's Fire Station", "years": "2011–2012", "catalogNote": "", "conditionNote": ""}, {"id": "8", "category": "Buildings", "sku": "809463", "name": "Mickey's Tree House", "years": "2011", "catalogNote": "", "conditionNote": ""}, {"id": "9", "category": "Buildings", "sku": "4021754", "name": "Mickey's Ice Cream Shop", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "10", "category": "Buildings", "sku": "4021755", "name": "Minnie's Dress Shop", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "11", "category": "Buildings", "sku": "4027600", "name": "Goofy's Gas Station", "years": "2012–2014", "catalogNote": "", "conditionNote": ""}, {"id": "12", "category": "Buildings", "sku": "4027599", "name": "Mickey's House", "years": "2013–2018", "catalogNote": "", "conditionNote": ""}, {"id": "13", "category": "Buildings", "sku": "4032203", "name": "Mickey's Holiday Train Station", "years": "2014–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "14", "category": "Buildings", "sku": "4038630", "name": "Mickey's Cinema", "years": "2015–2016", "catalogNote": "", "conditionNote": ""}, {"id": "15", "category": "Buildings", "sku": "4038631", "name": "Minnie's House", "years": "2014–current", "catalogNote": "", "conditionNote": ""}, {"id": "16", "category": "Buildings", "sku": "4047183", "name": "Mickey's Candy Shop", "years": "2015–2019", "catalogNote": "", "conditionNote": ""}, {"id": "17", "category": "Buildings", "sku": "4047184", "name": "Mickey's Toy Store", "years": "2015–2017", "catalogNote": "", "conditionNote": ""}, {"id": "18", "category": "Buildings", "sku": "4053048", "name": "Mickey's Cocoa Shoppe", "years": "2016–2018", "catalogNote": "", "conditionNote": ""}, {"id": "19", "category": "Buildings", "sku": "4057261", "name": "Mickey's Alarm Clock Shop", "years": "2017–current", "catalogNote": "", "conditionNote": ""}, {"id": "20", "category": "Buildings", "sku": "4059627", "name": "Mickey's Tree Lot", "years": "2017–current", "catalogNote": "", "conditionNote": ""}, {"id": "21", "category": "Buildings", "sku": "4059626", "name": "Mickey's Holiday Center", "years": "2019–2020", "catalogNote": "", "conditionNote": ""}, {"id": "22", "category": "Buildings", "sku": "6003307", "name": "Mickey's Carriage Rides", "years": "2019", "catalogNote": "", "conditionNote": ""}, {"id": "23", "category": "Buildings", "sku": "6001316", "name": "Mickey's Balloon Inflators", "years": "2019–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "24", "category": "Buildings", "sku": "6001318", "name": "Minnie's Cotton Candy Shop", "years": "2019–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "25", "category": "Buildings", "sku": "6001317", "name": "Mickey's Gingerbread House", "years": "2020–current", "catalogNote": "", "conditionNote": ""}, {"id": "26", "category": "Buildings", "sku": "6007176", "name": "Minnie's Dance Academy", "years": "2021–current", "catalogNote": "", "conditionNote": ""}, {"id": "27", "category": "Buildings", "sku": "6007177", "name": "Mickey Mouse Ear Hat Shop", "years": "2021–current", "catalogNote": "", "conditionNote": ""}, {"id": "28", "category": "Buildings", "sku": "6010492", "name": "Mickey's Clubhouse", "years": "2023–2024 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "29", "category": "Buildings", "sku": "6010494", "name": "Minnie's Shoe Boutique", "years": "2023–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "30", "category": "Buildings", "sku": "6013668", "name": "Duck the Halls", "years": "2024 limited edition", "catalogNote": "", "conditionNote": ""}, {"id": "31", "category": "Buildings", "sku": "6013662", "name": "Mickey's Peppermint Villa", "years": "2024–current", "catalogNote": "", "conditionNote": ""}, {"id": "32", "category": "Buildings", "sku": "6013663", "name": "Minnie's Peppermint Villa", "years": "2025", "catalogNote": "", "conditionNote": ""}, {"id": "33", "category": "Buildings", "sku": "6014523", "name": "Daisy's Dockside Café", "years": "2025", "catalogNote": "", "conditionNote": ""}, {"id": "34", "category": "Buildings", "sku": "6018368", "name": "Mickey's Peppermint Café", "years": "2026", "catalogNote": "", "conditionNote": ""}, {"id": "35", "category": "Coordinating figures & accessories", "sku": "811269", "name": "Mickey & Pluto Loading the Sleigh", "years": "2009–2011", "catalogNote": "", "conditionNote": ""}, {"id": "36", "category": "Coordinating figures & accessories", "sku": "811270", "name": "Merry Christmas List (Mickey's Christmas List)", "years": "2009–2015", "catalogNote": "", "conditionNote": ""}, {"id": "37", "category": "Coordinating figures & accessories", "sku": "811271", "name": "Goofy's Got Game", "years": "2009–2012", "catalogNote": "", "conditionNote": ""}, {"id": "38", "category": "Coordinating figures & accessories", "sku": "811272", "name": "Huey, Dewey & Louie Race", "years": "2010–2012", "catalogNote": "", "conditionNote": ""}, {"id": "39", "category": "Coordinating figures & accessories", "sku": "811273", "name": "Goofy Takes a Tumble", "years": "2009–2013", "catalogNote": "", "conditionNote": ""}, {"id": "40", "category": "Coordinating figures & accessories", "sku": "811274", "name": "Mickey & Minnie Go Skating", "years": "2010–current", "catalogNote": "", "conditionNote": ""}, {"id": "41", "category": "Coordinating figures & accessories", "sku": "811275", "name": "Minnie's Custom Cookies", "years": "2010–2016", "catalogNote": "", "conditionNote": ""}, {"id": "42", "category": "Coordinating figures & accessories", "sku": "811276", "name": "Mickey & Minnie Wrapping Gifts", "years": "2010–2017", "catalogNote": "", "conditionNote": ""}, {"id": "43", "category": "Coordinating figures & accessories", "sku": "811277", "name": "Pluto's Kittens", "years": "2010–2012", "catalogNote": "", "conditionNote": ""}, {"id": "44", "category": "Coordinating figures & accessories", "sku": "811278", "name": "A Treat for Minnie's Dog", "years": "2009–2012", "catalogNote": "", "conditionNote": ""}, {"id": "45", "category": "Coordinating figures & accessories", "sku": "811279", "name": "Mickey and Friends Sing Carols", "years": "2009–2014", "catalogNote": "", "conditionNote": ""}, {"id": "46", "category": "Coordinating figures & accessories", "sku": "811289", "name": "The Three Mouseketeers", "years": "2010–current", "catalogNote": "", "conditionNote": ""}, {"id": "47", "category": "Coordinating figures & accessories", "sku": "4017688", "name": "Donald's Fire Hose", "years": "2011–2014", "catalogNote": "", "conditionNote": ""}, {"id": "48", "category": "Coordinating figures & accessories", "sku": "4017689", "name": "Tree House Stayover", "years": "2011", "catalogNote": "", "conditionNote": ""}, {"id": "49", "category": "Coordinating figures & accessories", "sku": "4017690", "name": "Minnie's Pies", "years": "2011–2012", "catalogNote": "", "conditionNote": ""}, {"id": "50", "category": "Coordinating figures & accessories", "sku": "4020326", "name": "Mickey's Holiday Express", "years": "2011–current", "catalogNote": "", "conditionNote": ""}, {"id": "51", "category": "Coordinating figures & accessories", "sku": "4021789", "name": "Minnie Sewing", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "52", "category": "Coordinating figures & accessories", "sku": "4021790", "name": "Mickey's Christmas Spirit", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "53", "category": "Coordinating figures & accessories", "sku": "4021791", "name": "Pluto Sneaking Ice Cream", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "54", "category": "Coordinating figures & accessories", "sku": "4021842", "name": "Mickey Serving Ice Cream", "years": "2011–2016", "catalogNote": "", "conditionNote": ""}, {"id": "55", "category": "Coordinating figures & accessories", "sku": "4021864", "name": "Mickey Catching Some Air", "years": "2011–2013", "catalogNote": "", "conditionNote": ""}, {"id": "56", "category": "Coordinating figures & accessories", "sku": "4027601", "name": "Goofy for Gas", "years": "2012–2014", "catalogNote": "", "conditionNote": ""}, {"id": "57", "category": "Coordinating figures & accessories", "sku": "4027602", "name": "A Special Snack for Pluto", "years": "2013–2014", "catalogNote": "", "conditionNote": ""}, {"id": "58", "category": "Coordinating figures & accessories", "sku": "4027603", "name": "Mickey & Minnie's Holiday Drive", "years": "2012–2019", "catalogNote": "", "conditionNote": ""}, {"id": "59", "category": "Coordinating figures & accessories", "sku": "4032205", "name": "Hurry Up, Donald", "years": "2014–2015", "catalogNote": "", "conditionNote": ""}, {"id": "60", "category": "Coordinating figures & accessories", "sku": "4032206", "name": "Ringing in the Holidays", "years": "2013–current", "catalogNote": "", "conditionNote": ""}, {"id": "61", "category": "Coordinating figures & accessories", "sku": "4032207", "name": "Snow for Fun! / Mickey's Snow Fort Fun", "years": "2013–2017", "catalogNote": "", "conditionNote": ""}, {"id": "62", "category": "Coordinating figures & accessories", "sku": "4038633", "name": "Minnie's Finishing Touch", "years": "2014–2018", "catalogNote": "", "conditionNote": ""}, {"id": "63", "category": "Coordinating figures & accessories", "sku": "4038634", "name": "Mickey Lights Up Christmas", "years": "2014–current", "catalogNote": "", "conditionNote": ""}, {"id": "64", "category": "Coordinating figures & accessories", "sku": "4038635", "name": "Mickey & Minnie's Date Night", "years": "2015–2016", "catalogNote": "", "conditionNote": ""}, {"id": "65", "category": "Coordinating figures & accessories", "sku": "4041361", "name": "Mickey's Tangled Tango", "years": "2014–2015", "catalogNote": "", "conditionNote": ""}, {"id": "66", "category": "Coordinating figures & accessories", "sku": "4043307", "name": "Mickey & Minnie Go Camping", "years": "2015", "catalogNote": "", "conditionNote": ""}, {"id": "67", "category": "Coordinating figures & accessories", "sku": "4047186", "name": "Donald's Snowshoe Adventure", "years": "2015–2016", "catalogNote": "", "conditionNote": ""}, {"id": "68", "category": "Coordinating figures & accessories", "sku": "4047187", "name": "Minnie's Treats for Sweets", "years": "2015–2017", "catalogNote": "", "conditionNote": ""}, {"id": "69", "category": "Coordinating figures & accessories", "sku": "4049831", "name": "Mickey's Toys", "years": "2015–2017", "catalogNote": "", "conditionNote": ""}, {"id": "70", "category": "Coordinating figures & accessories", "sku": "4053052", "name": "Cocoa on the Go (set of 2)", "years": "2016–2018", "catalogNote": "", "conditionNote": ""}, {"id": "71", "category": "Coordinating figures & accessories", "sku": "4053053", "name": "Mickey's Christmas Kiss", "years": "2016–current", "catalogNote": "", "conditionNote": ""}, {"id": "72", "category": "Coordinating figures & accessories", "sku": "4059719", "name": "Mickey's Mistletoe Surprise", "years": "2018–current", "catalogNote": "", "conditionNote": ""}, {"id": "73", "category": "Coordinating figures & accessories", "sku": "6001190", "name": "Christmas Treats for Pluto", "years": "2018–2019", "catalogNote": "", "conditionNote": ""}, {"id": "74", "category": "Coordinating figures & accessories", "sku": "4057262", "name": "Mickey's Autograph Clock", "years": "2017–2019", "catalogNote": "", "conditionNote": ""}, {"id": "75", "category": "Coordinating figures & accessories", "sku": "4057263", "name": "Pluto's Toboggan Ride", "years": "2017–current", "catalogNote": "", "conditionNote": ""}, {"id": "76", "category": "Coordinating figures & accessories", "sku": "4057264", "name": "Mickey & Minnie Card Exchange", "years": "2017", "catalogNote": "", "conditionNote": ""}, {"id": "77", "category": "Coordinating figures & accessories", "sku": "6003310", "name": "Mickey and Minnie's Dance (animated/musical)", "years": "2019–2020", "catalogNote": "", "conditionNote": ""}, {"id": "78", "category": "Coordinating figures & accessories", "sku": "4059718", "name": "A Gift from Mickey", "years": "2019–2020", "catalogNote": "", "conditionNote": ""}, {"id": "79", "category": "Coordinating figures & accessories", "sku": "6003309", "name": "Minnie's Carriage Ride", "years": "2019", "catalogNote": "", "conditionNote": ""}, {"id": "80", "category": "Coordinating figures & accessories", "sku": "6001191", "name": "Mickey's Head in the Clouds", "years": "2019–current", "catalogNote": "", "conditionNote": ""}, {"id": "81", "category": "Coordinating figures & accessories", "sku": "6001193", "name": "Cotton Candy Delight", "years": "2019–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "82", "category": "Coordinating figures & accessories", "sku": "6001192", "name": "Sugar & Spice", "years": "2020–current", "catalogNote": "", "conditionNote": ""}, {"id": "83", "category": "Coordinating figures & accessories", "sku": "6007178", "name": "Minnie's Arabesque", "years": "2021–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "84", "category": "Coordinating figures & accessories", "sku": "6007179", "name": "Mickey's Finishing Touch", "years": "2021–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "85", "category": "Coordinating figures & accessories", "sku": "6010493", "name": "Minnie Will Love This!", "years": "2023–2024 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "86", "category": "Coordinating figures & accessories", "sku": "6010495", "name": "Minnie Struts Her Stuff", "years": "2023–2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "87", "category": "Train", "sku": "4032204", "name": "Mickey's Holiday Train Engine", "years": "2014–2017", "catalogNote": "", "conditionNote": ""}, {"id": "88", "category": "Train", "sku": "4038632", "name": "Mickey's Holiday Tree Car", "years": "2015–2017", "catalogNote": "", "conditionNote": ""}, {"id": "89", "category": "Train", "sku": "4047185", "name": "Donald's Duck Choir Train Car", "years": "2015–2016", "catalogNote": "", "conditionNote": ""}, {"id": "90", "category": "Train", "sku": "4053051", "name": "Mickey's Holiday Caboose / Dumbo Caboose", "years": "2016–2017", "catalogNote": "", "conditionNote": ""}, {"id": "91", "category": "General village", "sku": "4028299", "name": "Mickey Topiary", "years": "2012–current", "catalogNote": "", "conditionNote": ""}, {"id": "92", "category": "General village", "sku": "4028300", "name": "Mickey Water Tower", "years": "2012–current", "catalogNote": "", "conditionNote": ""}, {"id": "93", "category": "General village", "sku": "4028301", "name": "Mickey Trellis", "years": "2012–2013", "catalogNote": "", "conditionNote": ""}, {"id": "94", "category": "General village", "sku": "4028302", "name": "Mickey Street Lamps (set of 2)", "years": "2012–current", "catalogNote": "", "conditionNote": ""}, {"id": "95", "category": "General village", "sku": "4028303", "name": "Mickey Fence", "years": "2012–2013", "catalogNote": "", "conditionNote": ""}, {"id": "96", "category": "General village", "sku": "4032412", "name": "Mickey's Bench", "years": "2013–2014", "catalogNote": "", "conditionNote": ""}, {"id": "97", "category": "General village", "sku": "4038636", "name": "Mickey's Road, Curved (set of 2)", "years": "2014–2015", "catalogNote": "", "conditionNote": ""}, {"id": "98", "category": "General village", "sku": "4038637", "name": "Mickey's Bridge", "years": "2014–2016", "catalogNote": "", "conditionNote": ""}, {"id": "99", "category": "General village", "sku": "4038638", "name": "Mickey's Crossing Sign", "years": "2014", "catalogNote": "", "conditionNote": ""}, {"id": "100", "category": "General village", "sku": "4043197", "name": "Mickey's Road, Straight (set of 2)", "years": "2014–2015", "catalogNote": "", "conditionNote": ""}, {"id": "101", "category": "General village", "sku": "4047190", "name": "Mickey's Candy Tree", "years": "2015–current", "catalogNote": "", "conditionNote": ""}, {"id": "102", "category": "General village", "sku": "4047191", "name": "Mickey's Christmas Tree House", "years": "2014–2020", "catalogNote": "", "conditionNote": ""}, {"id": "103", "category": "General village", "sku": "4054847", "name": "Mickey & Minnie's Animated Skating Pond", "years": "2016–2019", "catalogNote": "", "conditionNote": ""}, {"id": "104", "category": "Seaside subseries", "sku": "6013677", "name": "What I Really, Really Wanted!", "years": "2024 limited edition", "catalogNote": "", "conditionNote": ""}, {"id": "105", "category": "Seaside subseries", "sku": "6018372", "name": "Pete's Crabby Christmas", "years": "2026–current", "catalogNote": "", "conditionNote": ""}, {"id": "106", "category": "Seaside subseries", "sku": "6018374", "name": "Keeping a Watch for Santa", "years": "2026–current", "catalogNote": "", "conditionNote": ""}, {"id": "107", "category": "Seaside subseries", "sku": "6013678", "name": "Thank You, Uncle Donald!", "years": "2024–current", "catalogNote": "", "conditionNote": ""}, {"id": "108", "category": "Seaside subseries", "sku": "6014524", "name": "Compliments to the Cook", "years": "2025 (discontinued)", "catalogNote": "", "conditionNote": ""}, {"id": "109", "category": "Seaside subseries", "sku": "6015590", "name": "Wharf Fencing (set of 2)", "years": "2025–current", "catalogNote": "", "conditionNote": ""}, {"id": "110", "category": "Seaside subseries", "sku": "6018373", "name": "No One's Crabby at Christmas", "years": "2026–current", "catalogNote": "", "conditionNote": ""}, {"id": "111", "category": "Seaside subseries", "sku": "6018375", "name": "Santa Ahoy!", "years": "2026–current", "catalogNote": "", "conditionNote": ""}, {"id": "115", "category": "Coordinating figures & accessories", "sku": "6018337", "name": "A Cocoa With A Cutie!", "years": "2026", "catalogNote": "2026 Disney Village Christmas release; included as a figure, not a separate village.", "conditionNote": ""}, {"id": "116", "category": "Coordinating figures & accessories", "sku": "6018367", "name": "Stitch Orders It All", "years": "2026", "catalogNote": "2026 Disney Village Christmas release; included as a figure, not a separate village.", "conditionNote": ""}];
-const STORAGE_KEY = "mickey-merry-christmas-village-v1";
-let saved = {};
-try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch(e) { saved = {}; }
-let statusFilter = "all", categoryFilter = "All categories", query = "";
-const categories = ["All categories", ...new Set(ITEMS.map(x=>x.category))];
-const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function record(id){ return saved[id] || (saved[id]={owned:false,price:"",date:"",condition:"",box:"",notes:""}); }
-function persist(){ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(saved));}catch(e){alert("Browser storage is full or unavailable. Please export a backup.");} }
-function updateStats(){
- const owned=ITEMS.filter(x=>record(x.id).owned).length, total=ITEMS.length, pct=total?Math.round(owned/total*100):0;
- document.getElementById("ownedCount").textContent=owned;
- document.getElementById("remainingCount").textContent=total-owned;
- document.getElementById("percentCount").textContent=pct+"%";
- document.getElementById("progressFill").style.width=pct+"%";
-}
-function renderCategories(){
- const el=document.getElementById("categoryFilters");
- el.innerHTML=categories.map(c=>`<button class="catbtn ${c===categoryFilter?"active":""}" data-category="${esc(c)}">${esc(c)}</button>`).join("");
- el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{categoryFilter=b.dataset.category;renderCategories();renderItems();}));
-}
+
 const VERIFIED_PHOTO_URLS = {
  "4032206": "https://www.department56.com/cdn/shop/files/4032206.jpg?v=1793716806&width=1080",
  "6001190": "https://images.replacements.com/cdn-cgi/image/format%3Dauto/https%3A//images.replacements.com/1-collectibles-D-P0000392127S0039T1/department-56-mickeys-merry-christmas-village-christmas-treats-for-pluto-no-box.jpg",
@@ -254,98 +408,804 @@ const VERIFIED_PHOTO_URLS = {
  "4047187": "https://images.replacements.com/cdn-cgi/image/format%3Dauto/https%3A/images.replacements.com/images/images1/collectibles/D/P0000392127S0060T1.jpg",
  "4053052": "https://images.replacements.com/cdn-cgi/image/format%3Dauto/https%3A/images.replacements.com/images/images1/collectibles/D/P0000392127S000000071328T1.jpg",
 };
-function photoCandidates(sku){
- const s=String(sku).trim().toLowerCase();
- const candidates=[];
- if(VERIFIED_PHOTO_URLS[s]) candidates.push(VERIFIED_PHOTO_URLS[s]);
- const chronicler="https://thevillagechronicler.com/Images/";
- const retired="https://retiredproducts.department56.com/cdn/shop/files/";
- // Shopify image variants: the product photo may be published at either size.
- candidates.push(
-  `${retired}${encodeURIComponent(s)}_2048x2048.jpg`,
-  `${retired}${encodeURIComponent(s)}_1200x1200.jpg`,
-  `${retired}${encodeURIComponent(s)}_800x800.jpg`,
-  `${chronicler}${encodeURIComponent(s)}.jpg`,
-  `${chronicler}${encodeURIComponent(s.replace(/-[a-z]$/,""))}.jpg`
- );
- return [...new Set(candidates)];
-}
-function renderItems(){
- const filtered=ITEMS.filter(x=>{
-  const r=record(x.id), q=query.toLowerCase();
-  return (statusFilter==="all" || (statusFilter==="owned"?r.owned:!r.owned)) &&
-   (categoryFilter==="All categories" || x.category===categoryFilter) &&
-   (!q || (x.name+" "+x.sku+" "+x.category).toLowerCase().includes(q));
- });
- document.getElementById("visibleCount").textContent=filtered.length+" shown";
- document.getElementById("listTitle").textContent=statusFilter==="owned"?"Pieces you own":statusFilter==="needed"?"Still on your wish list":"Collection pieces";
- const el=document.getElementById("itemList");
- if(!filtered.length){el.innerHTML='<div class="empty">No pieces match that search or filter.</div>';return;}
- el.innerHTML=filtered.map(x=>{
-  const r=record(x.id);
-  return `<article class="item ${r.owned?"owned":""}" data-id="${x.id}">
-   <input class="check" type="checkbox" aria-label="Mark ${esc(x.name)} owned" ${r.owned?"checked":""}>
-   <div>
-    <div class="photo-row">
-     <div class="photo-box" data-photo-box="${x.id}">
-      <img class="itemphoto" loading="lazy" alt="${esc(x.name)} Department 56 collectible, item ${esc(x.sku)}" src="${photoCandidates(x.sku)[0]}" data-photo-step="0" data-photo-candidates="${esc(JSON.stringify(photoCandidates(x.sku)))}">
-      <div class="photo-placeholder">Catalog photo not available from this image address</div>
-     </div>
-     <div class="photo-tools">
-      <a class="photo-link" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent('Department 56 '+x.name+' '+x.sku)}" target="_blank" rel="noopener">Find / view photo ↗</a>
-      <span class="photo-caption">${VERIFIED_PHOTO_URLS[String(x.sku)]?"Matched product photo":"Photo search if no match"}</span>
-     </div>
-    </div>
-    <div class="topline"><div class="itemname">${esc(x.name)}</div><div class="sku">#${esc(x.sku)}</div></div>
-    <div class="meta">${esc(x.category)} · ${esc(x.years)}</div>
-    <div class="itemactions find-actions"><a class="find-ebay" href="https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent("Department 56 "+x.name+" "+x.sku)}" target="_blank" rel="noopener">Find This Piece on eBay ↗</a></div>
-    ${x.catalogNote?`<div class="tags"><span class="tag">Catalog note</span></div>`:""}
-    <div class="itemactions"><button class="expand" type="button">${r.owned?"✓ Owned · ":""}Details & notes ▾</button></div>
-    <div class="details">
-     <div class="detailgrid">
-      <div><label>Purchase price</label><input data-field="price" value="${esc(r.price)}" placeholder="$0.00"></div>
-      <div><label>Purchase date</label><input data-field="date" value="${esc(r.date)}" placeholder="MM/DD/YYYY"></div>
-      <div><label>Condition</label><input data-field="condition" value="${esc(r.condition)}" placeholder="New, used, excellent…"></div>
-      <div><label>Original box</label><input data-field="box" value="${esc(r.box)}" placeholder="Yes / No / Condition"></div>
-      <div class="full"><label>My notes</label><textarea data-field="notes" placeholder="Where purchased, missing parts, display notes…">${esc(r.notes)}</textarea></div>
-      ${x.catalogNote?`<div class="full"><label>Catalog verification note</label><div class="meta">${esc(x.catalogNote)}</div></div>`:""}
-     </div>
-    </div>
-   </div>
-  </article>`;
- }).join("");
- el.querySelectorAll(".itemphoto").forEach(img=>{
-  img.addEventListener("error",()=>{
-   const candidates=JSON.parse(img.dataset.photoCandidates||"[]");
-   const next=Number(img.dataset.photoStep||0)+1;
-   if(next<candidates.length){
-    img.dataset.photoStep=String(next);
-    img.src=candidates[next];
-   } else {img.closest(".photo-box").classList.add("missing");img.remove();}
-  });
- });
- el.querySelectorAll(".item").forEach(card=>{
-  const id=card.dataset.id;
-  card.querySelector(".check").addEventListener("change",e=>{record(id).owned=e.target.checked;persist();renderItems();updateStats();});
-  card.querySelector(".expand").addEventListener("click",()=>card.classList.toggle("expanded"));
-  card.querySelectorAll("[data-field]").forEach(input=>input.addEventListener("change",()=>{record(id)[input.dataset.field]=input.value;persist();}));
- });
- updateStats();
-}
-document.getElementById("search").addEventListener("input",e=>{query=e.target.value;renderItems();});
-document.querySelectorAll("#statusFilters button").forEach(b=>b.addEventListener("click",()=>{statusFilter=b.dataset.status;document.querySelectorAll("#statusFilters button").forEach(x=>x.classList.toggle("active",x===b));renderItems();}));
-document.getElementById("clearFilters").addEventListener("click",()=>{query="";statusFilter="all";categoryFilter="All categories";document.getElementById("search").value="";document.querySelectorAll("#statusFilters button").forEach(x=>x.classList.toggle("active",x.dataset.status==="all"));renderCategories();renderItems();});
-document.getElementById("backupBtn").addEventListener("click",()=>{
- const payload={app:"Mickey's Merry Christmas Village Collector",version:1,exportedAt:new Date().toISOString(),saved};
- const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
- const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Mickey-Village-Collection-Backup.json";a.click();URL.revokeObjectURL(a.href);
-});
-document.getElementById("restoreFile").addEventListener("change",async e=>{
- const file=e.target.files[0];if(!file)return;
- try{const data=JSON.parse(await file.text());const incoming=data.saved||data;if(!incoming||typeof incoming!=="object")throw new Error("Invalid backup");saved=incoming;persist();renderItems();alert("Backup restored.");}
- catch(err){alert("That backup file could not be read.");}e.target.value="";
-});
-renderCategories();renderItems();updateStats();
-if ("serviceWorker" in navigator) { window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{})); }
 </script>
-</body></html>
+<script>
+(function(){
+'use strict';
+/* ================= Mickey's Merry Christmas Village — Collector's Edition (v18) ================= */
+const APP_VERSION='18';
+const KEY="mickey-merry-christmas-village-v1";            /* unchanged: ownership + purchase details */
+const JKEY="mickey-merry-christmas-village-journal-v1";   /* new: journal entries */
+const SKEY="mickey-merry-christmas-village-settings-v1";  /* new: appearance + backup status */
+const PKEY="mickey-merry-christmas-village-prerestore-v1";/* safety copy taken before restore/erase */
+const EXTRA_PHOTOS={};  /* sku -> additional verified photo URLs (none yet; gallery shows them when present) */
+const CATLABEL={'Coordinating figures & accessories':'Figures & accessories'};
+const catName=c=>CATLABEL[c]||c;
+
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const toISO=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const toMDY=iso=>{const m=String(iso).match(/^(\d{4})-(\d{2})-(\d{2})$/);return m?`${m[2]}/${m[3]}/${m[1]}`:iso};
+const fmtMoney=n=>n.toLocaleString('en-US',{style:'currency',currency:'USD'});
+const fmtDate=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+const plural=(n,a,b)=>n===1?a:(b||a+'s');
+function mk(y,m,d,yo){ if(m<1||m>12||d<1||d>31||y<1900||y>2100)return null; const dt=new Date(y,m-1,d,12); if(dt.getMonth()!==m-1)return null; return {d:dt,yo:!!yo}; }
+function parseDate(s){
+  s=String(s==null?'':s).trim(); if(!s)return null; let m;
+  if((m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/)))return mk(+m[1],+m[2],+m[3]);
+  if((m=s.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})$/))){let y=+m[3];if(y<100)y+=2000;return mk(y,+m[1],+m[2]);}
+  if((m=s.match(/^(\d{4})$/)))return mk(+m[1],1,1,true);
+  const t=Date.parse(s); if(!isNaN(t)){const d=new Date(t);return mk(d.getFullYear(),d.getMonth()+1,d.getDate());}
+  return null;
+}
+function num(s){ if(s==null)return null; const m=String(s).replace(/,/g,'').match(/\d+(\.\d+)?/); if(!m)return null; const n=parseFloat(m[0]); return isFinite(n)?n:null; }
+const norm=s=>String(s==null?'':s).toLowerCase().replace(/[’'`]/g,'').replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim();
+const uid=()=>'j'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+
+/* ---------- storage (localStorage; nothing leaves the device) ---------- */
+const mem={}; let storageOK=true;
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return mem[k]==null?null:mem[k]}}
+function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){mem[k]=v;return false}}
+function loadJSON(k,def){
+  const raw=lsGet(k); if(raw==null)return def;
+  try{const v=JSON.parse(raw);return v&&typeof v==='object'?v:def}
+  catch(e){ lsSet(k+'-unreadable-'+Date.now(),raw); return def; }   /* never silently discard unreadable data */
+}
+let saved=loadJSON(KEY,{}); if(Array.isArray(saved))saved={};
+let journal=loadJSON(JKEY,[]); if(!Array.isArray(journal))journal=[];
+let settings=Object.assign({theme:'auto',view:'grid',lastExport:null,changes:0,seen:null,mdates:{},snooze:0},loadJSON(SKEY,{}));
+function saveSettings(){ if(!lsSet(SKEY,JSON.stringify(settings)))storageOK=false; }
+function persist(){
+  const a=lsSet(KEY,JSON.stringify(saved)), b=lsSet(JKEY,JSON.stringify(journal));
+  settings.changes=(settings.changes||0)+1; const c=lsSet(SKEY,JSON.stringify(settings));
+  storageOK=a&&b&&c;
+  if(!storageOK)toast('This browser could not save your changes. Export a backup now.',[],8000);
+}
+
+/* ---------- catalog + records ---------- */
+const total=ITEMS.length, byId={}; ITEMS.forEach(x=>byId[x.id]=x);
+const CATS=[...new Set(ITEMS.map(x=>x.category))];
+const BLANK=Object.freeze({owned:false,price:'',date:'',condition:'',box:'',notes:''});
+const R=id=>saved[id]||BLANK;                                   /* read-only view of a record */
+const W=id=>saved[id]||(saved[id]=Object.assign({},BLANK));      /* writable record */
+const isOwned=x=>!!R(x.id).owned;
+const isWish=x=>{const r=R(x.id);return !!r.wish&&!r.owned};
+const ownedItems=()=>ITEMS.filter(isOwned);
+const skuKey=x=>String(x.sku).trim().toLowerCase();
+const ebayURL=x=>"https://www.ebay.com/sch/i.html?_nkw="+encodeURIComponent("Department 56 "+x.name+" "+x.sku);
+const photoSearchURL=x=>"https://www.google.com/search?tbm=isch&q="+encodeURIComponent('Department 56 '+x.name+' '+x.sku);
+function acqTime(id){const r=R(id),p=parseDate(r.date);return p?p.d.getTime():(r.acquiredAt||null);}
+function dateLabel(id){
+  const r=R(id),p=parseDate(r.date);
+  if(p)return p.yo?String(p.d.getFullYear()):fmtDate(p.d);
+  if(String(r.date||'').trim())return String(r.date).trim();
+  return r.acquiredAt?fmtDate(new Date(r.acquiredAt)):'';
+}
+function recentOwned(n){
+  return ownedItems().map(x=>({x,t:acqTime(x.id)})).filter(o=>o.t).sort((a,b)=>b.t-a.t).slice(0,n).map(o=>o.x);
+}
+const PRIO={high:{l:'High',o:0},med:{l:'Medium',o:1},low:{l:'Low',o:2}};
+function wishSorted(){
+  return ITEMS.filter(isWish).sort((a,b)=>{const ra=R(a.id),rb=R(b.id);
+    return (PRIO[ra.prio||'med'].o-PRIO[rb.prio||'med'].o)||((ra.wishAt||0)-(rb.wishAt||0));});
+}
+/* characters are read from the item names only */
+const CHAR_NAMES=['Mickey','Minnie','Donald','Daisy','Goofy','Pluto','Chip','Dale','Huey','Dewey','Louie','Stitch','Pete','Dumbo'];
+const CH={}, HAY={};
+function chars(x){return CH[x.id]||(CH[x.id]=CHAR_NAMES.filter(c=>new RegExp('\\b'+c+'\\b','i').test(x.name)));}
+function hay(x){return HAY[x.id]||(HAY[x.id]=norm([x.name,x.sku,x.category,catName(x.category),chars(x).join(' ')].join(' ')));}
+const CHARS_USED=CHAR_NAMES.filter(c=>ITEMS.some(x=>chars(x).includes(c)));
+
+/* ---------- milestones ---------- */
+const MILES=[
+ {id:'first',at:1,t:'First piece acquired',s:'The collection begins.'},
+ {id:'ten',at:10,t:'10 pieces owned',s:'A village is taking shape.'},
+ {id:'t25',at:25,t:'25 pieces owned',s:'A real collection now.'},
+ {id:'f50',at:50,t:'50 pieces owned',s:'Fifty pieces on display.'},
+ {id:'p75',at:Math.ceil(total*.75),t:'75% complete',s:Math.ceil(total*.75)+' of '+total+' pieces.'},
+ {id:'all',at:total,t:'Collection complete',s:'Every piece on the checklist is yours.'}
+];
+
+/* ---------- icons ---------- */
+const P={
+ home:'<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>',
+ coll:'<rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.6"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.6"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.6"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.6"/>',
+ heart:'<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.4a4.3 4.3 0 0 1 7.5 2.4C19.5 15.4 12 20 12 20z"/>',
+ chart:'<path d="M5 20v-6M12 20V5M19 20v-10"/>',
+ more:'<circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/>',
+ check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+ back:'<path d="M14.5 5 7.5 12l7 7"/>',
+ chev:'<path d="m9 5 7 7-7 7"/>',
+ share:'<path d="M12 15V4M8 7.5 12 4l4 3.5"/><path d="M5 12v7h14v-7"/>',
+ grid:'<rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.4"/>',
+ list:'<path d="M4 6.5h16M4 12h16M4 17.5h16"/>',
+ search:'<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/>',
+ sliders:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
+ plus:'<path d="M12 5v14M5 12h14"/>',
+ ext:'<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5H5V6h5"/>',
+ book:'<path d="M5 4.5h11a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>',
+ edit:'<path d="M5 19l1-4L16.5 4.5a2 2 0 0 1 3 3L9 18z"/>',
+ shuffle:'<path d="M4 7h3.5c5 0 5 10 10 10H20M4 17h3.5c1.6 0 2.7-.9 3.6-2M13 9c1-1.2 2.2-2 4.5-2H20"/><path d="m18 5 2 2-2 2M18 15l2 2-2 2"/>',
+ x:'<path d="M6 6l12 12M18 6 6 18"/>',
+ star:'<path d="m12 4 2.4 5 5.4.7-4 3.8 1 5.4-4.8-2.7-4.8 2.7 1-5.4-4-3.8 5.4-.7z"/>',
+ cam:'<path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.2"/>',
+ shield:'<path d="M12 3.5 5 6v5.5c0 4.2 3 7.2 7 9 4-1.8 7-4.8 7-9V6z"/><path d="m9 12 2.2 2.2L15.5 10"/>'
+};
+const ic=(n,c)=>`<svg class="ic${c?' '+c:''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
+
+/* ---------- photos: exact item-number matches only ---------- */
+const PS={}, PF={};   /* per-session: working step / exhausted */
+function fallbackChain(s){
+  const retired="https://retiredproducts.department56.com/cdn/shop/files/", chron="https://thevillagechronicler.com/Images/";
+  return [`${retired}${encodeURIComponent(s)}_2048x2048.jpg`,`${retired}${encodeURIComponent(s)}_1200x1200.jpg`,`${retired}${encodeURIComponent(s)}_800x800.jpg`,
+          `${chron}${encodeURIComponent(s)}.jpg`,`${chron}${encodeURIComponent(s.replace(/-[a-z]$/,''))}.jpg`];
+}
+function photoSlides(x){
+  const r=R(x.id), s=skuKey(x), out=[], fb=fallbackChain(s);
+  if(r.photoUrl)out.push({chain:[r.photoUrl],label:'Your photo',kind:'user'});
+  if(VERIFIED_PHOTO_URLS[s])out.push({chain:[VERIFIED_PHOTO_URLS[s],...fb],label:'Verified product photo',kind:'verified'});
+  (EXTRA_PHOTOS[s]||[]).forEach(u=>out.push({chain:[u],label:'Verified product photo',kind:'verified'}));
+  if(!out.length)out.push({chain:fb,label:'Matched by item number, not individually verified',kind:'auto'});
+  return out;
+}
+const hasVerified=x=>!!VERIFIED_PHOTO_URLS[skuKey(x)];
+const EMPTYPH=`<div class="ph-empty">${ic('home')}<span>No photo yet</span></div>`;
+function imgTag(x,slide,key){
+  const step=key==='0'?(PS[x.id]||0):0, chain=slide.chain, st=Math.min(step,chain.length-1);
+  return `<img src="${esc(chain[st])}" data-chain="${esc(JSON.stringify(chain))}" data-step="${st}" data-id="${x.id}" data-k="${key}" data-kind="${slide.kind}" alt="${esc(x.name)}, Department 56 item ${esc(x.sku)}" loading="lazy" decoding="async">`;
+}
+function thumb(x){
+  if(PF[x.id]&&!R(x.id).photoUrl)return EMPTYPH;
+  return imgTag(x,photoSlides(x)[0],'0');
+}
+document.addEventListener('error',e=>{
+  const t=e.target; if(!t||t.tagName!=='IMG'||!t.dataset.chain)return;
+  const chain=JSON.parse(t.dataset.chain), n=(+t.dataset.step)+1;
+  if(n<chain.length){t.dataset.step=n;t.src=chain[n];return;}
+  if(t.dataset.k==='0')PF[t.dataset.id]=1;
+  const box=t.parentElement; t.remove(); if(box&&!box.querySelector('.ph-empty'))box.insertAdjacentHTML('afterbegin',EMPTYPH);
+},true);
+document.addEventListener('load',e=>{
+  const t=e.target; if(!t||t.tagName!=='IMG'||!t.dataset.chain)return;
+  t.classList.add('ok'); if(t.dataset.k==='0')PS[t.dataset.id]=+t.dataset.step;
+  const cap=t.closest('.slide')&&t.closest('.slide').querySelector('.slide-cap');
+  if(cap&&t.dataset.kind==='verified'&&+t.dataset.step>0)cap.textContent='Matched by item number, not individually verified';
+},true);
+
+/* ---------- state + router ---------- */
+const S=window.S={tab:'home',cur:'',prev:'',q:'',status:'all',cat:'',chr:'',sort:'catalog',feat:0,scroll:{},justOwned:null};
+const TABS=['home','collection','wishlist','insights','more'];
+function go(r,opts){ if(opts)Object.assign(S,opts); const h='#/'+r; if(location.hash===h)route(); else location.hash=h; }
+window.go=go;
+function goBack(){ if(S.prev&&history.length>1)history.back(); else go(S.tab==='home'?'home':'collection'); }
+let navCount=0;
+function route(keep){
+  const h=location.hash.replace(/^#\/?/,'')||'home', parts=h.split('/'), name=parts[0], arg=decodeURIComponent(parts.slice(1).join('/'));
+  const y=window.scrollY;
+  if(!keep){ if(S.cur)S.scroll[S.cur]=y; S.prev=S.cur; closeSheet(true); }
+  S.cur=h; navCount++;
+  let html;
+  switch(name){
+    case 'collection':html=vCollection();break;
+    case 'wishlist':html=vWishlist();break;
+    case 'insights':html=vInsights();break;
+    case 'more':html=vMore();break;
+    case 'journal':html=vJournal();break;
+    case 'item':html=vItem(arg);break;
+    default:html=vHome();
+  }
+  if(TABS.includes(name))S.tab=name; else if(name==='journal')S.tab='more';
+  if(!TABS.includes(name)&&name!=='journal'&&name!=='item')S.tab='home';
+  const view=$('#view'); view.innerHTML=html; view.className='view'+(keep?'':' enter');
+  $$('#tabs button').forEach(b=>{const on=b.dataset.v===S.tab;b.classList.toggle('on',on);b.setAttribute('aria-current',on?'page':'false');});
+  if(name==='collection')renderResults();
+  hydrate();
+  if(keep)window.scrollTo(0,y); else { if(name==='item')delete S.scroll[h]; window.scrollTo(0,S.scroll[h]||0); }
+}
+function refresh(){ route(true); }
+function hydrate(){
+  requestAnimationFrame(()=>{ $$('.ring-fg').forEach(e=>{e.style.strokeDashoffset=e.dataset.off;}); $$('.bar-fg').forEach(e=>{e.style.width=e.dataset.w;}); });
+  const gal=$('#gal'); if(gal){ gal.addEventListener('scroll',()=>{const i=Math.round(gal.scrollLeft/gal.clientWidth);$$('.dots i').forEach((d,k)=>d.classList.toggle('on',k===i));},{passive:true}); }
+}
+
+/* ---------- toast, sheets, dialogs ---------- */
+let toastTimer;
+function toast(msg,actions,ms){
+  actions=actions||[]; const box=$('#toasts'); box.innerHTML='';
+  const el=document.createElement('div'); el.className='toast'; el._acts=actions;
+  el.innerHTML=`<span>${esc(msg)}</span>`+actions.map((a,i)=>`<button data-act="toastfn" data-i="${i}">${esc(a.label)}</button>`).join('');
+  box.appendChild(el); requestAnimationFrame(()=>el.classList.add('in'));
+  clearTimeout(toastTimer); if(ms!==0)toastTimer=setTimeout(hideToast,ms||5500);
+}
+function hideToast(){const el=$('#toasts .toast');if(!el)return;el.classList.remove('in');setTimeout(()=>{if(el.parentNode)el.remove()},250);}
+let cur=null;
+function openSheet(html,fns){
+  closeSheet(true);
+  const w=document.createElement('div'); w.className='sheet-wrap';
+  w.innerHTML=`<div class="scrim" data-act="close"></div><div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div><div class="sc">${html}</div></div>`;
+  document.body.appendChild(w); document.body.classList.add('lock');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>w.classList.add('in')));
+  cur={el:w,fns:fns||{}}; return w;
+}
+function setSheet(html){ if(cur)$('.sc',cur.el).innerHTML=html; }
+function closeSheet(now){
+  if(!cur)return; const w=cur.el; cur=null; document.body.classList.remove('lock');
+  if(now){w.remove();return;} w.classList.remove('in'); setTimeout(()=>w.remove(),260);
+}
+function confirmDlg(o){
+  openSheet(`<h2 class="sh-t">${esc(o.title)}</h2><p class="sh-p">${o.msg}</p><div class="sh-actions">${o.extra||''}<button class="btn ${o.danger?'danger':'primary'}" data-act="fn" data-fn="ok">${esc(o.ok)}</button><button class="btn ghost" data-act="close">Cancel</button></div>`,{ok:()=>{closeSheet();o.fn();}});
+}
+
+/* ---------- reusable view parts ---------- */
+const statusPill=x=>isOwned(x)?`<span class="pill own">${ic('check')}Owned</span>`:isWish(x)?`<span class="pill wish">${ic('heart')}Wishlist</span>`:`<span class="pill">Not owned</span>`;
+const priceLabel=id=>{const r=R(id),n=num(r.price);return n!=null?fmtMoney(n):String(r.price||'').trim();};
+function counts(){const own=ownedItems(), dated=own.filter(x=>acqTime(x.id)).length;return {all:total,owned:own.length,missing:total-own.length,wish:ITEMS.filter(isWish).length,recent:Math.min(12,dated)};}
+function ringSVG(p,size,sw,label,sub){
+  const r=(size-sw)/2,c=2*Math.PI*r,cx=size/2;
+  return `<svg class="ring" viewBox="0 0 ${size} ${size}" role="img" aria-label="${label} ${sub}"><circle cx="${cx}" cy="${cx}" r="${r}" class="ring-bg" stroke-width="${sw}" fill="none"/><circle cx="${cx}" cy="${cx}" r="${r}" class="ring-fg" stroke-width="${sw}" fill="none" stroke-linecap="round" stroke-dasharray="${c}" style="stroke-dashoffset:${c}" data-off="${c*(1-Math.min(100,p)/100)}" transform="rotate(-90 ${cx} ${cx})"/><text x="${cx}" y="${cx+size*.05}" text-anchor="middle" class="ring-n" style="font-size:${size*.26}px">${label}</text><text x="${cx}" y="${cx+size*.2}" text-anchor="middle" class="ring-s" style="font-size:${size*.1}px">${sub}</text></svg>`;
+}
+const barHTML=(p)=>`<div class="bar"><div class="bar-fg" style="width:0" data-w="${Math.max(0,Math.min(100,p))}%"></div></div>`;
+function miniCard(x,sub){return `<button class="mini" data-act="open" data-id="${x.id}"><div class="ph sm">${thumb(x)}</div><b>${esc(x.name)}</b><span>${esc(sub||'')}</span></button>`;}
+function hlRow(label,x,sub){return `<button class="hl" data-act="open" data-id="${x.id}"><div class="ph sm">${thumb(x)}</div><div class="hl-b"><p class="lab">${label}</p><b>${esc(x.name)}</b><span>${esc(sub)}</span></div>${ic('chev')}</button>`;}
+function hlEmpty(label,msg,btn,act){return `<div class="hl empty"><div class="hl-b"><p class="lab">${label}</p><span>${msg}</span></div><button class="btn sm ghost" data-act="${act}">${btn}</button></div>`;}
+
+/* ---------- HOME ---------- */
+function featuredItem(){
+  const pool=ITEMS.filter(x=>hasVerified(x)&&!PF[x.id]); if(!pool.length)return null;
+  return pool[(Math.floor(Date.now()/864e5)+S.feat)%pool.length];
+}
+function nudge(){
+  const has=ownedItems().length||journal.length||ITEMS.some(isWish);
+  if(!has||Date.now()<(settings.snooze||0))return '';
+  const never=!settings.lastExport; if(!never&&(settings.changes||0)<10)return '';
+  return `<div class="nudge">${ic('shield')}<div class="nt"><b>${never?'Back up your collection':'Time for a fresh backup'}</b><span>${never?'Your collection is saved only on this device. Export a backup file in case your phone or browser data is ever lost.':settings.changes+' changes since your last backup.'}</span><div class="nb"><button class="btn sm primary" data-act="export">Export backup</button><button class="link" data-act="snooze">Later</button></div></div></div>`;
+}
+function vHome(){
+  const own=ownedItems().length, rem=total-own, pct=Math.round(own/total*100), c=counts();
+  const f=featuredItem(), rec=recentOwned(8), last=rec[0], nw=wishSorted()[0];
+  const next=MILES.find(m=>own<m.at), done=MILES.filter(m=>own>=m.at), latest=done[done.length-1];
+  const recSec=`<section><div class="sh"><h2>Recently acquired</h2>${rec.length?`<button class="link" data-act="qa" data-v="recent">See all</button>`:''}</div>${rec.length?`<div class="hscroll">${rec.map(x=>miniCard(x,dateLabel(x.id))).join('')}</div>`:`<p class="empty-s">${own?'Add purchase dates to your pieces to see your latest acquisitions here.':'Mark a piece as owned and it will appear here.'}</p>`}</section>`;
+  const nwTarget=nw&&num(R(nw.id).target)!=null?' · target '+fmtMoney(num(R(nw.id).target)):'';
+  return `<header class="hero home"><p class="kicker">Collector’s Edition</p><h1>Mickey’s Merry<br>Christmas Village</h1>
+  <div class="prog">${ringSVG(own/total*100,128,9,pct+'%','complete')}
+  <dl class="figs"><div><dt>Owned</dt><dd>${own}</dd></div><div><dt>Remaining</dt><dd>${rem}</dd></div><div><dt>Total pieces</dt><dd>${total}</dd></div></dl></div></header>
+  <main class="pg">
+  ${nudge()}
+  ${f?`<section class="spot"><div class="ph lg" data-act="open" data-id="${f.id}">${thumb(f)}</div><div class="spot-b"><p class="lab">Spotlight</p><h2>${esc(f.name)}</h2><p class="muted">Item № ${esc(f.sku)} · ${esc(catName(f.category))}</p><div class="spot-r">${statusPill(f)}<span class="grow"></span><button class="ibtn ghost" data-act="shuffle" aria-label="Show another piece">${ic('shuffle')}</button><button class="btn primary" data-act="open" data-id="${f.id}">View details</button></div></div></section>`:''}
+  <div class="quick">
+   <button data-act="qa" data-v="browse">${ic('coll')}<b>Browse collection</b><span>${total} pieces</span></button>
+   <button data-act="qa" data-v="missing">${ic('search')}<b>Missing pieces</b><span>${rem?rem+' to find':'None missing'}</span></button>
+   <button data-act="qa" data-v="add">${ic('plus')}<b>Add acquisition</b><span>Record a new piece</span></button>
+   <button data-act="qa" data-v="wish">${ic('heart')}<b>Wishlist</b><span>${c.wish} ${plural(c.wish,'piece')}</span></button>
+  </div>
+  ${recSec}
+  <section class="hls">
+   ${last?hlRow('Most recent purchase',last,[dateLabel(last.id),priceLabel(last.id)].filter(Boolean).join(' · ')||'Acquired'):hlEmpty('Most recent purchase','No purchases recorded yet.','Add one','qa-add')}
+   ${nw?hlRow('Next on your wishlist',nw,PRIO[R(nw.id).prio||'med'].l+' priority'+nwTarget):hlEmpty('Next on your wishlist','Your wishlist is empty.','Add a piece','pickwish')}
+  </section>
+  <section class="card mcard"><div class="sh"><h2>Milestones</h2><button class="link" data-act="tab" data-v="insights">View all</button></div>
+   ${next?`<p class="mline">Next: <b>${esc(next.t)}</b></p>${barHTML(own/next.at*100)}<p class="muted">${own} of ${next.at} · ${next.at-own} to go</p>`:`<p class="mline"><b>Collection complete.</b> Every milestone reached.</p>`}
+   ${latest?`<p class="muted lastm">Latest reached: ${esc(latest.t)}</p>`:''}
+  </section>
+  <button class="row-link" data-act="go" data-v="journal">${ic('book')}<div><b>Collection journal</b><span>${journal.length} ${plural(journal.length,'entry','entries')}</span></div>${ic('chev')}</button>
+  </main>`;
+}
+
+/* ---------- COLLECTION ---------- */
+const ORD={}; ITEMS.forEach((x,i)=>ORD[x.id]=i);
+const sortKey=s=>s.replace(/^[^A-Za-z0-9]+/,'');
+const SORTS=[['catalog','Catalog order'],['name','Product name'],['sku','Item number'],['owned','Owned first'],['missing','Not owned first'],['recent','Recently acquired']];
+const CMP={
+ catalog:(a,b)=>ORD[a.id]-ORD[b.id],
+ name:(a,b)=>sortKey(a.name).localeCompare(sortKey(b.name),'en',{sensitivity:'base',numeric:true}),
+ sku:(a,b)=>((num(a.sku)||0)-(num(b.sku)||0))||ORD[a.id]-ORD[b.id],
+ owned:(a,b)=>(isOwned(b)-isOwned(a))||ORD[a.id]-ORD[b.id],
+ missing:(a,b)=>(isOwned(a)-isOwned(b))||ORD[a.id]-ORD[b.id],
+ recent:(a,b)=>((acqTime(b.id)||0)-(acqTime(a.id)||0))||ORD[a.id]-ORD[b.id]
+};
+function filtered(){
+  const toks=norm(S.q).split(' ').filter(Boolean);
+  let l=ITEMS.filter(x=>{
+    const r=R(x.id);
+    if(S.status==='owned'&&!r.owned)return false;
+    if(S.status==='missing'&&r.owned)return false;
+    if(S.status==='wish'&&!(r.wish&&!r.owned))return false;
+    if(S.status==='recent'&&!(r.owned&&acqTime(x.id)))return false;
+    if(S.cat&&x.category!==S.cat)return false;
+    if(S.chr&&!chars(x).includes(S.chr))return false;
+    const h=hay(x); return toks.every(t=>h.includes(t));
+  });
+  if(S.status==='recent')l=l.sort(CMP.recent).slice(0,12);
+  return l.sort(CMP[S.sort]||CMP.catalog);
+}
+function tgBtn(x){const o=isOwned(x);return `<button class="tg" data-act="toggle" data-id="${x.id}" aria-pressed="${o}" aria-label="${o?'Remove '+esc(x.name)+' from collection':'Mark '+esc(x.name)+' as owned'}">${ic('check')}</button>`;}
+function card(x){
+  const o=isOwned(x), w=isWish(x);
+  return `<article class="pc${o?' owned':''}" data-id="${x.id}"><div class="ph" data-act="open" data-id="${x.id}">${thumb(x)}${o?`<span class="badge">${ic('check')}Owned</span>`:''}${w?`<span class="wtag" title="On wishlist">${ic('heart')}</span>`:''}</div>
+  <div class="pc-b"><div class="pc-t" data-act="open" data-id="${x.id}"><span class="cat">${esc(catName(x.category))}</span><h3>${esc(x.name)}</h3><span class="sku">Item № ${esc(x.sku)}</span></div>${tgBtn(x)}</div></article>`;
+}
+function row(x){
+  const o=isOwned(x), w=isWish(x);
+  return `<article class="lr${o?' owned':''}" data-id="${x.id}"><div class="ph sm" data-act="open" data-id="${x.id}">${thumb(x)}</div>
+  <div class="lr-t" data-act="open" data-id="${x.id}"><h3>${esc(x.name)}</h3><span class="meta">№ ${esc(x.sku)} · ${esc(catName(x.category))}</span><span class="st">${o?'Owned':w?'On wishlist':''}</span></div>${tgBtn(x)}</article>`;
+}
+function chipsHTML(){
+  const c=counts(), ch=(v,l,n)=>`<button class="chip${S.status===v?' on':''}" data-act="status" data-v="${v}">${l}<i>${n}</i></button>`;
+  return ch('all','All',c.all)+ch('owned','Owned',c.owned)+ch('missing','Not owned',c.missing)+ch('wish','Wishlist',c.wish)+ch('recent','Recently added',c.recent);
+}
+const filterCount=()=>(S.cat?1:0)+(S.chr?1:0)+(S.sort!=='catalog'?1:0);
+function vCollection(){
+  const nf=filterCount();
+  return `<header class="hero tight"><div class="hrow"><h1>Collection</h1><div class="vt" role="group" aria-label="View mode"><button data-act="view" data-v="grid" class="${settings.view==='grid'?'on':''}" aria-label="Grid view">${ic('grid')}</button><button data-act="view" data-v="list" class="${settings.view==='list'?'on':''}" aria-label="List view">${ic('list')}</button></div></div></header>
+  <div class="bar-sticky"><div class="srow"><label class="search">${ic('search')}<input id="q" type="search" enterkeyhint="search" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Name, item number or character" value="${esc(S.q)}"></label><button class="fbtn" id="fbtn" data-act="filters" aria-label="Sort and filter">${ic('sliders')}${nf?`<i>${nf}</i>`:''}</button></div><div class="chips" id="chips">${chipsHTML()}</div></div>
+  <main class="pg"><div id="active"></div><p class="cnt" id="cnt"></p><div id="res"></div></main>`;
+}
+function renderChips(){
+  const c=$('#chips'); if(c)c.innerHTML=chipsHTML();
+  const f=$('#fbtn'); if(f){const n=filterCount();f.innerHTML=ic('sliders')+(n?`<i>${n}</i>`:'');}
+}
+function renderResults(){
+  const res=$('#res'); if(!res)return;
+  const l=filtered();
+  $('#cnt').textContent=S.status==='recent'?`Showing your ${l.length} most recent`:`Showing ${l.length} of ${total} pieces`;
+  const act=[]; if(S.cat)act.push(['clearcat',catName(S.cat)]); if(S.chr)act.push(['clearchr',S.chr]); if(S.sort!=='catalog')act.push(['clearsort','Sorted: '+SORTS.find(s=>s[0]===S.sort)[1]]);
+  $('#active').innerHTML=act.length?`<div class="chips act">${act.map(a=>`<button class="chip on" data-act="${a[0]}">${esc(a[1])}${ic('x')}</button>`).join('')}</div>`:'';
+  if(!l.length){
+    const msg={wish:['Your wishlist is empty.','Add a piece','pickwish'],owned:['You haven’t marked any pieces as owned yet.','',''],recent:['No dated acquisitions yet. Add purchase dates to your pieces to see them here.','','']}[S.status];
+    res.innerHTML=`<div class="empty"><p>${msg?msg[0]:'No pieces match your search or filters.'}</p>${msg&&msg[2]?`<button class="btn primary" data-act="${msg[2]}">${msg[1]}</button>`:`<button class="btn ghost" data-act="clearall">Clear search and filters</button>`}</div>`;
+    return;
+  }
+  res.innerHTML=settings.view==='list'?`<div class="lst">${l.map(row).join('')}</div>`:`<div class="grid">${l.map(card).join('')}</div>`;
+}
+function syncBar(){renderChips();renderResults();}
+function filtersBody(){
+  return `<h2 class="sh-t">Sort and filter</h2>
+  <h3 class="sh-h">Sort by</h3><div class="opts">${SORTS.map(([v,l])=>`<button class="opt${S.sort===v?' on':''}" data-act="setsort" data-v="${v}">${l}${S.sort===v?ic('check'):''}</button>`).join('')}</div>
+  <h3 class="sh-h">Category</h3><div class="chips wrap"><button class="chip${!S.cat?' on':''}" data-act="setcat" data-v="">All<i>${total}</i></button>${CATS.map(c=>`<button class="chip${S.cat===c?' on':''}" data-act="setcat" data-v="${esc(c)}">${esc(catName(c))}<i>${ITEMS.filter(x=>x.category===c).length}</i></button>`).join('')}</div>
+  <h3 class="sh-h">Character <small>from item names</small></h3><div class="chips wrap"><button class="chip${!S.chr?' on':''}" data-act="setchr" data-v="">Any</button>${CHARS_USED.map(c=>`<button class="chip${S.chr===c?' on':''}" data-act="setchr" data-v="${c}">${c}<i>${ITEMS.filter(x=>chars(x).includes(c)).length}</i></button>`).join('')}</div>
+  <div class="sh-actions"><button class="btn primary" data-act="close">Show ${filtered().length} ${plural(filtered().length,'piece')}</button><button class="btn ghost" data-act="resetf">Reset sort and filters</button></div>`;
+}
+function filtersSheet(){openSheet(filtersBody());}
+function updateCards(id){
+  const x=byId[id]; if(!x)return; const o=isOwned(x), w=isWish(x);
+  $$(`.pc[data-id="${id}"],.lr[data-id="${id}"]`).forEach(el=>{
+    el.classList.toggle('owned',o); if(o){el.classList.add('just');setTimeout(()=>el.classList.remove('just'),1000);} const ph=$('.ph',el);
+    let b=$('.badge',ph); if(o&&!b)ph.insertAdjacentHTML('beforeend',`<span class="badge">${ic('check')}Owned</span>`); if(!o&&b)b.remove();
+    let t=$('.wtag',ph); if(w&&!t)ph.insertAdjacentHTML('beforeend',`<span class="wtag">${ic('heart')}</span>`); if(!w&&t)t.remove();
+    const st=$('.st',el); if(st)st.textContent=o?'Owned':w?'On wishlist':'';
+    const tg=$('.tg',el); tg.setAttribute('aria-pressed',o); tg.setAttribute('aria-label',(o?'Remove ':'Mark ')+x.name+(o?' from collection':' as owned'));
+  });
+}
+let rt;
+function afterChange(id){
+  if(S.cur.split('/')[0]==='collection'){
+    updateCards(id); renderChips(); clearTimeout(rt);
+    if(S.status!=='all'||['owned','missing','recent'].includes(S.sort))rt=setTimeout(renderResults,450);
+  } else refresh();
+}
+
+/* ---------- ITEM DETAIL ---------- */
+const kv=(l,v,pre)=>`<div class="kv"><dt>${l}</dt><dd${pre?' class="pre"':''}>${v?esc(v):'<em>Not recorded</em>'}</dd></div>`;
+const moneyOrRaw=v=>{const n=num(v);return n!=null?fmtMoney(n):String(v||'').trim();};
+const entriesFor=id=>journal.filter(e=>e.itemId===id).sort((a,b)=>entryTime(b)-entryTime(a));
+function entryTime(e){
+  if(e.type==='acquired')return acqTime(e.itemId)||e.createdAt||0;
+  const p=parseDate(e.date); return p?p.d.getTime():(e.createdAt||0);
+}
+function entryDate(e){
+  if(e.type==='acquired')return dateLabel(e.itemId)||fmtDate(new Date(e.createdAt||Date.now()));
+  const p=parseDate(e.date); return p?(p.yo?String(p.d.getFullYear()):fmtDate(p.d)):fmtDate(new Date(e.createdAt||Date.now()));
+}
+function entryBits(e){
+  const b=[]; if(e.type==='acquired'){const r=R(e.itemId);const pl=priceLabel(e.itemId);if(pl)b.push(pl);if(r.condition)b.push(r.condition);if(r.box)b.push('Box: '+r.box);}
+  else{if(e.price)b.push(moneyOrRaw(e.price));if(e.condition)b.push(e.condition);}
+  return b;
+}
+function histRow(e){
+  const bits=entryBits(e);
+  return `<div class="hist"><div class="hd"><b>${e.type==='acquired'?'Acquired':esc(e.title||'Journal note')}</b><span>${esc(entryDate(e))}</span></div>${bits.length?`<p class="muted">${esc(bits.join(' · '))}</p>`:''}${e.foundAt?`<p>Found at ${esc(e.foundAt)}</p>`:''}${e.story?`<p class="story">${esc(e.story)}</p>`:''}<button class="link" data-act="editentry" data-id="${e.id}">Edit</button></div>`;
+}
+function vItem(id){
+  const x=byId[id];
+  if(!x)return `<header class="hero tight"><div class="hrow"><button class="ibtn light" data-act="back" aria-label="Back">${ic('back')}</button><h1>Not found</h1></div></header><main class="pg"><p class="empty-s">That piece isn’t on the checklist.</p><button class="btn primary" data-act="go" data-v="collection">Back to collection</button></main>`;
+  const r=R(id), o=!!r.owned, w=isWish(x), slides=photoSlides(x), pop=S.justOwned===id; S.justOwned=null;
+  const legacy=['price','date','condition','box','notes'].some(k=>String(r[k]||'').trim());
+  const hist=entriesFor(id);
+  const dtxt=(()=>{const p=parseDate(r.date);return p?(p.yo?String(p.d.getFullYear()):fmtDate(p.d)):String(r.date||'').trim();})();
+  const status=o?`<div class="status own${pop?' pop':''}"><span class="seal">${ic('check')}</span><div><b>In your collection</b><span>${dateLabel(id)?'Acquired '+esc(dateLabel(id)):'Marked as owned'}</span></div></div>`
+    :w?`<div class="status wish"><span class="seal">${ic('heart')}</span><div><b>On your wishlist</b><span>${PRIO[r.prio||'med'].l} priority</span></div></div>`
+    :`<div class="status"><span class="seal">${ic('plus')}</span><div><b>Not in your collection yet</b><span>Mark it owned when it arrives.</span></div></div>`;
+  return `<header class="hero tight dhead"><div class="hrow"><button class="ibtn light" data-act="back" aria-label="Back">${ic('back')}</button><h1>Piece details</h1><button class="ibtn light" data-act="share" data-id="${id}" aria-label="Share item details">${ic('share')}</button></div></header>
+  <main class="pg">
+  <div class="gallery"><div class="gal" id="gal">${slides.map((s,i)=>`<figure class="slide"><div class="ph big">${imgTag(x,s,String(i))}</div><figcaption class="slide-cap">${esc(s.label)}</figcaption></figure>`).join('')}</div>${slides.length>1?`<div class="dots">${slides.map((s,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}</div>
+  <div class="ptools"><a class="link" href="${esc(photoSearchURL(x))}" target="_blank" rel="noopener">Search for a photo${ic('ext')}</a><button class="link" data-act="photo" data-id="${id}">${r.photoUrl?'Change my photo link':'Use my own photo link'}</button></div>
+  <section class="dtitle"><p class="cat">${esc(catName(x.category))}</p><h1>${esc(x.name)}</h1><p class="muted">Department 56 item № ${esc(x.sku)}${x.years?' · Catalog years '+esc(x.years):''}</p></section>
+  ${status}
+  <div class="acts">${o?`<button class="btn primary" data-act="editacq" data-id="${id}">${ic('edit')}Edit purchase details</button>`:`<button class="btn gold" data-act="own" data-id="${id}">${ic('check')}Mark as owned</button>`}</div>
+  <div class="acts trio">${o?'':(w?`<button class="btn ghost" data-act="editwish" data-id="${id}">${ic('heart')}On wishlist</button>`:`<button class="btn ghost" data-act="wish" data-id="${id}">${ic('heart')}Add to wishlist</button>`)}<a class="btn ghost" href="${esc(ebayURL(x))}" target="_blank" rel="noopener">${ic('ext')}Find on eBay</a><button class="btn ghost" data-act="share" data-id="${id}">${ic('share')}Share</button></div>
+  ${w?`<section class="card"><div class="sh"><h2>Wishlist</h2><button class="link" data-act="editwish" data-id="${id}">Edit</button></div><dl>${kv('Priority',PRIO[r.prio||'med'].l)}${kv('Target price',moneyOrRaw(r.target))}${kv('Budget',moneyOrRaw(r.budget))}${kv('Notes',r.wnotes,1)}</dl><div class="acts"><button class="btn primary" data-act="buy" data-id="${id}">Mark as purchased</button><button class="btn ghost" data-act="unwish" data-id="${id}">Remove</button></div></section>`:''}
+  ${(o||legacy)?`<section class="card"><div class="sh"><h2>Purchase information</h2><button class="link" data-act="editacq" data-id="${id}">Edit</button></div><dl>${kv('Purchase price',moneyOrRaw(r.price))}${kv('Purchase date',dtxt)}${kv('Condition',r.condition)}${kv('Original box',r.box)}${kv('Personal notes',r.notes,1)}</dl>${o?`<button class="link danger-t" data-act="unown" data-id="${id}">Remove from my collection</button>`:''}</section>`:''}
+  <section class="card"><div class="sh"><h2>Acquisition history</h2><button class="link" data-act="newnote" data-id="${id}">Add note</button></div>${hist.length?hist.map(histRow).join(''):`<p class="empty-s">${o?'No journal entry for this piece yet.':'Nothing recorded yet. Entries appear here when you acquire this piece.'}</p>${o?`<button class="btn sm ghost" data-act="mkentry" data-id="${id}">Create journal entry</button>`:''}`}</section>
+  ${x.catalogNote?`<section class="card"><div class="sh"><h2>Catalog note</h2></div><p class="muted">${esc(x.catalogNote)}</p></section>`:''}
+  </main>`;
+}
+
+/* ---------- ownership, wishlist, journal actions ---------- */
+function snap(id){return {id,rec:saved[id]?JSON.stringify(saved[id]):null,j:JSON.stringify(journal)};}
+function restoreSnap(s){ if(s.rec===null)delete saved[s.id]; else saved[s.id]=JSON.parse(s.rec); journal=JSON.parse(s.j); persist(); refresh(); }
+function ensureAcq(id){ if(!journal.some(e=>e.type==='acquired'&&e.itemId===id))journal.push({id:uid(),type:'acquired',itemId:id,foundAt:'',story:'',createdAt:Date.now(),auto:true}); }
+const acqEntry=id=>journal.find(e=>e.type==='acquired'&&e.itemId===id);
+function ownIt(id){
+  const x=byId[id], before=snap(id), rec=W(id); rec.owned=true; rec.wish=false; if(!rec.acquiredAt)rec.acquiredAt=Date.now();
+  ensureAcq(id); persist(); S.justOwned=id; afterChange(id);
+  toast(x.name+' is in your collection',[{label:'Add details',fn:()=>acqSheet(id,{fresh:true})},{label:'Undo',fn:()=>restoreSnap(before)}]);
+  checkMilestones();
+}
+function unownIt(id){
+  const before=snap(id), rec=W(id); rec.owned=false; delete rec.acquiredAt;
+  const en=acqEntry(id); if(en&&en.auto&&!en.foundAt&&!en.story)journal=journal.filter(j=>j!==en);
+  persist(); afterChange(id);
+  toast('Removed from your collection',[{label:'Undo',fn:()=>restoreSnap(before)}]);
+}
+function addWish(id){
+  if(isOwned(byId[id])){toast('Already in your collection');return;}
+  const before=snap(id), rec=W(id); rec.wish=true; rec.prio=rec.prio||'med'; if(!rec.wishAt)rec.wishAt=Date.now();
+  persist(); afterChange(id);
+  toast('Added to your wishlist',[{label:'Set priority',fn:()=>wishSheet(id,false)},{label:'Undo',fn:()=>restoreSnap(before)}]);
+}
+function unwish(id){
+  const before=snap(id), rec=W(id); rec.wish=false; persist(); afterChange(id);
+  toast('Removed from your wishlist',[{label:'Undo',fn:()=>restoreSnap(before)}]);
+}
+function buyWish(id){
+  const rec=W(id), hint=num(rec.target); rec.owned=true; rec.wish=false; rec.acquiredAt=Date.now(); ensureAcq(id); persist(); S.justOwned=id; refresh(); checkMilestones();
+  acqSheet(id,{fresh:true,hint:hint!=null?'Your wishlist target was '+fmtMoney(hint)+'.':''});
+}
+
+/* ---------- sheets: purchase details, wishlist, notes, photo, picker ---------- */
+const qchips=(f,list)=>`<div class="qchips" data-for="${f}">${list.map(c=>`<button type="button" data-act="qchip" data-v="${esc(c)}">${esc(c)}</button>`).join('')}</div>`;
+function sheetHead(x,title){return `<div class="sh-head"><div class="ph xs">${thumb(x)}</div><div><h2 class="sh-t">${esc(title)}</h2><p class="muted">${esc(x.name)} · № ${esc(x.sku)}</p></div></div>`;}
+function acqSheet(id,o){
+  o=o||{}; const x=byId[id], r=R(id), e=acqEntry(id)||{};
+  const p=parseDate(r.date), iso=p&&!p.yo?toISO(p.d):'', raw=String(r.date||'').trim(), keepRaw=!!raw&&!iso;
+  const dv=iso||((o.fresh||o.own)&&!keepRaw?toISO(new Date()):'');
+  openSheet(`${sheetHead(x,o.own?'Add acquisition':(o.fresh?'Acquisition details':'Purchase details'))}
+  <div class="form">
+   <label class="fl"><span>Purchase date</span><input id="f-date" type="date" value="${dv}">${keepRaw?`<small>Currently saved as “${esc(raw)}”. Pick a date to replace it.</small>`:''}</label>
+   <label class="fl"><span>Purchase price</span><input id="f-price" inputmode="decimal" placeholder="$0.00" value="${esc(r.price)}">${o.hint?`<small>${esc(o.hint)}</small>`:''}</label>
+   <label class="fl"><span>Condition</span><input id="f-cond" placeholder="New, used, excellent…" value="${esc(r.condition)}"></label>${qchips('f-cond',['New in box','Like new','Excellent','Good','Fair'])}
+   <label class="fl"><span>Original box</span><input id="f-box" placeholder="Yes, no, or its condition" value="${esc(r.box)}"></label>${qchips('f-box',['Yes','No','Box damaged'])}
+   <label class="fl"><span>Where it was found</span><input id="f-found" placeholder="Store, seller, show…" value="${esc(e.foundAt||'')}"></label>
+   <label class="fl"><span>Personal notes</span><textarea id="f-notes" rows="3" placeholder="Missing parts, display notes…">${esc(r.notes)}</textarea></label>
+   <label class="fl"><span>Memory or story for your journal</span><textarea id="f-story" rows="3" placeholder="The story behind this piece…">${esc(e.story||'')}</textarea></label>
+  </div>
+  <div class="sh-actions"><button class="btn primary" data-act="fn" data-fn="save">${o.own?'Save acquisition':'Save'}</button><button class="btn ghost" data-act="close">Cancel</button>${o.fromJournal&&e.id?`<button class="link danger-t" data-act="fn" data-fn="del">Delete this journal entry</button>`:''}</div>`,{
+    save:()=>{
+      const g=k=>$('#f-'+k,cur.el).value.trim(), before=snap(id), rec=W(id);
+      const d=$('#f-date',cur.el).value; if(d)rec.date=toMDY(d); else if(!keepRaw)rec.date='';
+      rec.price=g('price'); rec.condition=g('cond'); rec.box=g('box'); rec.notes=$('#f-notes',cur.el).value.trim();
+      const found=g('found'), story=$('#f-story',cur.el).value.trim(), was=!!rec.owned;
+      if(o.own&&!was){rec.owned=true;rec.wish=false;rec.acquiredAt=Date.now();}
+      if(rec.owned)ensureAcq(id);
+      const en=acqEntry(id); if(en){en.foundAt=found;en.story=story;if(found||story)en.auto=false;}
+      persist(); closeSheet(); S.justOwned=(!was&&rec.owned)?id:null; refresh();
+      toast(o.own&&!was?x.name+' is in your collection':'Saved',[{label:'Undo',fn:()=>restoreSnap(before)}]);
+      if(!was&&rec.owned)checkMilestones();
+    },
+    del:()=>{ const en=acqEntry(id); closeSheet(); if(!en)return; confirmDlg({title:'Delete this journal entry?',msg:'Your purchase details for this piece stay as they are. Only the journal entry is removed.',ok:'Delete entry',danger:true,fn:()=>{journal=journal.filter(j=>j!==en);persist();refresh();toast('Journal entry deleted');}}); }
+  });
+}
+function wishSheet(id,isNew){
+  const x=byId[id], r=R(id), pr=r.prio||'med';
+  openSheet(`${sheetHead(x,isNew?'Add to wishlist':'Wishlist details')}
+  <div class="form"><div class="fl"><span>Purchase priority</span><div class="seg" id="f-prio" data-v="${pr}">${['high','med','low'].map(k=>`<button type="button" class="${pr===k?'on':''}" data-act="prio" data-v="${k}">${PRIO[k].l}</button>`).join('')}</div></div>
+   <label class="fl"><span>Target price</span><input id="f-target" inputmode="decimal" placeholder="$0.00" value="${esc(r.target||'')}"><small>What you hope to pay.</small></label>
+   <label class="fl"><span>Budget</span><input id="f-budget" inputmode="decimal" placeholder="$0.00" value="${esc(r.budget||'')}"><small>The most you’d spend.</small></label>
+   <label class="fl"><span>Notes</span><textarea id="f-wnotes" rows="3" placeholder="Sellers to watch, condition you want…">${esc(r.wnotes||'')}</textarea></label></div>
+  <div class="sh-actions"><button class="btn primary" data-act="fn" data-fn="save">${isNew?'Add to wishlist':'Save'}</button>${isNew?'':`<button class="btn ghost" data-act="fn" data-fn="buy">Mark as purchased</button><button class="link danger-t" data-act="fn" data-fn="rm">Remove from wishlist</button>`}<button class="btn ghost" data-act="close">Cancel</button></div>`,{
+    save:()=>{ const g=k=>$('#f-'+k,cur.el).value.trim(), before=snap(id), rec=W(id);
+      rec.prio=$('#f-prio',cur.el).dataset.v; rec.target=g('target'); rec.budget=g('budget'); rec.wnotes=g('wnotes'); rec.wish=true; if(!rec.wishAt)rec.wishAt=Date.now();
+      persist(); closeSheet(); refresh(); toast(isNew?'Added to your wishlist':'Wishlist updated',[{label:'Undo',fn:()=>restoreSnap(before)}]); },
+    buy:()=>{closeSheet();buyWish(id);},
+    rm:()=>{closeSheet();unwish(id);}
+  });
+}
+function noteSheet(eid,itemId){
+  const e=eid?journal.find(j=>j.id===eid):null; const p=e&&parseDate(e.date), dv=p&&!p.yo?toISO(p.d):(e?'':toISO(new Date()));
+  const item=e?e.itemId:(itemId||'');
+  openSheet(`<h2 class="sh-t">${e?'Edit journal entry':'New journal entry'}</h2>
+  <div class="form">
+   <label class="fl"><span>Linked piece</span><select id="n-item"><option value="">No linked piece</option>${ITEMS.map(x=>`<option value="${x.id}"${item===x.id?' selected':''}>${esc(x.name)} (№ ${esc(x.sku)})</option>`).join('')}</select></label>
+   <label class="fl"><span>Title</span><input id="n-title" placeholder="A short title" value="${esc(e?e.title:'')}"></label>
+   <label class="fl"><span>Date</span><input id="n-date" type="date" value="${dv}"></label>
+   <label class="fl"><span>Price</span><input id="n-price" inputmode="decimal" placeholder="$0.00" value="${esc(e?e.price||'':'')}"></label>
+   <label class="fl"><span>Condition</span><input id="n-cond" placeholder="New, used, excellent…" value="${esc(e?e.condition||'':'')}"></label>
+   <label class="fl"><span>Where it was found</span><input id="n-found" placeholder="Store, seller, show…" value="${esc(e?e.foundAt||'':'')}"></label>
+   <label class="fl"><span>Memory or story</span><textarea id="n-story" rows="4" placeholder="Write it down while you remember it…">${esc(e?e.story||'':'')}</textarea></label></div>
+  <div class="sh-actions"><button class="btn primary" data-act="fn" data-fn="save">Save entry</button><button class="btn ghost" data-act="close">Cancel</button>${e?`<button class="link danger-t" data-act="fn" data-fn="del">Delete entry</button>`:''}</div>`,{
+    save:()=>{ const g=k=>$('#n-'+k,cur.el).value.trim();
+      const it=g('item'), title=g('title'), story=g('story');
+      if(!title&&!story&&!it){ toast('Add a title, a story or a linked piece first.'); return; }
+      const d=$('#n-date',cur.el).value, data={type:'note',itemId:it||null,title,date:d,price:g('price'),condition:g('cond'),foundAt:g('found'),story};
+      if(e)Object.assign(e,data); else journal.push(Object.assign({id:uid(),createdAt:Date.now(),auto:false},data));
+      persist(); closeSheet(); refresh(); toast('Journal entry saved'); },
+    del:()=>{ closeSheet(); confirmDlg({title:'Delete this journal entry?',msg:'This removes the entry from your journal.',ok:'Delete entry',danger:true,fn:()=>{journal=journal.filter(j=>j!==e);persist();refresh();toast('Journal entry deleted');}}); }
+  });
+}
+function photoSheet(id){
+  const x=byId[id], r=R(id);
+  openSheet(`${sheetHead(x,'Your photo link')}
+  <div class="form"><label class="fl"><span>Image link</span><input id="f-url" type="url" inputmode="url" autocapitalize="off" autocorrect="off" placeholder="https://…" value="${esc(r.photoUrl||'')}"><small>Paste the link to an image of this exact piece (item № ${esc(x.sku)}). It shows alongside the catalog photo, and nothing else is ever substituted.</small></label></div>
+  <div class="sh-actions"><button class="btn primary" data-act="fn" data-fn="save">Save photo link</button>${r.photoUrl?`<button class="btn ghost" data-act="fn" data-fn="clear">Remove my photo link</button>`:''}<button class="btn ghost" data-act="close">Cancel</button></div>`,{
+    save:()=>{ const v=$('#f-url',cur.el).value.trim(); if(!/^https:\/\/\S+$/i.test(v)){toast('Enter a link that starts with https://');return;}
+      W(id).photoUrl=v; delete PF[id]; delete PS[id]; persist(); closeSheet(); refresh(); toast('Photo link saved'); },
+    clear:()=>{ delete W(id).photoUrl; delete PF[id]; delete PS[id]; persist(); closeSheet(); refresh(); toast('Photo link removed'); }
+  });
+}
+function pickerSheet(title,filter,onPick){
+  openSheet(`<h2 class="sh-t">${esc(title)}</h2><label class="search inset">${ic('search')}<input id="pq" type="search" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Search name or item number"></label><div class="plist" id="plist"></div>`,{});
+  cur.pick=onPick; cur.filter=filter; fillPicker();
+}
+function fillPicker(){
+  if(!cur||!cur.filter)return; const toks=norm($('#pq').value).split(' ').filter(Boolean);
+  const l=ITEMS.filter(cur.filter).filter(x=>toks.every(t=>hay(x).includes(t)));
+  $('#plist').innerHTML=l.length?l.map(x=>`<button class="prow" data-act="pick" data-id="${x.id}"><div class="ph xs">${thumb(x)}</div><div><b>${esc(x.name)}</b><span>№ ${esc(x.sku)} · ${esc(catName(x.category))}</span></div></button>`).join(''):'<p class="empty-s">No matching pieces.</p>';
+}
+
+/* ---------- WISHLIST ---------- */
+function wishRow(x){
+  const r=R(x.id), t=num(r.target), b=num(r.budget), k=r.prio||'med';
+  return `<article class="wr" data-id="${x.id}"><div class="ph sm" data-act="open" data-id="${x.id}">${thumb(x)}</div><div class="wr-b" data-act="open" data-id="${x.id}"><span class="prio ${k}">${PRIO[k].l}</span><h3>${esc(x.name)}</h3><span class="meta">№ ${esc(x.sku)}${t!=null?' · Target '+fmtMoney(t):''}${b!=null?' · Budget '+fmtMoney(b):''}</span>${r.wnotes?`<span class="meta clip">${esc(r.wnotes)}</span>`:''}</div>
+  <div class="wr-a"><button class="btn sm primary" data-act="buy" data-id="${x.id}">Purchased</button><div class="ia"><a class="ibtn ghost" href="${esc(ebayURL(x))}" target="_blank" rel="noopener" aria-label="Find ${esc(x.name)} on eBay">${ic('ext')}</a><button class="ibtn ghost" data-act="editwish" data-id="${x.id}" aria-label="Edit wishlist details for ${esc(x.name)}">${ic('edit')}</button></div></div></article>`;
+}
+function vWishlist(){
+  const l=wishSorted(), priced=l.filter(x=>num(R(x.id).target)!=null), sum=priced.reduce((s,x)=>s+num(R(x.id).target),0);
+  const bud=l.filter(x=>num(R(x.id).budget)!=null), bsum=bud.reduce((s,x)=>s+num(R(x.id).budget),0);
+  const high=l.filter(x=>(R(x.id).prio||'med')==='high'), top=(high.length?high:l).slice(0,6);
+  const recent=[...l].sort((a,b)=>(R(b.id).wishAt||0)-(R(a.id).wishAt||0)).slice(0,6);
+  const sub=x=>{const t=num(R(x.id).target);return PRIO[R(x.id).prio||'med'].l+(t!=null?' · '+fmtMoney(t):'');};
+  return `<header class="hero tight"><div class="hrow"><h1>Wishlist</h1><button class="ibtn light" data-act="pickwish" aria-label="Add a piece to your wishlist">${ic('plus')}</button></div></header>
+  <main class="pg">
+  ${l.length?`<div class="stats3"><div><dd>${l.length}</dd><dt>${plural(l.length,'Piece')} wanted</dt></div><div><dd>${priced.length?fmtMoney(sum):'—'}</dd><dt>${priced.length?'Est. cost · '+priced.length+' of '+l.length+' priced':'Est. cost · add target prices'}</dt></div><div><dd>${bud.length?fmtMoney(bsum):'—'}</dd><dt>${bud.length?'Budget · '+bud.length+' set':'Budget · none set'}</dt></div></div>
+  <section><div class="sh"><h2>${high.length?'Highest priority':'Next up'}</h2></div><div class="hscroll">${top.map(x=>miniCard(x,sub(x))).join('')}</div></section>
+  ${l.length>1?`<section><div class="sh"><h2>Recently added</h2></div><div class="hscroll">${recent.map(x=>miniCard(x,sub(x))).join('')}</div></section>`:''}
+  <section><div class="sh"><h2>All wishlist pieces</h2></div><div class="wlist">${l.map(wishRow).join('')}</div></section>`
+  :`<div class="empty big"><div class="empty-ic">${ic('heart')}</div><h2>Your wishlist is empty</h2><p>Add any piece you don’t own yet. Set a priority, a target price and a budget, and mark it purchased when it arrives.</p><button class="btn primary" data-act="pickwish">${ic('plus')}Add a piece</button></div>`}
+  </main>`;
+}
+
+/* ---------- INSIGHTS ---------- */
+function lineChart(d){
+  const W=300,H=96,pd=4,N=d.length,t0=d[0].t,t1=d[N-1].t,span=t1-t0;
+  const X=(i,t)=>pd+(span>0?(t-t0)/span:i/(N-1))*(W-2*pd), Y=c=>H-pd-(c/N)*(H-2*pd);
+  let p=`M${X(0,t0).toFixed(1)} ${Y(0).toFixed(1)}`;
+  d.forEach((o,i)=>{p+=` L${X(i,o.t).toFixed(1)} ${Y(i).toFixed(1)} L${X(i,o.t).toFixed(1)} ${Y(i+1).toFixed(1)}`;});
+  p+=` L${W-pd} ${Y(N).toFixed(1)}`;
+  return `<svg class="line" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Pieces owned over time"><path d="${p} L${W-pd} ${H-pd} L${pd} ${H-pd}Z" class="la"/><path d="${p}" class="ll" vector-effect="non-scaling-stroke"/></svg>`;
+}
+function vInsights(){
+  const own=ownedItems(), n=own.length, pct=Math.round(n/total*100);
+  const dated=own.map(x=>({x,t:acqTime(x.id)})).filter(o=>o.t).sort((a,b)=>a.t-b.t), undated=n-dated.length;
+  const years={}; dated.forEach(o=>{const y=new Date(o.t).getFullYear();years[y]=(years[y]||0)+1;});
+  const ys=Object.keys(years).sort(), ymax=Math.max(1,...ys.map(y=>years[y]));
+  const prices=own.map(x=>({x,v:num(R(x.id).price)})).filter(o=>o.v!=null);
+  const sum=prices.reduce((s,o)=>s+o.v,0), top=prices.slice().sort((a,b)=>b.v-a.v)[0];
+  const last=dated.length?dated[dated.length-1].x:null;
+  return `<header class="hero tight"><div class="hrow"><h1>Insights</h1></div></header>
+  <main class="pg">
+  <section class="card comp">${ringSVG(n/total*100,112,8,pct+'%','complete')}<div><h2>${n} of ${total}</h2><p class="muted">${n} owned · ${total-n} remaining</p>${barHTML(n/total*100)}</div></section>
+  <section class="card"><div class="sh"><h2>By category</h2></div>${CATS.map(c=>{const t=ITEMS.filter(x=>x.category===c),o=t.filter(isOwned).length;return `<div class="crow"><div class="cr-h"><span>${esc(catName(c))}</span><b>${o}<small> of ${t.length}</small></b></div>${barHTML(o/t.length*100)}</div>`;}).join('')}</section>
+  <section class="card"><div class="sh"><h2>Acquired by year</h2></div>${ys.length?`<div class="cols">${ys.map(y=>`<div class="col"><span class="cv">${years[y]}</span><div class="cw"><div class="cb" style="height:${years[y]/ymax*100}%"></div></div><span class="cy">${y}</span></div>`).join('')}</div>`:`<p class="empty-s">Add purchase dates to your pieces to see when your collection grew.</p>`}${ys.length&&undated?`<p class="muted fine">${undated} owned ${plural(undated,'piece has','pieces have')} no purchase date and ${plural(undated,'isn’t','aren’t')} shown.</p>`:''}</section>
+  <section class="card"><div class="sh"><h2>Acquisition timeline</h2></div>${dated.length>=2?`${lineChart(dated)}<div class="axis"><span>${esc(dateLabel(dated[0].x.id))}</span><span>${n} owned</span><span>${esc(dateLabel(dated[dated.length-1].x.id))}</span></div>`:''}${dated.length?`<ul class="tl">${dated.slice().reverse().slice(0,8).map(o=>`<li data-act="open" data-id="${o.x.id}"><span class="td">${esc(dateLabel(o.x.id))}</span><b>${esc(o.x.name)}</b><span class="tp">${esc(priceLabel(o.x.id))}</span></li>`).join('')}</ul>`:`<p class="empty-s">Your timeline starts with your first dated acquisition.</p>`}</section>
+  <section class="card"><div class="sh"><h2>Spending</h2></div>${prices.length?`<div class="stats3 flat"><div><dd>${fmtMoney(sum)}</dd><dt>Total spent</dt></div><div><dd>${fmtMoney(sum/prices.length)}</dd><dt>Average per piece</dt></div><div><dd>${fmtMoney(top.v)}</dd><dt>Highest · ${esc(top.x.name)}</dt></div></div><p class="muted fine">Based on ${prices.length} of ${n} owned ${plural(n,'piece')} with a price entered.</p>`:`<p class="empty-s">${n?'Enter purchase prices on your owned pieces to see your spending.':'Spending appears here once you record purchase prices.'}</p>`}</section>
+  <section class="card"><div class="sh"><h2>Most recently acquired</h2></div>${last?hlRow('',last,[dateLabel(last.id),priceLabel(last.id)].filter(Boolean).join(' · ')||'Acquired'):`<p class="empty-s">No acquisitions recorded yet.</p>`}</section>
+  <section class="card"><div class="sh"><h2>Milestones</h2></div><ul class="miles">${MILES.map(m=>{const ok=n>=m.at,d=settings.mdates&&settings.mdates[m.id];return `<li class="${ok?'ok':''}"><span class="mk">${ok?ic('check'):''}</span><div><b>${esc(m.t)}</b><span>${ok?(d?'Reached '+fmtDate(new Date(d)):'Reached'):Math.max(0,m.at-n)+' to go'}</span></div></li>`;}).join('')}</ul></section>
+  </main>`;
+}
+function checkMilestones(){
+  const n=ownedItems().length, ach=MILES.filter(m=>n>=m.at);
+  if(!Array.isArray(settings.seen)){settings.seen=ach.map(m=>m.id);saveSettings();return;}
+  const fresh=ach.filter(m=>!settings.seen.includes(m.id)); if(!fresh.length)return;
+  settings.mdates=settings.mdates||{}; fresh.forEach(m=>{settings.seen.push(m.id);settings.mdates[m.id]=Date.now();}); saveSettings();
+  showMilestone(fresh[fresh.length-1]);
+}
+function showMilestone(m){
+  const w=document.createElement('div'); w.className='mile-wrap';
+  w.innerHTML=`<div class="mile-card2" role="dialog" aria-modal="true" aria-label="Milestone reached"><svg class="mseal" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" class="m1"/><circle cx="60" cy="60" r="46" class="m2"/><g transform="translate(36 36) scale(2)" class="m3" fill="none" stroke-width="1.2" stroke-linejoin="round">${P.star}</g></svg><p class="mk2">Milestone reached</p><h2>${esc(m.t)}</h2><p>${esc(m.s)}</p><button class="btn gold" data-act="mclose">Continue</button></div>`;
+  document.body.appendChild(w); requestAnimationFrame(()=>requestAnimationFrame(()=>w.classList.add('in')));
+}
+
+/* ---------- JOURNAL ---------- */
+function jcard(e){
+  const x=e.itemId?byId[e.itemId]:null, bits=entryBits(e), isA=e.type==='acquired';
+  const title=isA?(x?x.name:'Acquired piece'):(e.title||(x?x.name:'Journal note'));
+  return `<article class="jc" data-act="editentry" data-id="${e.id}">${x?`<div class="ph sm">${thumb(x)}</div>`:`<div class="ph sm jg">${ic('book')}</div>`}<div class="jc-b"><p class="jd">${esc(entryDate(e))}${isA?'<span class="tag">Acquired</span>':''}${isA&&x&&!isOwned(x)?'<span class="tag mute">Not in collection</span>':''}</p><h3>${esc(title)}</h3>${bits.length?`<p class="muted">${esc(bits.join(' · '))}</p>`:''}${e.foundAt?`<p class="fnd">Found at ${esc(e.foundAt)}</p>`:''}${e.story?`<p class="story">${esc(e.story)}</p>`:''}</div></article>`;
+}
+function vJournal(){
+  const es=[...journal].sort((a,b)=>entryTime(b)-entryTime(a)), missing=ownedItems().filter(x=>!acqEntry(x.id)).length;
+  let body='';
+  if(!es.length)body=`<div class="empty big"><div class="empty-ic">${ic('book')}</div><h2>Your journal is empty</h2><p>Entries are created automatically when you mark a piece as owned. You can also write your own.</p><button class="btn primary" data-act="newnote">${ic('plus')}New entry</button></div>`;
+  else{ let yr=''; es.forEach(e=>{const y=new Date(entryTime(e)).getFullYear(); if(y!==yr){yr=y;body+=`<h2 class="yh">${y}</h2>`;} body+=jcard(e);}); }
+  return `<header class="hero tight"><div class="hrow"><button class="ibtn light" data-act="back" aria-label="Back">${ic('back')}</button><h1>Journal</h1><button class="ibtn light" data-act="newnote" aria-label="New journal entry">${ic('plus')}</button></div></header>
+  <main class="pg">${missing?`<div class="nudge soft"><div class="nt"><b>${missing} owned ${plural(missing,'piece has','pieces have')} no entry</b><span>Create entries from the purchase details you’ve already saved.</span><div class="nb"><button class="btn sm primary" data-act="backfill">Create entries</button></div></div></div>`:''}${body}</main>`;
+}
+
+/* ---------- MORE ---------- */
+function backupStatus(){
+  if(!settings.lastExport)return 'No backup exported yet';
+  const c=settings.changes||0; return 'Last backup '+fmtDate(new Date(settings.lastExport))+(c?` · ${c} ${plural(c,'change')} since`:' · up to date');
+}
+function vMore(){
+  const pre=!!lsGet(PKEY), per=S.persisted===true?'Protected from automatic clean-up':S.persisted===false?'Not guaranteed — export backups regularly':'Not reported by this browser';
+  return `<header class="hero tight"><div class="hrow"><h1>More</h1></div></header>
+  <main class="pg">
+  <section class="card"><div class="sh"><h2>Appearance</h2></div><div class="seg wide" role="group" aria-label="Appearance">${[['auto','Automatic'],['light','Light'],['dark','Dark']].map(([v,l])=>`<button class="${settings.theme===v?'on':''}" data-act="theme" data-v="${v}">${l}</button>`).join('')}</div></section>
+  <button class="row-link" data-act="go" data-v="journal">${ic('book')}<div><b>Collection journal</b><span>${journal.length} ${plural(journal.length,'entry','entries')}</span></div>${ic('chev')}</button>
+  <section class="card"><div class="sh"><h2>Backup and data</h2></div>
+   <div class="saved">${ic('shield')}<div><b>${storageOK?'Saved automatically on this device':'This browser is not saving changes'}</b><span>${esc(backupStatus())}</span></div></div>
+   <p class="muted fine">Your collection lives only in this browser on this device. It is not synced to other devices or to any server, so export a backup to protect it or to move to a new phone.</p>
+   <div class="stack"><button class="btn primary" data-act="export">Export backup</button><label class="btn ghost filebtn">Restore from backup<input type="file" id="restoreFile" accept="application/json,.json"></label>${pre?`<button class="btn ghost" data-act="undorestore">Undo last restore or erase</button>`:''}</div>
+   <dl class="mini-kv">${kv('Storage protection',per)}${kv('Pieces tracked',ownedItems().length+' owned · '+ITEMS.filter(isWish).length+' on wishlist · '+journal.length+' journal')}</dl></section>
+  <section class="card"><div class="sh"><h2>Data tools</h2></div><div class="stack"><button class="btn ghost" data-act="backfill">Create journal entries for owned pieces</button><button class="btn ghost danger-o" data-act="erase">Erase all collection data</button></div></section>
+  <section class="card"><div class="sh"><h2>About</h2></div><dl class="mini-kv">${kv('Version',APP_VERSION+' · Collector’s Edition')}${kv('Checklist',total+' pieces')}</dl><div class="stack"><button class="btn ghost" data-act="update">Check for updates</button></div>
+   <p class="muted fine">A personal collection tracker. Not an official Department 56 or Disney app. The checklist is a working catalog, and some 2026 and special-edition entries still need independent verification. Photos load from the web, so they need a connection the first time you view them.</p></section>
+  </main>`;
+}
+function exportBackup(){
+  const payload={app:"Mickey's Merry Christmas Village Collector",version:2,exportedAt:new Date().toISOString(),saved,journal,settings:{theme:settings.theme,view:settings.view}};
+  const json=JSON.stringify(payload,null,2), name='Mickey-Village-Collection-Backup-'+toISO(new Date())+'.json';
+  const done=msg=>{settings.lastExport=Date.now();settings.changes=0;saveSettings();refresh();toast(msg,[],7000);};
+  const dl=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000);done('Backup downloaded');};
+  try{
+    const file=new File([json],name,{type:'application/json'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      navigator.share({files:[file],title:'Collection backup'}).then(()=>done('Backup shared. Make sure you saved it to Files.')).catch(err=>{if(err&&err.name==='AbortError')return;dl();});
+      return;
+    }
+  }catch(e){}
+  dl();
+}
+const sv=v=>typeof v==='string'?v:(typeof v==='number'&&isFinite(v)?String(v):'');
+function cleanRec(r){
+  const o={owned:!!r.owned&&r.owned!=='false',price:sv(r.price),date:sv(r.date),condition:sv(r.condition),box:sv(r.box),notes:sv(r.notes)};
+  if(r.wish===true)o.wish=true; if(['high','med','low'].includes(r.prio))o.prio=r.prio;
+  ['target','budget','wnotes'].forEach(k=>{if(sv(r[k]))o[k]=sv(r[k]);});
+  ['wishAt','acquiredAt'].forEach(k=>{if(typeof r[k]==='number'&&isFinite(r[k]))o[k]=r[k];});
+  if(typeof r.photoUrl==='string'&&/^https:\/\/\S+$/i.test(r.photoUrl))o.photoUrl=r.photoUrl;
+  return o;
+}
+function cleanEntry(e){
+  if(!e||typeof e!=='object')return null; const type=e.type==='note'?'note':(e.type==='acquired'?'acquired':null); if(!type)return null;
+  const itemId=typeof e.itemId==='string'&&byId[e.itemId]?e.itemId:null; if(type==='acquired'&&!itemId)return null;
+  return {id:typeof e.id==='string'&&e.id?e.id:uid(),type,itemId,title:sv(e.title),date:sv(e.date),price:sv(e.price),condition:sv(e.condition),foundAt:sv(e.foundAt),story:sv(e.story),createdAt:typeof e.createdAt==='number'?e.createdAt:Date.now(),auto:!!e.auto};
+}
+function parseBackup(text){
+  let data; try{data=JSON.parse(text);}catch(e){throw new Error('That file isn’t valid JSON, so it can’t be a collection backup.');}
+  if(!data||typeof data!=='object'||Array.isArray(data))throw new Error('This file doesn’t look like a collection backup.');
+  let src=null;
+  if(data.saved&&typeof data.saved==='object'&&!Array.isArray(data.saved))src=data.saved;
+  else{const ks=Object.keys(data); if(ks.length&&ks.every(k=>data[k]&&typeof data[k]==='object'&&!Array.isArray(data[k]))&&ks.some(k=>byId[k]))src=data;}
+  if(!src)throw new Error('No collection data was found in this file.');
+  const out={}, rep={owned:0,wish:0,unknown:0,bad:0,jn:0,jbad:0,recs:0};
+  Object.keys(src).forEach(k=>{
+    const r=src[k]; if(!r||typeof r!=='object'||Array.isArray(r)||k.length>40){rep.bad++;return;}
+    const c=cleanRec(r); out[k]=c; rep.recs++;
+    if(byId[k]){if(c.owned)rep.owned++;if(c.wish&&!c.owned)rep.wish++;}else rep.unknown++;
+  });
+  const jn=[]; if(Array.isArray(data.journal))data.journal.forEach(e=>{const c=cleanEntry(e);if(c)jn.push(c);else rep.jbad++;}); rep.jn=jn.length;
+  return {saved:out,journal:jn,settings:data.settings&&typeof data.settings==='object'?data.settings:null,exportedAt:data.exportedAt||null,rep};
+}
+function snapshotAll(){lsSet(PKEY,JSON.stringify({at:Date.now(),saved,journal,settings:{theme:settings.theme,view:settings.view,lastExport:settings.lastExport,seen:settings.seen,mdates:settings.mdates}}));}
+function applyData(sd,jn,st){
+  saved=sd; journal=jn;
+  if(st){if(['auto','light','dark'].includes(st.theme))settings.theme=st.theme; if(['grid','list'].includes(st.view))settings.view=st.view; if('lastExport' in st)settings.lastExport=st.lastExport; if('seen' in st)settings.seen=st.seen; if(st.mdates&&typeof st.mdates==='object')settings.mdates=st.mdates;}
+  settings.seen=null; persist(); settings.changes=0; saveSettings(); applyTheme(); checkMilestones();
+}
+function restoreFromFile(file){
+  const fr=new FileReader();
+  fr.onerror=()=>toast('That file couldn’t be read.');
+  fr.onload=()=>{
+    let b; try{b=parseBackup(String(fr.result));}catch(err){confirmDlg({title:'Can’t restore this file',msg:esc(err.message)+' Your current collection has not been changed.',ok:'OK',fn:()=>{}});return;}
+    const r=b.rep, when=b.exportedAt&&!isNaN(Date.parse(b.exportedAt))?fmtDate(new Date(b.exportedAt)):'an unknown date';
+    confirmDlg({title:'Restore this backup?',msg:`Backup from <b>${esc(when)}</b>:<br>${r.owned} ${plural(r.owned,'piece')} owned · ${r.wish} on wishlist · ${r.jn} journal ${plural(r.jn,'entry','entries')}.${r.unknown?`<br><span class="muted">${r.unknown} ${plural(r.unknown,'record')} for pieces no longer on the checklist ${plural(r.unknown,'is','are')} kept but hidden.</span>`:''}${r.bad||r.jbad?`<br><span class="muted">${r.bad+r.jbad} unreadable ${plural(r.bad+r.jbad,'item was','items were')} skipped.</span>`:''}<br><br>This replaces the collection on this device. A safety copy of your current data is kept so you can undo.`,ok:'Restore backup',fn:()=>{snapshotAll();applyData(b.saved,b.journal,b.settings);refresh();toast('Backup restored');}});
+  };
+  fr.readAsText(file);
+}
+
+/* ---------- actions + events ---------- */
+function applyTheme(){const t=settings.theme; if(t==='light'||t==='dark')document.documentElement.dataset.theme=t; else delete document.documentElement.dataset.theme;}
+function resetFilters(){S.q='';S.status='all';S.cat='';S.chr='';S.sort='catalog';}
+async function shareItem(id){
+  const x=byId[id], r=R(id);
+  const text=`${x.name}\nDepartment 56 item № ${x.sku}\n${catName(x.category)}${x.years?' · '+x.years:''}\n${r.owned?'In my collection':'Not yet in my collection'}\n${ebayURL(x)}`;
+  if(navigator.share){try{await navigator.share({title:x.name,text});}catch(e){} return;}
+  try{await navigator.clipboard.writeText(text);toast('Item details copied');}catch(e){toast('Sharing isn’t available in this browser.');}
+}
+const ACT={
+  tab:(t,id,v)=>go(v), go:(t,id,v)=>go(v), back:()=>goBack(),
+  open:(t,id)=>go('item/'+encodeURIComponent(id)),
+  toggle:(t,id)=>{isOwned(byId[id])?unownIt(id):ownIt(id);},
+  own:(t,id)=>ownIt(id), unown:(t,id)=>unownIt(id),
+  wish:(t,id)=>addWish(id), unwish:(t,id)=>unwish(id), buy:(t,id)=>buyWish(id),
+  editacq:(t,id)=>acqSheet(id,{}), editwish:(t,id)=>wishSheet(id,false),
+  photo:(t,id)=>photoSheet(id), share:(t,id)=>shareItem(id),
+  newnote:(t,id)=>noteSheet(null,id||null),
+  mkentry:(t,id)=>{ensureAcq(id);persist();refresh();toast('Journal entry created');},
+  editentry:(t,id)=>{const e=journal.find(j=>j.id===id); if(!e)return; if(e.type==='acquired')acqSheet(e.itemId,{fromJournal:true}); else noteSheet(e.id);},
+  status:(t,id,v)=>{S.status=v;syncBar();},
+  view:(t,id,v)=>{settings.view=v;saveSettings();$$('.vt button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));renderResults();},
+  filters:()=>filtersSheet(),
+  setsort:(t,id,v)=>{S.sort=v;setSheet(filtersBody());syncBar();},
+  setcat:(t,id,v)=>{S.cat=v;setSheet(filtersBody());syncBar();},
+  setchr:(t,id,v)=>{S.chr=v;setSheet(filtersBody());syncBar();},
+  resetf:()=>{resetFilters();const q=$('#q');if(q)q.value='';setSheet(filtersBody());syncBar();},
+  clearall:()=>{resetFilters();const q=$('#q');if(q)q.value='';syncBar();},
+  clearcat:()=>{S.cat='';syncBar();}, clearchr:()=>{S.chr='';syncBar();}, clearsort:()=>{S.sort='catalog';syncBar();},
+  qa:(t,id,v)=>{
+    if(v==='add')return ACT['qa-add']();
+    if(v==='wish')return go('wishlist');
+    resetFilters(); S.status=v==='browse'?'all':v; go('collection');
+  },
+  'qa-add':()=>pickerSheet('Add an acquisition',x=>!isOwned(x),pid=>acqSheet(pid,{own:true})),
+  pickwish:()=>pickerSheet('Add to wishlist',x=>!isOwned(x)&&!isWish(x),pid=>wishSheet(pid,true)),
+  pick:(t,id)=>{const f=cur&&cur.pick; if(f){closeSheet(true);f(id);}},
+  shuffle:()=>{S.feat++;refresh();},
+  snooze:()=>{settings.snooze=Date.now()+3*864e5;saveSettings();refresh();},
+  theme:(t,id,v)=>{settings.theme=v;saveSettings();applyTheme();refresh();},
+  export:()=>exportBackup(),
+  backfill:()=>{
+    const miss=ownedItems().filter(x=>!acqEntry(x.id)); if(!miss.length){toast('Every owned piece already has a journal entry.');return;}
+    confirmDlg({title:'Create journal entries?',msg:`This adds a journal entry for ${miss.length} owned ${plural(miss.length,'piece')} using the purchase details you’ve already saved. Nothing else changes.`,ok:'Create entries',fn:()=>{miss.forEach(x=>journal.push({id:uid(),type:'acquired',itemId:x.id,foundAt:'',story:'',createdAt:acqTime(x.id)||Date.now(),auto:true}));persist();refresh();toast(miss.length+' journal '+plural(miss.length,'entry','entries')+' created');}});
+  },
+  erase:()=>confirmDlg({title:'Erase all collection data?',msg:'This removes every ownership mark, purchase detail, wishlist item and journal entry from this device. A safety copy is kept so you can undo from the More tab, but exporting a backup first is the safest choice.',ok:'Erase everything',danger:true,extra:'<button class="btn ghost" data-act="export">Export backup first</button>',fn:()=>{snapshotAll();saved={};journal=[];settings.seen=null;settings.mdates={};persist();settings.changes=0;checkMilestones();saveSettings();refresh();toast('All collection data erased',[{label:'Undo',fn:()=>ACT.undorestore(null,null,null,true)}],8000);}}),
+  undorestore:(t,id,v,now)=>{
+    let p; try{p=JSON.parse(lsGet(PKEY));}catch(e){p=null;} if(!p||!p.saved){toast('There’s nothing to undo.');return;}
+    const run=()=>{applyData(p.saved,Array.isArray(p.journal)?p.journal:[],p.settings||null);try{localStorage.removeItem(PKEY);}catch(e){delete mem[PKEY];}refresh();toast('Your previous data is back');};
+    if(now)run(); else confirmDlg({title:'Undo the last restore or erase?',msg:'This brings back the data you had before, saved '+fmtDate(new Date(p.at||Date.now()))+'.',ok:'Bring it back',fn:run});
+  },
+  update:()=>{
+    if(!('serviceWorker' in navigator)){toast('Updates aren’t available in this browser.');return;}
+    toast('Checking for updates…',[],2500);
+    navigator.serviceWorker.getRegistration().then(reg=>{ if(!reg){toast('Offline support isn’t active yet. Reload the app once.');return;}
+      return reg.update().then(()=>setTimeout(()=>{ if(!(reg.installing||reg.waiting))toast('You’re on the latest version ('+APP_VERSION+').'); },1800)); }).catch(()=>toast('Couldn’t check for updates right now.'));
+  },
+  qchip:(t,id,v)=>{const f=t.parentElement.dataset.for; const i=$('#'+f,cur.el); if(i){i.value=v;i.focus();}},
+  prio:(t,id,v)=>{const s=t.parentElement; s.dataset.v=v; $$('button',s).forEach(b=>b.classList.toggle('on',b===t));},
+  fn:(t)=>{const f=cur&&cur.fns[t.dataset.fn]; if(f)f();},
+  close:()=>closeSheet(),
+  toastfn:(t)=>{const el=$('#toasts .toast'); if(!el)return; const a=el._acts[+t.dataset.i]; hideToast(); if(a)a.fn();},
+  mclose:(t)=>{const w=t.closest('.mile-wrap'); w.classList.remove('in'); setTimeout(()=>w.remove(),300);}
+};
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-act]'); if(!t)return;
+  const f=ACT[t.dataset.act]; if(!f)return;
+  f(t,t.dataset.id,t.dataset.v,e);
+});
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.id==='q'){S.q=t.value;renderResults();}
+  else if(t.id==='pq')fillPicker();
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&(e.target.id==='q'||e.target.id==='pq')){e.preventDefault();e.target.blur();} if(e.key==='Escape'&&cur)closeSheet(); });
+document.addEventListener('change',e=>{ if(e.target.id==='restoreFile'){const f=e.target.files[0]; e.target.value=''; if(f)restoreFromFile(f);} });
+document.addEventListener('focusin',e=>{ if(e.target.closest&&e.target.closest('.sheet')&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))setTimeout(()=>e.target.scrollIntoView({block:'center',behavior:'smooth'}),320); });
+window.addEventListener('hashchange',()=>route());
+
+/* ---------- start ---------- */
+try{history.scrollRestoration='manual';}catch(e){}
+applyTheme(); checkMilestones(); route();
+if(navigator.storage&&navigator.storage.persist){
+  navigator.storage.persisted().then(p=>p?p:navigator.storage.persist()).then(p=>{S.persisted=!!p;}).catch(()=>{});
+}
+if('serviceWorker' in navigator){
+  let had=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(had)toast('A new version is ready.',[{label:'Reload',fn:()=>location.reload()}],0); had=true; });
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+})();
+
+</script>
+</body>
+</html>
