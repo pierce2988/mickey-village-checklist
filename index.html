@@ -125,6 +125,16 @@ function renderCategories(){
  el.innerHTML=categories.map(c=>`<button class="catbtn ${c===categoryFilter?"active":""}" data-category="${esc(c)}">${esc(c)}</button>`).join("");
  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{categoryFilter=b.dataset.category;renderCategories();renderItems();}));
 }
+function photoCandidates(sku){
+ const s=String(sku).trim().toLowerCase();
+ const base="https://thevillagechronicler.com/Collections/";
+ return [
+  `https://retiredproducts.department56.com/cdn/shop/files/${encodeURIComponent(s)}_1200x1200.jpg`,
+  `${base}${encodeURIComponent(s)}.jpg`,
+  `${base}${encodeURIComponent(s.replace(/-[a-z]$/,""))}.jpg`,
+  `https://thevillagechronicler.com/Images/${encodeURIComponent(s)}.jpg`
+ ];
+}
 function renderItems(){
  const filtered=ITEMS.filter(x=>{
   const r=record(x.id), q=query.toLowerCase();
@@ -143,7 +153,7 @@ function renderItems(){
    <div>
     <div class="photo-row">
      <div class="photo-box" data-photo-box="${x.id}">
-      <img class="itemphoto" loading="lazy" alt="${esc(x.name)} Department 56 collectible, item ${esc(x.sku)}" src="https://retiredproducts.department56.com/cdn/shop/files/${encodeURIComponent(String(x.sku).toLowerCase())}_1200x1200.jpg" data-photo-step="0">
+      <img class="itemphoto" loading="lazy" alt="${esc(x.name)} Department 56 collectible, item ${esc(x.sku)}" src="${photoCandidates(x.sku)[0]}" data-photo-step="0" data-photo-candidates="${esc(JSON.stringify(photoCandidates(x.sku)))}">
       <div class="photo-placeholder">Catalog photo not available from this image address</div>
      </div>
      <div class="photo-tools">
@@ -170,14 +180,13 @@ function renderItems(){
  }).join("");
  el.querySelectorAll(".itemphoto").forEach(img=>{
   img.addEventListener("error",()=>{
-   const steps=["1200x1200","2048x2048","600x600"];
+   const candidates=JSON.parse(img.dataset.photoCandidates||"[]");
    const next=Number(img.dataset.photoStep||0)+1;
-   if(next<steps.length){
+   if(next<candidates.length){
     img.dataset.photoStep=String(next);
-    const sku=img.closest(".item").querySelector(".sku").textContent.replace(/^#/,"").toLowerCase();
-    img.src=`https://retiredproducts.department56.com/cdn/shop/files/${encodeURIComponent(sku)}_${steps[next]}.jpg`;
+    img.src=candidates[next];
    } else {img.closest(".photo-box").classList.add("missing");img.remove();}
-  },{once:true});
+  });
  });
  el.querySelectorAll(".item").forEach(card=>{
   const id=card.dataset.id;

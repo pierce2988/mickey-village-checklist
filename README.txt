@@ -1,11 +1,13 @@
-PHOTO FEATURE UPDATE — upload these two files to the ROOT of your existing GitHub repository.
+BULK PHOTO LOOKUP UPDATE
 
-1. Replace index.html with the included index.html.
-2. Replace sw.js with the included sw.js.
-3. Commit both changes to the main branch.
-4. Wait for GitHub Pages to deploy.
-5. On your iPhone, close the installed app/browser tab, then reopen the GitHub Pages website. If it still shows the old version, open the website in a fresh Safari tab and refresh once.
+Replace index.html AND sw.js in the root of your GitHub repository with these two files, then commit.
 
-Why two files? The previous app's service worker cached the old index.html. Updating only index.html could leave the old page visible. This sw.js uses a new cache version and removes the old cache.
+This update tries multiple exact-SKU image locations in sequence:
+1) Department 56 retired-product image CDN
+2) The Village Chronicler collection image folder using the exact SKU
+3) A base SKU fallback for letter-suffixed gift set numbers
+4) The Village Chronicler common Images folder
 
-Note: product photos are loaded from an external Department 56 image address by SKU. Some historical SKUs may not have a photo at that address; those items show a photo-search link instead.
+If no exact-SKU image responds, the app retains the item-specific photo search link instead of showing a mismatched image.
+
+The service worker cache is versioned v3 so the previous app cache is removed on next visit.
