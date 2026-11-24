@@ -413,7 +413,7 @@ const VERIFIED_PHOTO_URLS = {
 (function(){
 'use strict';
 /* ================= Mickey's Merry Christmas Village — Collector's Edition (v18) ================= */
-const APP_VERSION='18';
+const APP_VERSION='20';
 const KEY="mickey-merry-christmas-village-v1";            /* unchanged: ownership + purchase details */
 const JKEY="mickey-merry-christmas-village-journal-v1";   /* new: journal entries */
 const SKEY="mickey-merry-christmas-village-settings-v1";  /* new: appearance + backup status */
@@ -544,6 +544,7 @@ function fallbackChain(s){
 }
 function photoSlides(x){
   const r=R(x.id), s=skuKey(x), out=[], fb=fallbackChain(s);
+  if(r.photoLocal&&LP[x.id])out.push({chain:[LP[x.id]],label:'Your photo',kind:'user'});
   if(r.photoUrl)out.push({chain:[r.photoUrl],label:'Your photo',kind:'user'});
   if(VERIFIED_PHOTO_URLS[s])out.push({chain:[VERIFIED_PHOTO_URLS[s],...fb],label:'Verified product photo',kind:'verified'});
   (EXTRA_PHOTOS[s]||[]).forEach(u=>out.push({chain:[u],label:'Verified product photo',kind:'verified'}));
@@ -551,13 +552,37 @@ function photoSlides(x){
   return out;
 }
 const hasVerified=x=>!!VERIFIED_PHOTO_URLS[skuKey(x)];
+/* ---------- your own uploaded photos: IndexedDB on this device, resized before saving ---------- */
+const LP={}, B64={};
+function idb(){return new Promise((res,rej)=>{if(!window.indexedDB)return rej(new Error('no indexedDB'));const r=indexedDB.open('mickey-village-photos',1);r.onupgradeneeded=()=>r.result.createObjectStore('p');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function idbDo(mode,fn){return idb().then(db=>new Promise((res,rej)=>{const t=db.transaction('p',mode);t.oncomplete=()=>{db.close();res();};t.onerror=t.onabort=()=>rej(t.error);fn(t.objectStore('p'));}));}
+function b64(blob){return new Promise(res=>{const f=new FileReader();f.onload=()=>res(f.result);f.onerror=()=>res('');f.readAsDataURL(blob);});}
+const photoPut=(id,blob)=>idbDo('readwrite',s=>{s.put(blob,id);}).then(()=>{if(LP[id])URL.revokeObjectURL(LP[id]);LP[id]=URL.createObjectURL(blob);return b64(blob).then(d=>{B64[id]=d;});});
+const photoDel=id=>idbDo('readwrite',s=>{s.delete(id);}).then(()=>{if(LP[id])URL.revokeObjectURL(LP[id]);delete LP[id];delete B64[id];});
+const photoClear=()=>idbDo('readwrite',s=>{s.clear();}).then(()=>{Object.keys(LP).forEach(i=>{URL.revokeObjectURL(LP[i]);delete LP[i];delete B64[i];});});
+function photosLoad(){return idb().then(db=>new Promise((res,rej)=>{const out={},t=db.transaction('p','readonly'),q=t.objectStore('p').openCursor();q.onsuccess=()=>{const c=q.result;if(c){out[c.key]=c.value;c.continue();}};t.oncomplete=()=>{db.close();res(out);};t.onerror=()=>rej(t.error);}));}
+function uploadPhoto(file,id){
+  if(!file)return;
+  if(!/^image\//.test(file.type)&&!/\.(jpe?g|png|webp|heic|heif)$/i.test(file.name)){toast('Choose an image file.');return;}
+  const url=URL.createObjectURL(file), img=new Image();
+  img.onload=()=>{
+    const m=1200,s=Math.min(1,m/Math.max(img.naturalWidth,img.naturalHeight)),w=Math.max(1,Math.round(img.naturalWidth*s)),h=Math.max(1,Math.round(img.naturalHeight*s));
+    const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,w,h);g.drawImage(img,0,0,w,h);URL.revokeObjectURL(url);
+    c.toBlob(bl=>{
+      if(!bl){toast('That photo couldn’t be processed.');return;}
+      photoPut(id,bl).then(()=>{W(id).photoLocal=true;delete PF[id];PS[id]=0;persist();closeSheet();refresh();toast('Photo saved on this device');}).catch(()=>toast('This browser couldn’t store the photo.'));
+    },'image/jpeg',.85);
+  };
+  img.onerror=()=>{URL.revokeObjectURL(url);toast('That image format isn’t supported by this browser.');};
+  img.src=url;
+}
 const EMPTYPH=`<div class="ph-empty">${ic('home')}<span>No photo yet</span></div>`;
 function imgTag(x,slide,key){
   const step=key==='0'?(PS[x.id]||0):0, chain=slide.chain, st=Math.min(step,chain.length-1);
   return `<img src="${esc(chain[st])}" data-chain="${esc(JSON.stringify(chain))}" data-step="${st}" data-id="${x.id}" data-k="${key}" data-kind="${slide.kind}" alt="${esc(x.name)}, Department 56 item ${esc(x.sku)}" loading="lazy" decoding="async">`;
 }
 function thumb(x){
-  if(PF[x.id]&&!R(x.id).photoUrl)return EMPTYPH;
+  if(PF[x.id]&&!R(x.id).photoUrl&&!LP[x.id])return EMPTYPH;
   return imgTag(x,photoSlides(x)[0],'0');
 }
 document.addEventListener('error',e=>{
@@ -820,7 +845,7 @@ function vItem(id){
   return `<header class="hero tight dhead"><div class="hrow"><button class="ibtn light" data-act="back" aria-label="Back">${ic('back')}</button><h1>Piece details</h1><button class="ibtn light" data-act="share" data-id="${id}" aria-label="Share item details">${ic('share')}</button></div></header>
   <main class="pg">
   <div class="gallery"><div class="gal" id="gal">${slides.map((s,i)=>`<figure class="slide"><div class="ph big">${imgTag(x,s,String(i))}</div><figcaption class="slide-cap">${esc(s.label)}</figcaption></figure>`).join('')}</div>${slides.length>1?`<div class="dots">${slides.map((s,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}</div>
-  <div class="ptools"><a class="link" href="${esc(photoSearchURL(x))}" target="_blank" rel="noopener">Search for a photo${ic('ext')}</a><button class="link" data-act="photo" data-id="${id}">${r.photoUrl?'Change my photo link':'Use my own photo link'}</button></div>
+  <div class="ptools"><a class="link" href="${esc(photoSearchURL(x))}" target="_blank" rel="noopener">Search for a photo${ic('ext')}</a><button class="link" data-act="photo" data-id="${id}">${(r.photoUrl||(r.photoLocal&&LP[id]))?'Change my photo':'Add my own photo'}</button></div>
   <section class="dtitle"><p class="cat">${esc(catName(x.category))}</p><h1>${esc(x.name)}</h1><p class="muted">Department 56 item № ${esc(x.sku)}${x.years?' · Catalog years '+esc(x.years):''}</p></section>
   ${status}
   <div class="acts">${o?`<button class="btn primary" data-act="editacq" data-id="${id}">${ic('edit')}Edit purchase details</button>`:`<button class="btn gold" data-act="own" data-id="${id}">${ic('check')}Mark as owned</button>`}</div>
@@ -935,14 +960,17 @@ function noteSheet(eid,itemId){
   });
 }
 function photoSheet(id){
-  const x=byId[id], r=R(id);
-  openSheet(`${sheetHead(x,'Your photo link')}
-  <div class="form"><label class="fl"><span>Image link</span><input id="f-url" type="url" inputmode="url" autocapitalize="off" autocorrect="off" placeholder="https://…" value="${esc(r.photoUrl||'')}"><small>Paste the link to an image of this exact piece (item № ${esc(x.sku)}). It shows alongside the catalog photo, and nothing else is ever substituted.</small></label></div>
-  <div class="sh-actions"><button class="btn primary" data-act="fn" data-fn="save">Save photo link</button>${r.photoUrl?`<button class="btn ghost" data-act="fn" data-fn="clear">Remove my photo link</button>`:''}<button class="btn ghost" data-act="close">Cancel</button></div>`,{
+  const x=byId[id], r=R(id), has=!!(r.photoUrl||(r.photoLocal&&LP[id]));
+  openSheet(`${sheetHead(x,'Your photo')}
+  <p class="sh-p">Add your own photo of this exact piece (item № ${esc(x.sku)}). It shows first in the gallery and is stored only on this device. Nothing else is ever substituted.</p>
+  <label class="btn primary filebtn">${ic('cam')}Choose or take a photo<input type="file" id="f-file" accept="image/*"></label>
+  <div class="form" style="margin-top:16px"><label class="fl"><span>Or paste an image link</span><input id="f-url" type="url" inputmode="url" autocapitalize="off" autocorrect="off" placeholder="https://…" value="${esc(r.photoUrl||'')}"></label></div>
+  <div class="sh-actions"><button class="btn ghost" data-act="fn" data-fn="save">Save link</button>${has?`<button class="link danger-t" data-act="fn" data-fn="clear">Remove my photo</button>`:''}<button class="btn ghost" data-act="close">Cancel</button></div>`,{
     save:()=>{ const v=$('#f-url',cur.el).value.trim(); if(!/^https:\/\/\S+$/i.test(v)){toast('Enter a link that starts with https://');return;}
       W(id).photoUrl=v; delete PF[id]; delete PS[id]; persist(); closeSheet(); refresh(); toast('Photo link saved'); },
-    clear:()=>{ delete W(id).photoUrl; delete PF[id]; delete PS[id]; persist(); closeSheet(); refresh(); toast('Photo link removed'); }
+    clear:()=>{ const rec=W(id); delete rec.photoUrl; delete rec.photoLocal; delete PF[id]; delete PS[id]; photoDel(id).catch(()=>{}); persist(); closeSheet(); refresh(); toast('Photo removed'); }
   });
+  cur.photoId=id;
 }
 function pickerSheet(title,filter,onPick){
   openSheet(`<h2 class="sh-t">${esc(title)}</h2><label class="search inset">${ic('search')}<input id="pq" type="search" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Search name or item number"></label><div class="plist" id="plist"></div>`,{});
@@ -1054,7 +1082,8 @@ function vMore(){
   </main>`;
 }
 function exportBackup(){
-  const payload={app:"Mickey's Merry Christmas Village Collector",version:2,exportedAt:new Date().toISOString(),saved,journal,settings:{theme:settings.theme,view:settings.view}};
+  const photos={}; Object.keys(LP).forEach(i=>{if(saved[i]&&saved[i].photoLocal&&B64[i])photos[i]=B64[i];});
+  const payload={app:"Mickey's Merry Christmas Village Collector",version:2,exportedAt:new Date().toISOString(),saved,journal,settings:{theme:settings.theme,view:settings.view},photos};
   const json=JSON.stringify(payload,null,2), name='Mickey-Village-Collection-Backup-'+toISO(new Date())+'.json';
   const done=msg=>{settings.lastExport=Date.now();settings.changes=0;saveSettings();refresh();toast(msg,[],7000);};
   const dl=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000);done('Backup downloaded');};
@@ -1095,7 +1124,9 @@ function parseBackup(text){
     if(byId[k]){if(c.owned)rep.owned++;if(c.wish&&!c.owned)rep.wish++;}else rep.unknown++;
   });
   const jn=[]; if(Array.isArray(data.journal))data.journal.forEach(e=>{const c=cleanEntry(e);if(c)jn.push(c);else rep.jbad++;}); rep.jn=jn.length;
-  return {saved:out,journal:jn,settings:data.settings&&typeof data.settings==='object'?data.settings:null,exportedAt:data.exportedAt||null,rep};
+  const ph={}; if(data.photos&&typeof data.photos==='object'&&!Array.isArray(data.photos))Object.keys(data.photos).forEach(k=>{const v=data.photos[k];if(byId[k]&&typeof v==='string'&&/^data:image\/(jpeg|png|webp);base64,/.test(v)&&v.length<12e6)ph[k]=v;});
+  rep.photos=Object.keys(ph).length;
+  return {saved:out,journal:jn,photos:ph,settings:data.settings&&typeof data.settings==='object'?data.settings:null,exportedAt:data.exportedAt||null,rep};
 }
 function snapshotAll(){lsSet(PKEY,JSON.stringify({at:Date.now(),saved,journal,settings:{theme:settings.theme,view:settings.view,lastExport:settings.lastExport,seen:settings.seen,mdates:settings.mdates}}));}
 function applyData(sd,jn,st){
@@ -1109,7 +1140,10 @@ function restoreFromFile(file){
   fr.onload=()=>{
     let b; try{b=parseBackup(String(fr.result));}catch(err){confirmDlg({title:'Can’t restore this file',msg:esc(err.message)+' Your current collection has not been changed.',ok:'OK',fn:()=>{}});return;}
     const r=b.rep, when=b.exportedAt&&!isNaN(Date.parse(b.exportedAt))?fmtDate(new Date(b.exportedAt)):'an unknown date';
-    confirmDlg({title:'Restore this backup?',msg:`Backup from <b>${esc(when)}</b>:<br>${r.owned} ${plural(r.owned,'piece')} owned · ${r.wish} on wishlist · ${r.jn} journal ${plural(r.jn,'entry','entries')}.${r.unknown?`<br><span class="muted">${r.unknown} ${plural(r.unknown,'record')} for pieces no longer on the checklist ${plural(r.unknown,'is','are')} kept but hidden.</span>`:''}${r.bad||r.jbad?`<br><span class="muted">${r.bad+r.jbad} unreadable ${plural(r.bad+r.jbad,'item was','items were')} skipped.</span>`:''}<br><br>This replaces the collection on this device. A safety copy of your current data is kept so you can undo.`,ok:'Restore backup',fn:()=>{snapshotAll();applyData(b.saved,b.journal,b.settings);refresh();toast('Backup restored');}});
+    confirmDlg({title:'Restore this backup?',msg:`Backup from <b>${esc(when)}</b>:<br>${r.owned} ${plural(r.owned,'piece')} owned · ${r.wish} on wishlist · ${r.jn} journal ${plural(r.jn,'entry','entries')}${r.photos?' · '+r.photos+' '+plural(r.photos,'photo'):''}.${r.unknown?`<br><span class="muted">${r.unknown} ${plural(r.unknown,'record')} for pieces no longer on the checklist ${plural(r.unknown,'is','are')} kept but hidden.</span>`:''}${r.bad||r.jbad?`<br><span class="muted">${r.bad+r.jbad} unreadable ${plural(r.bad+r.jbad,'item was','items were')} skipped.</span>`:''}<br><br>This replaces the collection on this device. A safety copy of your current data is kept so you can undo.`,ok:'Restore backup',fn:()=>{snapshotAll();const ids=Object.keys(b.photos);
+      Promise.all(ids.map(id=>fetch(b.photos[id]).then(x=>x.blob()).then(bl=>photoPut(id,bl)))).catch(()=>{}).then(()=>{
+        ids.forEach(id=>{if(LP[id]){if(!b.saved[id])b.saved[id]=cleanRec({});b.saved[id].photoLocal=true;}});
+        applyData(b.saved,b.journal,b.settings);refresh();toast('Backup restored');});}});
   };
   fr.readAsText(file);
 }
@@ -1159,7 +1193,7 @@ const ACT={
     const miss=ownedItems().filter(x=>!acqEntry(x.id)); if(!miss.length){toast('Every owned piece already has a journal entry.');return;}
     confirmDlg({title:'Create journal entries?',msg:`This adds a journal entry for ${miss.length} owned ${plural(miss.length,'piece')} using the purchase details you’ve already saved. Nothing else changes.`,ok:'Create entries',fn:()=>{miss.forEach(x=>journal.push({id:uid(),type:'acquired',itemId:x.id,foundAt:'',story:'',createdAt:acqTime(x.id)||Date.now(),auto:true}));persist();refresh();toast(miss.length+' journal '+plural(miss.length,'entry','entries')+' created');}});
   },
-  erase:()=>confirmDlg({title:'Erase all collection data?',msg:'This removes every ownership mark, purchase detail, wishlist item and journal entry from this device. A safety copy is kept so you can undo from the More tab, but exporting a backup first is the safest choice.',ok:'Erase everything',danger:true,extra:'<button class="btn ghost" data-act="export">Export backup first</button>',fn:()=>{snapshotAll();saved={};journal=[];settings.seen=null;settings.mdates={};persist();settings.changes=0;checkMilestones();saveSettings();refresh();toast('All collection data erased',[{label:'Undo',fn:()=>ACT.undorestore(null,null,null,true)}],8000);}}),
+  erase:()=>confirmDlg({title:'Erase all collection data?',msg:'This removes every ownership mark, purchase detail, wishlist item, journal entry and photo you uploaded from this device. A safety copy of your records is kept so you can undo from the More tab, but uploaded photos can’t be brought back, so export a backup first.',ok:'Erase everything',danger:true,extra:'<button class="btn ghost" data-act="export">Export backup first</button>',fn:()=>{snapshotAll();photoClear().catch(()=>{});saved={};journal=[];settings.seen=null;settings.mdates={};persist();settings.changes=0;checkMilestones();saveSettings();refresh();toast('All collection data erased',[{label:'Undo',fn:()=>ACT.undorestore(null,null,null,true)}],8000);}}),
   undorestore:(t,id,v,now)=>{
     let p; try{p=JSON.parse(lsGet(PKEY));}catch(e){p=null;} if(!p||!p.saved){toast('There’s nothing to undo.');return;}
     const run=()=>{applyData(p.saved,Array.isArray(p.journal)?p.journal:[],p.settings||null);try{localStorage.removeItem(PKEY);}catch(e){delete mem[PKEY];}refresh();toast('Your previous data is back');};
@@ -1189,13 +1223,14 @@ document.addEventListener('input',e=>{
   else if(t.id==='pq')fillPicker();
 });
 document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&(e.target.id==='q'||e.target.id==='pq')){e.preventDefault();e.target.blur();} if(e.key==='Escape'&&cur)closeSheet(); });
-document.addEventListener('change',e=>{ if(e.target.id==='restoreFile'){const f=e.target.files[0]; e.target.value=''; if(f)restoreFromFile(f);} });
+document.addEventListener('change',e=>{ if(e.target.id==='restoreFile'){const f=e.target.files[0]; e.target.value=''; if(f)restoreFromFile(f);} else if(e.target.id==='f-file'){const f=e.target.files[0],id=cur&&cur.photoId; e.target.value=''; if(f&&id)uploadPhoto(f,id);} });
 document.addEventListener('focusin',e=>{ if(e.target.closest&&e.target.closest('.sheet')&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))setTimeout(()=>e.target.scrollIntoView({block:'center',behavior:'smooth'}),320); });
 window.addEventListener('hashchange',()=>route());
 
 /* ---------- start ---------- */
 try{history.scrollRestoration='manual';}catch(e){}
 applyTheme(); checkMilestones(); route();
+photosLoad().then(m=>{const ids=Object.keys(m);ids.forEach(id=>{LP[id]=URL.createObjectURL(m[id]);b64(m[id]).then(d=>{B64[id]=d;});});if(ids.length)refresh();}).catch(()=>{});
 if(navigator.storage&&navigator.storage.persist){
   navigator.storage.persisted().then(p=>p?p:navigator.storage.persist()).then(p=>{S.persisted=!!p;}).catch(()=>{});
 }

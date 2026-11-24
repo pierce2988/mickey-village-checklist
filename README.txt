@@ -1,8 +1,8 @@
-Mickey's Merry Christmas Village Collector - Collector's Edition (v18)
+Mickey's Merry Christmas Village Collector - Collector's Edition (v20)
 
 FILES (upload all 7 to the root of your GitHub Pages repo, replacing the old ones)
   index.html              the whole app
-  sw.js                   offline cache, version mickey-village-collector-v18
+  sw.js                   offline cache, version mickey-village-collector-v20
   manifest.webmanifest    home-screen install settings
   icon-192.png, icon-512.png, apple-touch-icon.png
   README.txt
@@ -14,6 +14,11 @@ DEPLOY
    The new version installs in the background; More > Check for updates forces it.
 4. Before updating, tap More > Export backup in the old version if it has one. Your data
    is not touched by the update, but a backup is always smart.
+
+YOUR PHOTOS
+- On any piece: Piece details > Add my own photo > Choose or take a photo.
+- Photos are resized and stored only on this device (IndexedDB) and are included in backups.
+- Erase all data also deletes uploaded photos.
 
 YOUR DATA
 - Ownership and purchase details still use localStorage key mickey-merry-christmas-village-v1
