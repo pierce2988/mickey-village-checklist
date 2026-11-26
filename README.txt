@@ -1,8 +1,8 @@
-Mickey's Merry Christmas Village Collector - Collector's Edition (v21)
+Mickey's Merry Christmas Village Collector - Collector's Edition (v22)
 
 FILES (upload all 7 to the root of your GitHub Pages repo, replacing the old ones)
   index.html              the whole app
-  sw.js                   offline cache, version mickey-village-collector-v21
+  sw.js                   offline cache, version mickey-village-collector-v22
   manifest.webmanifest    home-screen install settings
   icon-192.png, icon-512.png, apple-touch-icon.png
   README.txt

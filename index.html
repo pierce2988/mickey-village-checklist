@@ -306,9 +306,63 @@ dl{display:grid}
 .chips.cats .chip{height:32px;padding:0 11px;font-size:13px;border-color:rgba(197,161,91,.5)}
 .chips.cats .chip.on{background:var(--ivory);border-color:var(--ivory);color:var(--forest)}
 
+/* ===== festive layer: lights, snow, drifts ===== */
+.hero{overflow:hidden;padding-top:calc(env(safe-area-inset-top) + 32px)}
+.hero.home{padding-top:calc(env(safe-area-inset-top) + 52px)}
+.hero.hasdrift{padding-bottom:34px}
+.hero.hasdrift:after{display:none}
+.lights{position:absolute;left:0;top:env(safe-area-inset-top);width:100%;display:flex;overflow:hidden;pointer-events:none}
+.lights svg{flex:none;display:block}
+.lights.top0{top:0;z-index:0}
+.bulb{animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.5}}
+.drift{position:absolute;left:0;bottom:-1px;width:100%;height:24px;display:block;pointer-events:none}
+.dr-f{fill:var(--bg)}.dr-l{fill:none;stroke:rgba(255,255,255,.7);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.hero>*:not(.lights):not(.drift){position:relative;z-index:1}
+.hero.home h1{background:linear-gradient(100deg,#F7F3E9 0,#F7F3E9 42%,#F6E1A8 50%,#F7F3E9 58%,#F7F3E9 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shimmer 9s ease-in-out infinite}
+@keyframes shimmer{0%,12%{background-position:120% 0}60%,100%{background-position:-20% 0}}
+/* bulb ring */
+.rb.off{fill:rgba(247,243,233,.2)}
+.card .rb.off{fill:var(--ringbg)}
+.rb.on{animation:bulbon .5s ease-out both}
+@keyframes bulbon{0%{opacity:0;transform:scale(.2)}100%{opacity:1;transform:none}}
+.rb.on{transform-box:fill-box;transform-origin:center}
+.rh{opacity:.3;animation:glowp 3.2s ease-in-out infinite}
+@keyframes glowp{0%,100%{opacity:.34}50%{opacity:.12}}
+/* snowfall */
+.flakes{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+#snow{position:fixed;inset:0 -20px;z-index:5;overflow:hidden;pointer-events:none;animation:sway 8s ease-in-out infinite alternate}
+@keyframes sway{from{transform:translateX(-12px)}to{transform:translateX(12px)}}
+.flakes i{position:absolute;left:0;right:0;top:-340px;height:calc(100% + 340px);background-repeat:repeat;will-change:transform}
+.flakes i:nth-child(1){background-image:radial-gradient(2.2px 2.2px at 18px 26px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(1.7px 1.7px at 92px 70px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(2.1px 2.1px at 140px 120px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(1.5px 1.5px at 50px 150px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(1.4px 1.4px at 160px 18px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%);background-size:170px 170px;opacity:.9;animation:fall 10s linear infinite}
+.flakes i:nth-child(2){background-image:radial-gradient(2.8px 2.8px at 30px 40px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(2.4px 2.4px at 120px 95px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(3px 3px at 210px 60px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(2.5px 2.5px at 280px 150px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(2.6px 2.6px at 70px 210px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(3px 3px at 180px 260px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(2.3px 2.3px at 300px 300px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(2.7px 2.7px at 20px 320px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%);background-size:340px 340px;opacity:.7;animation:fall 17s linear infinite}
+.flakes i:nth-child(3){background-image:radial-gradient(4.2px 4.2px at 60px 80px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(4.8px 4.8px at 230px 170px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(4px 4px at 120px 260px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%),radial-gradient(4.4px 4.4px at 300px 40px,#fff 0,#fff 45%,rgba(175,190,200,.55) 75%,rgba(255,255,255,0) 100%);background-size:340px 340px;opacity:.35;animation:fall 26s linear infinite}
+@keyframes fall{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,340px,0)}}
+/* string of lights under the search bar */
+.bar-sticky:before,.bar-sticky:after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:16px;pointer-events:none;background-repeat:repeat-x;background-size:96px 16px}
+.bar-sticky:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='16' viewBox='0 0 96 16'%3E%3Cpath d='M0 1Q24 7 48 1M48 1Q72 7 96 1' fill='none' stroke='%23030e0a' stroke-width='1.2'/%3E%3Ccircle cx='12' cy='9' r='5.2' fill='%23F2C46B' opacity='.28'/%3E%3Crect x='10.4' y='2.6' width='3.2' height='3' rx='.8' fill='%2316251f'/%3E%3Cellipse cx='12' cy='8.4' rx='2.4' ry='3.3' fill='%23F2C46B'/%3E%3Ccircle cx='36' cy='9' r='5.2' fill='%23E4585F' opacity='.28'/%3E%3Crect x='34.4' y='2.6' width='3.2' height='3' rx='.8' fill='%2316251f'/%3E%3Cellipse cx='36' cy='8.4' rx='2.4' ry='3.3' fill='%23E4585F'/%3E%3Ccircle cx='60' cy='9' r='5.2' fill='%236CC59A' opacity='.28'/%3E%3Crect x='58.4' y='2.6' width='3.2' height='3' rx='.8' fill='%2316251f'/%3E%3Cellipse cx='60' cy='8.4' rx='2.4' ry='3.3' fill='%236CC59A'/%3E%3Ccircle cx='84' cy='9' r='5.2' fill='%238FCBF2' opacity='.28'/%3E%3Crect x='82.4' y='2.6' width='3.2' height='3' rx='.8' fill='%2316251f'/%3E%3Cellipse cx='84' cy='8.4' rx='2.4' ry='3.3' fill='%238FCBF2'/%3E%3C/svg%3E");animation:alt 3.4s ease-in-out infinite}
+.bar-sticky:after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='16' viewBox='0 0 96 16'%3E%3Cpath d='M0 1Q24 7 48 1M48 1Q72 7 96 1' fill='none' stroke='%23030e0a' stroke-width='1.2'/%3E%3Ccircle cx='12' cy='9' r='5.2' fill='%236CC59A' opacity='.28'/%3E%3Crect x='10.4' y='2.6' width='3.2' height='3' rx='.8' fill='%2316251f'/%3E%3Cellipse cx='12' cy='8.4' rx='2.4' ry='3.3' fill='%236CC59A'/%3E%3Ccircle cx='36' cy='9' r='5.2' fill='%238FCBF2' opacity='.28'/%3E%3Crect x='34.4' y='2.6' width='3.2' height='3' rx='.8' fill='%2316251f'/%3E%3Cellipse cx='36' cy='8.4' rx='2.4' ry='3.3' fill='%238FCBF2'/%3E%3Ccircle cx='60' cy='9' r='5.2' fill='%23F2C46B' opacity='.28'/%3E%3Crect x='58.4' y='2.6' width='3.2' height='3' rx='.8' fill='%2316251f'/%3E%3Cellipse cx='60' cy='8.4' rx='2.4' ry='3.3' fill='%23F2C46B'/%3E%3Ccircle cx='84' cy='9' r='5.2' fill='%23E4585F' opacity='.28'/%3E%3Crect x='82.4' y='2.6' width='3.2' height='3' rx='.8' fill='%2316251f'/%3E%3Cellipse cx='84' cy='8.4' rx='2.4' ry='3.3' fill='%23E4585F'/%3E%3C/svg%3E");animation:alt 3.4s ease-in-out infinite reverse}
+@keyframes alt{0%,100%{opacity:1}50%{opacity:.4}}
+/* snow on card tops, warm glow on owned pieces and spotlight */
+.pc .ph:before,.spot .ph:before{content:"";position:absolute;left:0;right:0;top:0;height:15px;z-index:3;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 16' preserveAspectRatio='none'%3E%3Cpath d='M0 2H160V8C148 14 138 7 124 11S100 16 86 10 62 5 48 11 22 15 0 9Z' fill='%23b9c8d0' opacity='.45'/%3E%3Cpath d='M0 0H160V6C148 12 138 5 124 9S100 14 86 8 62 3 48 9 22 13 0 7Z' fill='white'/%3E%3C/svg%3E") no-repeat top/100% 100%}
+.pc .badge,.pc .wtag{z-index:4;top:15px}
+.pc.owned{box-shadow:0 0 0 1px rgba(197,161,91,.35),0 8px 26px rgba(197,161,91,.2)}
+.spot{box-shadow:0 0 0 1px rgba(197,161,91,.4),0 16px 44px rgba(197,161,91,.16)}
+.spot .ph.lg:before{height:20px}
+/* tab bar: lit bulb */
+#tabs button.on:before{top:4px;width:9px;height:9px;border-radius:50%;background:#F2C46B;box-shadow:0 0 8px 3px rgba(242,196,107,.65),0 0 18px 7px rgba(242,196,107,.25);animation:twinkle 3.2s ease-in-out infinite}
+/* milestone card */
+.mile-card2{position:relative;overflow:hidden;padding-top:56px}
+.mile-card2>*:not(.flakes):not(.lights){position:relative;z-index:1}
+.mile-card2 .flakes i:nth-child(3){display:none}
+.nofx #snow,.nofx .flakes{display:none}
+.nofx .bulb,.nofx .rh,.nofx .bar-sticky:before,.nofx .bar-sticky:after,.nofx #tabs button.on:before,.nofx .hero.home h1{animation:none}
+@media (prefers-reduced-motion:reduce){#snow,.flakes{display:none!important}.bulb,.rh,.rb.on,.bar-sticky:before,.bar-sticky:after,#tabs button.on:before,.hero.home h1{animation:none!important}}
+
 </style>
 </head>
 <body>
+<div id="snow" class="flakes" aria-hidden="true"><i></i><i></i><i></i></div>
 <div id="sb"></div>
 <div id="view" class="view"></div>
 <nav id="tabs" aria-label="Main"><button data-act="tab" data-v="home"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></svg><span>Home</span></button><button data-act="tab" data-v="collection"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.6"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.6"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.6"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.6"/></svg><span>Collection</span></button><button data-act="tab" data-v="wishlist"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.4a4.3 4.3 0 0 1 7.5 2.4C19.5 15.4 12 20 12 20z"/></svg><span>Wishlist</span></button><button data-act="tab" data-v="insights"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-6M12 20V5M19 20v-10"/></svg><span>Insights</span></button><button data-act="tab" data-v="more"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></svg><span>More</span></button></nav>
@@ -416,7 +470,7 @@ const VERIFIED_PHOTO_URLS = {
 (function(){
 'use strict';
 /* ================= Mickey's Merry Christmas Village — Collector's Edition (v18) ================= */
-const APP_VERSION='21';
+const APP_VERSION='22';
 const KEY="mickey-merry-christmas-village-v1";            /* unchanged: ownership + purchase details */
 const JKEY="mickey-merry-christmas-village-journal-v1";   /* new: journal entries */
 const SKEY="mickey-merry-christmas-village-settings-v1";  /* new: appearance + backup status */
@@ -458,7 +512,7 @@ function loadJSON(k,def){
 }
 let saved=loadJSON(KEY,{}); if(Array.isArray(saved))saved={};
 let journal=loadJSON(JKEY,[]); if(!Array.isArray(journal))journal=[];
-let settings=Object.assign({theme:'auto',view:'grid',lastExport:null,changes:0,seen:null,mdates:{},snooze:0},loadJSON(SKEY,{}));
+let settings=Object.assign({theme:'auto',fx:true,view:'grid',lastExport:null,changes:0,seen:null,mdates:{},snooze:0},loadJSON(SKEY,{}));
 function saveSettings(){ if(!lsSet(SKEY,JSON.stringify(settings)))storageOK=false; }
 function persist(){
   const a=lsSet(KEY,JSON.stringify(saved)), b=lsSet(JKEY,JSON.stringify(journal));
@@ -633,7 +687,30 @@ function route(keep){
   if(keep)window.scrollTo(0,y); else { if(name==='item')delete S.scroll[h]; window.scrollTo(0,S.scroll[h]||0); }
 }
 function refresh(){ route(true); }
+/* ---------- festive layer: string lights, snowdrift, effects switch ---------- */
+const BULBS=['#F2C46B','#E4585F','#6CC59A','#FFF0CF','#8FCBF2'];
+function swag(w,seed){
+  const h=Math.round(w*44/130); let b='';
+  [[26,13.6],[65,19],[104,13.6]].forEach(([x,y],i)=>{
+    const k=seed*3+i, c=BULBS[k%BULBS.length], d=((k*0.73)%3).toFixed(2), du=(2.6+(k%3)*.7).toFixed(1);
+    b+=`<g class="bulb" style="color:${c};animation-delay:-${d}s;animation-duration:${du}s"><circle cx="${x}" cy="${y+8}" r="11" fill="currentColor" opacity=".16"/><circle cx="${x}" cy="${y+8}" r="7.4" fill="currentColor" opacity=".28"/><rect x="${x-2}" y="${y-1.2}" width="4" height="4.6" rx="1" fill="#16251f"/><ellipse cx="${x}" cy="${y+8}" rx="4.3" ry="6.1" fill="currentColor"/><ellipse cx="${x-1.3}" cy="${y+6}" rx="1.1" ry="2" fill="#fff" opacity=".6"/></g>`;
+  });
+  return `<svg viewBox="0 0 130 44" width="${w}" height="${h}" aria-hidden="true"><path d="M0 4Q65 34 130 4" fill="none" stroke="rgba(3,14,10,.9)" stroke-width="1.5"/>${b}</svg>`;
+}
+function buildLights(hero){
+  const old=$('.lights',hero); if(old)old.remove();
+  const w=hero.classList.contains('home')?130:96, n=Math.ceil((hero.clientWidth||window.innerWidth)/w)+1;
+  hero.insertAdjacentHTML('afterbegin',`<div class="lights" aria-hidden="true">${Array.from({length:n},(_,i)=>swag(w,i)).join('')}</div>`);
+}
+const DRIFT='<svg class="drift" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true"><path class="dr-f" d="M0 24V13C30 5 60 3 100 9S170 17 210 10 300 2 340 8 385 12 400 9V24Z"/><path class="dr-l" d="M0 13C30 5 60 3 100 9S170 17 210 10 300 2 340 8 385 12 400 9"/></svg>';
+function decorate(){
+  const nm=S.cur.split('/')[0];
+  $$('.hero').forEach(h=>{ buildLights(h); if(!['collection','item'].includes(nm)&&!$('.drift',h)){h.classList.add('hasdrift');h.insertAdjacentHTML('beforeend',DRIFT);} });
+}
+function applyFx(){document.documentElement.classList.toggle('nofx',settings.fx===false);}
+let rzT; window.addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(()=>$$('.hero').forEach(buildLights),200);});
 function hydrate(){
+  decorate();
   requestAnimationFrame(()=>{ $$('.ring-fg').forEach(e=>{e.style.strokeDashoffset=e.dataset.off;}); $$('.bar-fg').forEach(e=>{e.style.width=e.dataset.w;}); });
   const gal=$('#gal'); if(gal){ gal.addEventListener('scroll',()=>{const i=Math.round(gal.scrollLeft/gal.clientWidth);$$('.dots i').forEach((d,k)=>d.classList.toggle('on',k===i));},{passive:true}); }
 }
@@ -671,8 +748,13 @@ const statusPill=x=>isOwned(x)?`<span class="pill own">${ic('check')}Owned</span
 const priceLabel=id=>{const r=R(id),n=num(r.price);return n!=null?fmtMoney(n):String(r.price||'').trim();};
 function counts(){const own=ownedItems(), dated=own.filter(x=>acqTime(x.id)).length;return {all:total,owned:own.length,missing:total-own.length,wish:ITEMS.filter(isWish).length,recent:Math.min(12,dated)};}
 function ringSVG(p,size,sw,label,sub){
-  const r=(size-sw)/2,c=2*Math.PI*r,cx=size/2;
-  return `<svg class="ring" viewBox="0 0 ${size} ${size}" role="img" aria-label="${label} ${sub}"><circle cx="${cx}" cy="${cx}" r="${r}" class="ring-bg" stroke-width="${sw}" fill="none"/><circle cx="${cx}" cy="${cx}" r="${r}" class="ring-fg" stroke-width="${sw}" fill="none" stroke-linecap="round" stroke-dasharray="${c}" style="stroke-dashoffset:${c}" data-off="${c*(1-Math.min(100,p)/100)}" transform="rotate(-90 ${cx} ${cx})"/><text x="${cx}" y="${cx+size*.05}" text-anchor="middle" class="ring-n" style="font-size:${size*.26}px">${label}</text><text x="${cx}" y="${cx+size*.2}" text-anchor="middle" class="ring-s" style="font-size:${size*.1}px">${sub}</text></svg>`;
+  const N=40, cx=size/2, R=size/2-size*.075, br=size*.027;
+  let lit=p>=100?N:Math.min(N-1,Math.round(p/100*N)); if(p>0&&lit===0)lit=1;
+  let b=''; for(let i=0;i<N;i++){
+    const a=2*Math.PI*i/N-Math.PI/2, x=(cx+R*Math.cos(a)).toFixed(1), y=(cx+R*Math.sin(a)).toFixed(1), on=i<lit, c=BULBS[i%BULBS.length];
+    b+=on?`<g class="rb on" style="animation-delay:${(i*45)}ms"><circle class="rh" cx="${x}" cy="${y}" r="${(br*1.8).toFixed(1)}" fill="${c}" style="animation-delay:-${((i*0.61)%3).toFixed(2)}s"/><circle cx="${x}" cy="${y}" r="${br.toFixed(1)}" fill="${c}"/></g>`:`<circle class="rb off" cx="${x}" cy="${y}" r="${(br*.8).toFixed(1)}"/>`;
+  }
+  return `<svg class="ring" viewBox="0 0 ${size} ${size}" role="img" aria-label="${label} ${sub}">${b}<text x="${cx}" y="${cx+size*.05}" text-anchor="middle" class="ring-n" style="font-size:${size*.25}px">${label}</text><text x="${cx}" y="${cx+size*.19}" text-anchor="middle" class="ring-s" style="font-size:${size*.095}px">${sub}</text></svg>`;
 }
 const barHTML=(p)=>`<div class="bar"><div class="bar-fg" style="width:0" data-w="${Math.max(0,Math.min(100,p))}%"></div></div>`;
 function miniCard(x,sub){return `<button class="mini" data-act="open" data-id="${x.id}"><div class="ph sm">${thumb(x)}</div><b>${esc(x.name)}</b><span>${esc(sub||'')}</span></button>`;}
@@ -1047,7 +1129,7 @@ function checkMilestones(){
 }
 function showMilestone(m){
   const w=document.createElement('div'); w.className='mile-wrap';
-  w.innerHTML=`<div class="mile-card2" role="dialog" aria-modal="true" aria-label="Milestone reached"><svg class="mseal" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" class="m1"/><circle cx="60" cy="60" r="46" class="m2"/><g transform="translate(36 36) scale(2)" class="m3" fill="none" stroke-width="1.2" stroke-linejoin="round">${P.star}</g></svg><p class="mk2">Milestone reached</p><h2>${esc(m.t)}</h2><p>${esc(m.s)}</p><button class="btn gold" data-act="mclose">Continue</button></div>`;
+  w.innerHTML=`<div class="mile-card2" role="dialog" aria-modal="true" aria-label="Milestone reached"><div class="flakes" aria-hidden="true"><i></i><i></i><i></i></div><div class="lights top0" aria-hidden="true">${swag(107,1)}${swag(107,2)}${swag(107,3)}</div><svg class="mseal" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" class="m1"/><circle cx="60" cy="60" r="46" class="m2"/><g transform="translate(36 36) scale(2)" class="m3" fill="none" stroke-width="1.2" stroke-linejoin="round">${P.star}</g></svg><p class="mk2">Milestone reached</p><h2>${esc(m.t)}</h2><p>${esc(m.s)}</p><button class="btn gold" data-act="mclose">Continue</button></div>`;
   document.body.appendChild(w); requestAnimationFrame(()=>requestAnimationFrame(()=>w.classList.add('in')));
 }
 
@@ -1075,7 +1157,8 @@ function vMore(){
   const pre=!!lsGet(PKEY), per=S.persisted===true?'Protected from automatic clean-up':S.persisted===false?'Not guaranteed — export backups regularly':'Not reported by this browser';
   return `<header class="hero tight"><div class="hrow"><h1>More</h1></div></header>
   <main class="pg">
-  <section class="card"><div class="sh"><h2>Appearance</h2></div><div class="seg wide" role="group" aria-label="Appearance">${[['auto','Automatic'],['light','Light'],['dark','Dark']].map(([v,l])=>`<button class="${settings.theme===v?'on':''}" data-act="theme" data-v="${v}">${l}</button>`).join('')}</div></section>
+  <section class="card"><div class="sh"><h2>Appearance</h2></div><div class="seg wide" role="group" aria-label="Appearance">${[['auto','Automatic'],['light','Light'],['dark','Dark']].map(([v,l])=>`<button class="${settings.theme===v?'on':''}" data-act="theme" data-v="${v}">${l}</button>`).join('')}</div>
+   <div class="sh" style="margin-top:18px"><h2>Festive effects</h2></div><div class="seg wide" role="group" aria-label="Festive effects">${[['on','On'],['off','Off']].map(([v,l])=>`<button class="${(settings.fx!==false)===(v==='on')?'on':''}" data-act="fx" data-v="${v}">${l}</button>`).join('')}</div><p class="muted fine">Falling snow and twinkling lights. Turn off to save battery.</p></section>
   <button class="row-link" data-act="go" data-v="journal">${ic('book')}<div><b>Collection journal</b><span>${journal.length} ${plural(journal.length,'entry','entries')}</span></div>${ic('chev')}</button>
   <section class="card"><div class="sh"><h2>Backup and data</h2></div>
    <div class="saved">${ic('shield')}<div><b>${storageOK?'Saved automatically on this device':'This browser is not saving changes'}</b><span>${esc(backupStatus())}</span></div></div>
@@ -1194,6 +1277,7 @@ const ACT={
   pick:(t,id)=>{const f=cur&&cur.pick; if(f){closeSheet(true);f(id);}},
   shuffle:()=>{S.feat++;refresh();},
   snooze:()=>{settings.snooze=Date.now()+3*864e5;saveSettings();refresh();},
+  fx:(t,id,v)=>{settings.fx=v==='on';saveSettings();applyFx();refresh();},
   theme:(t,id,v)=>{settings.theme=v;saveSettings();applyTheme();refresh();},
   export:()=>exportBackup(),
   backfill:()=>{
@@ -1236,7 +1320,7 @@ window.addEventListener('hashchange',()=>route());
 
 /* ---------- start ---------- */
 try{history.scrollRestoration='manual';}catch(e){}
-applyTheme(); checkMilestones(); route();
+applyTheme(); applyFx(); checkMilestones(); route();
 photosLoad().then(m=>{const ids=Object.keys(m);ids.forEach(id=>{LP[id]=URL.createObjectURL(m[id]);b64(m[id]).then(d=>{B64[id]=d;});});if(ids.length)refresh();}).catch(()=>{});
 if(navigator.storage&&navigator.storage.persist){
   navigator.storage.persisted().then(p=>p?p:navigator.storage.persist()).then(p=>{S.persisted=!!p;}).catch(()=>{});
